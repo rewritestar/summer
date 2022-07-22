@@ -19,22 +19,22 @@ public class BoardService {
     @Autowired
     private BoardRepository boardRepository;
 //글 작성 처리
-public void write(Board board, MultipartFile file) throws Exception {
+    public void write(Board board, MultipartFile file) throws Exception {
 
-    String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
+        String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
 
-    UUID uuid = UUID.randomUUID();
+        UUID uuid = UUID.randomUUID();
 
-    String fileName = uuid + "_" + file.getOriginalFilename();
+        String fileName = uuid + "_" + file.getOriginalFilename();
 
-    File saveFile = new File(projectPath, fileName);
+        File saveFile = new File(projectPath, fileName);
 
-    file.transferTo(saveFile);
+        file.transferTo(saveFile);
 
-    board.setFilename(fileName);
-    board.setFilepath("/files/" + fileName);
+        board.setFilename(fileName);
+        board.setFilepath("/files/" + fileName);
 
-    boardRepository.save(board);
+        boardRepository.save(board);
 }
 
     //게시글 리스트 처리
@@ -42,7 +42,7 @@ public void write(Board board, MultipartFile file) throws Exception {
 //
 //        return boardRepository.findAll(pageable);
 //    }
-        public List<Board> boardList(){
+    public List<Board> boardList(){
 
         return boardRepository.findAll();
     }
