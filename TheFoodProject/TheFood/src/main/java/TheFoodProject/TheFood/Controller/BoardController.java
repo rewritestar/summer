@@ -29,7 +29,7 @@ public class BoardController {
 
         boardService.write(board, file);
 
-        return "/board/list";
+        return "redirect:/board/list";
     }
 
     @GetMapping("/board/list")
@@ -55,7 +55,7 @@ public class BoardController {
     }
 
     @GetMapping("/board/modify/{id}")
-    public String boardModify(@PathVariable("id") Integer id, Model model){
+    public String boardModify(@PathVariable("id") Integer id, Model model) {
 
         model.addAttribute("board", boardService.boardView(id));
 
@@ -72,7 +72,6 @@ public class BoardController {
         boardService.write(boardTemp, file);
 
         return "redirect:/board/list";
-
 
     }
 
