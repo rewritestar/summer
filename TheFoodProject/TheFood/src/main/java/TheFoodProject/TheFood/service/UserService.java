@@ -16,12 +16,16 @@ public class UserService {
 
     public void join(User user) {
 
-        Optional<User> result2 = userRepository.findByid(user.getId());
-        result2.ifPresent(u -> {
-            if(user.getUseremail().isBlank() || user.getUserid().isBlank() || user.getUsername().isBlank() || user.getUserpassword().isBlank())  {
+//        Optional<User> result = userRepository.findByid(user.getId());
+//        result.ifPresent(u -> {
+//            if(user.getUseremail().isBlank() || user.getUserid().isBlank() || user.getUsername().isBlank() || user.getUserpassword().isBlank())  {
+//                throw new IllegalStateException("다 작성하셔야합니다");
+//            }
+//        });
+
+        if(user.getUseremail().isBlank() || user.getUserid().isBlank() || user.getUsername().isBlank() || user.getUserpassword().isBlank())  {
                 throw new IllegalStateException("다 작성하셔야합니다");
             }
-        });
 
 
         Optional<User> result1 = userRepository.findByuseremail(user.getUseremail());
