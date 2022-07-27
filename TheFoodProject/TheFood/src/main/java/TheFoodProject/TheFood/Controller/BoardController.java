@@ -72,7 +72,6 @@ public class BoardController {
         boardService.write(boardTemp, file);
 
         return "redirect:/board/list";
-
     }
 
 }
