@@ -1,12 +1,11 @@
 package TheFoodProject.TheFood.service;
 
-import TheFoodProject.TheFood.entity.Board;
+import TheFoodProject.TheFood.entity.Role;
 import TheFoodProject.TheFood.entity.User;
 import TheFoodProject.TheFood.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -29,7 +28,10 @@ public class UserService {
             throw new IllegalStateException("이미 존재하는 회원입니다");
         });
 
-
+        user.setEnabled(true);
+        Role role = new Role();
+        role.setId(1);
+        user.getRoles().add(role);
         userRepository.save(user);
     }
 //--------------------------------------------------------------------------------------------------

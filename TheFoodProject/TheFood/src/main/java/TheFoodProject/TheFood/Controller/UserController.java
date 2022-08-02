@@ -1,6 +1,5 @@
 package TheFoodProject.TheFood.Controller;
 
-import TheFoodProject.TheFood.entity.Board;
 import TheFoodProject.TheFood.entity.User;
 import TheFoodProject.TheFood.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class UserController {
@@ -27,7 +25,7 @@ public class UserController {
     @PostMapping("user/joinpro")
     public String userJoinPro(User user){
     userService.join(user);
-    return "";
+    return "user/login";
     }
 //--------------------------------------------------------------------------------------------------
     //아이디,비밀번호 찾기
