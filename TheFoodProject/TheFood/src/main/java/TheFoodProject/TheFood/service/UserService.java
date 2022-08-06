@@ -17,6 +17,8 @@ public class UserService {
     //회원가입
     public void join(User user) {
 
+        System.out.println("해당하는 회원이 존재하지 않습니다");
+
         //빈칸입력 불가
         if(user.getUseremail().isBlank() || user.getUserid().isBlank() || user.getUsername().isBlank() || user.getUserpassword().isBlank())  {
                 throw new IllegalStateException("다 작성하셔야합니다");
@@ -30,7 +32,7 @@ public class UserService {
 
         user.setEnabled(true);
         Role role = new Role();
-        role.setId(1);
+        role.setId(1l);
         user.getRoles().add(role);
         userRepository.save(user);
     }

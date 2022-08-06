@@ -25,7 +25,7 @@ public class UserController {
     @PostMapping("user/joinpro")
     public String userJoinPro(User user){
     userService.join(user);
-    return "user/login";
+    return "redirect:/board/list";
     }
 //--------------------------------------------------------------------------------------------------
     //아이디,비밀번호 찾기
@@ -37,7 +37,7 @@ public class UserController {
     @PostMapping("user/findidpro")
     public String userFindIdPro(String useremail){
         userService.findid(useremail);
-        return "";
+        return "redirect:/user/login";
     }
 
     @GetMapping("/user/findpassword")
@@ -48,7 +48,7 @@ public class UserController {
     @PostMapping("user/findpasswordpro")
     public String userFindPasswordPro(String useremail, String userid){
         userService.findpassword(useremail, userid);
-        return "";
+        return "redirect:/user/login";
     }
 
 //--------------------------------------------------------------------------------------------------
@@ -61,7 +61,7 @@ public class UserController {
     @PostMapping("user/loginpro")
     public String userLoginPro(String userid, String userpassword){
         userService.login(userid, userpassword);
-        return "";
+        return "redirect:/board/list";
     }
 //--------------------------------------------------------------------------------------------------
     //마이페이지
@@ -80,7 +80,7 @@ public class UserController {
 
         userService.updatejoin(userTemp);
 
-        return "";
+        return "redirect:/user/login";
     }
 
 
