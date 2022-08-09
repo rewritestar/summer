@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+
 @Controller
 public class UserController {
 
@@ -24,7 +25,7 @@ public class UserController {
 
     @PostMapping("user/joinpro")
     public String userJoinPro(User user){
-    userService.join(user);
+    userService.save(user);
     return "redirect:/board/list";
     }
 //--------------------------------------------------------------------------------------------------
@@ -58,11 +59,12 @@ public class UserController {
         return "userlogin";
     }
 
-    @PostMapping("user/loginpro")
-    public String userLoginPro(String userid, String userpassword){
-        userService.login(userid, userpassword);
-        return "redirect:/board/list";
-    }
+//    @PostMapping("user/loginpro")
+//    public String userLoginPro(String userid, String userpassword){
+//        userService.login(userid, userpassword);
+//        return "redirect:/board/list";
+
+
 //--------------------------------------------------------------------------------------------------
     //마이페이지
     @GetMapping("/user/modify/{id}")

@@ -25,20 +25,21 @@
 
 <body >
 <div class="layout">
+    <form class="form-signin"  th:action="@{/user/login}" method="post" >
 
-<!--    <div th:if="${param.error}">-->
-<!--        Invalid username and password.-->
-<!--    </div>-->
+        <div th:if="${param.error}" class="alert alert-danger" role="alert">
+            Invalid username and password.
+        </div>
 
-<!--    <div th:if="${param.logout}">-->
-<!--        You have been logged out.-->
-<!--    </div>-->
+        <div th:if="${param.logout}" class="alert alert-primary" role="alert">
+            로그아웃 되었습니다.
+        </div>
 
-    <form action="/user/loginpro" method="post" >
-        <label for="userid">아이디</label>
-        <input type="text" id="userid" name="userid" >
-        <label for="userpassword">비밀번호</label>
-        <input type="text" id="userpassword" name="userpassword" >
+        <label for="userid" class="sr-only">아이디</label>
+        <input type="text" id="userid" name="userid" class="form-control"  required autofocus>
+        <label for="inputUserpassword" class="sr-only">비밀번호</label>
+        <input type="userpassword" id="inputUserpassword" name="userpassword" class="form-control" required>
+
         <button type="submit" >로그인</button>
     </form>
 </div>

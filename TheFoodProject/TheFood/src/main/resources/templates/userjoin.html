@@ -25,7 +25,8 @@
 
 <body>
 <div class="layout">
-    <form action="/user/joinpro" method="post" >
+    <form  th:action="@{/user/joinpro}" method="post" >
+
         <label for="username">이름</label>
         <input type="text" id="username" name="username" placeholder="닉네임을 입력하세요">
         <label for="useremail">이메일</label>
