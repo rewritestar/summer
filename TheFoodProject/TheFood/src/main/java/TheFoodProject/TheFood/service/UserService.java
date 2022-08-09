@@ -4,20 +4,24 @@ import TheFoodProject.TheFood.entity.Role;
 import TheFoodProject.TheFood.entity.User;
 import TheFoodProject.TheFood.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class UserService{
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
 
     //회원가입
-    public void join(User user) {
+    public User save(User user) {
 
-        System.out.println("해당하는 회원이 존재하지 않습니다");
+//        System.out.println("해당하는 회원이 존재하지 않습니다");
 
         //빈칸입력 불가
         if(user.getUseremail().isBlank() || user.getUserid().isBlank() || user.getUsername().isBlank() || user.getUserpassword().isBlank())  {
@@ -30,11 +34,13 @@ public class UserService {
             throw new IllegalStateException("이미 존재하는 회원입니다");
         });
 
+        String encodedPassword = passwordEncoder.encode(user.getUserpassword());
+        user.setUserpassword(encodedPassword);
         user.setEnabled(true);
         Role role = new Role();
         role.setId(1l);
         user.getRoles().add(role);
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 //--------------------------------------------------------------------------------------------------
     //아이디,비밀번호 찾기
@@ -64,7 +70,7 @@ public class UserService {
     }
 //--------------------------------------------------------------------------------------------------
     //로그인
-    public void login(String userid, String userpassword){
+    public String login(String userid, String userpassword){
         Optional<User> people1 = userRepository.findByuserpassword(userpassword);
         Optional<User> people2 = userRepository.findByuserid(userid);
 
@@ -76,6 +82,8 @@ public class UserService {
             System.out.println(people2.get().getUsername() + "님 환영합니다");
         }
         else {System.out.println("해당하는 회원이 존재하지 않습니다");}
+
+        return people2.get().getUsername();
     }
 
 //--------------------------------------------------------------------------------------------------

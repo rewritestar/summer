@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Data
-public class User {
+public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
@@ -22,7 +22,7 @@ public class User {
 
     private String username;
 
-    private Boolean enabled;
+    private boolean enabled;
 
     @ManyToMany
     @JoinTable(
@@ -31,7 +31,6 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
 
     private List<Role> roles = new ArrayList<>();
-
 
 
 }
