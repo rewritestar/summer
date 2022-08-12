@@ -3,6 +3,7 @@ package TheFoodProject.TheFood.Controller;
 import TheFoodProject.TheFood.entity.Board;
 import TheFoodProject.TheFood.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,17 +22,18 @@ public class BoardController {
 
     @GetMapping("/board/write")
     public String boardWriteForm(){
-
         return "boardwrite";
     }
 
     @PostMapping("/board/writepro")
-    public String boardWritePro(Board board, MultipartFile file) throws Exception{
+    public String boardWritePro(Board board, MultipartFile file, Authentication authentication) throws Exception{
 
-        boardService.write(board, file);
+        String username = authentication.getName();
+        boardService.write(username, board, file);
 
         return "redirect:/board/list";
     }
+
 
     @GetMapping("/board/list")
     public String boardList(Model model){
@@ -55,6 +57,7 @@ public class BoardController {
         return "redirect:/board/list";
     }
 
+
     @GetMapping("/board/modify/{id}")
     public String boardModify(@PathVariable("id") Integer id, Model model) {
 
@@ -66,11 +69,11 @@ public class BoardController {
     @PostMapping("/board/update/{id}")
     public String boardUpdate(@PathVariable("id") Integer id, Board board, MultipartFile file) throws Exception{
 
-        Board boardTemp = boardService.boardView(id);
-        boardTemp.setTitle(board.getTitle());
-        boardTemp.setContent(board.getContent());
-
-        boardService.write(boardTemp, file);
+//        Board boardTemp = boardService.boardView(id);
+//        boardTemp.setTitle(board.getTitle());
+//        boardTemp.setContent(board.getContent());
+//
+//        boardService.write(boardTemp, file);
 
         return "redirect:/board/list";
     }

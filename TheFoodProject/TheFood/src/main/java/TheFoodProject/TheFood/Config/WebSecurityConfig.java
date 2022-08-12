@@ -22,8 +22,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()//보안에는 취약해지지만 테스트를 위함
                 .authorizeRequests()
-                    .antMatchers("/board/list", "/user/join", "/user/joinpro", "/user/loginpro").permitAll()
+                    .antMatchers("/board/list", "/user/join", "/user/joinpro", "/user/loginpro", "/api/**").permitAll()
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
@@ -36,7 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                     .permitAll()
 //                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .logoutSuccessUrl("/board/list")
+//                    .logoutSuccessUrl("redirect:/board/list")
 //                    .invalidateHttpSession(true)
 
         ;
@@ -56,7 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         + "inner join role r on ur.role_id = r.id "
                         + "where u.userid = ?");
 
-//                .usersByUsernameQuery("select username, useremail, userid, userpassword, enabled "
+////                .usersByUsernameQuery("select username, useremail, userid, userpassword, enabled "
 //                        + "from user "
 //                        + "where userid = ?")
 //                .authoritiesByUsernameQuery("select u.userid, r.name "
