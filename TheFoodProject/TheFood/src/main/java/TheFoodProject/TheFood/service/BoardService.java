@@ -1,10 +1,10 @@
 package TheFoodProject.TheFood.service;
 
 import TheFoodProject.TheFood.entity.Board;
+import TheFoodProject.TheFood.entity.User;
 import TheFoodProject.TheFood.repository.BoardRepository;
+import TheFoodProject.TheFood.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,8 +18,14 @@ public class BoardService {
 
     @Autowired
     private BoardRepository boardRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 //글 작성 처리
-    public void write(Board board, MultipartFile file) throws Exception {
+    public Board write(String username, Board board, MultipartFile file) throws Exception {
+
+        User findUser = userRepository.findByusername(username);
+        board.setUser(findUser);
 
         String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
 
@@ -34,7 +40,7 @@ public class BoardService {
         board.setFilename(fileName);
         board.setFilepath("/files/" + fileName);
 
-        boardRepository.save(board);
+        return boardRepository.save(board);
 }
 
     //게시글 리스트 처리

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<!--xmlns:sec="http://www.w3.org/1999/xhtml"-->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
 
 <head>
     <meta charset="UTF-8">
@@ -17,27 +19,16 @@
 
 
 <body>
-    <div class = "menu-box con">
-                <a class="btn btn-secondary my-2 mr-2 my-sm-0" th:href="@{/user/login}"
-                   sec:authorize="!isAuthenticated()">로그인</a>
-                <a class="btn btn-secondary my-2 my-sm-0" th:href="@{/user/join}"
-                   sec:authorize="!isAuthenticated()">회원가입</a>
-
-                <form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="POST" sec:authorize="isAuthenticated()">
-                    <span class="text-white" sec:authentication="name">사용자</span>
-<!--                    <span class="text-white mx-2" sec:authentication="principal.authorities">권한</span>-->
-                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">로그아웃</button>
-                </form>
-    </div>
-
 
     <div class="layout">
+        <a th:href="@{/board/write}" >글쓰기</a>
 
         <table>
             <thead>
                 <tr>
                     <th>글번호</th>
                     <th>제목</th>
+                    <th>작성자</th>
                 </tr>
             </thead>
 
@@ -47,6 +38,7 @@
                     <td>
                         <a th:text="${board.title}" th:href="@{/board/view(id=${board.id})}"></a>
                     </td>
+                    <td th:text="${board.user.username}">홍길동</td>
                 </tr>
             </tbody>
         </table>
@@ -61,18 +53,26 @@
     <!--    </form>-->
 
 
-<!--        <a class="btn btn-secondary my-2 mr-2 my-sm-0" th:href="@{/user/login}"-->
-<!--           sec:authorize="!isAuthenticated()">로그인</a>-->
-<!--        <a class="btn btn-secondary my-2 my-sm-0" th:href="@{/user/join}"-->
-<!--           sec:authorize="!isAuthenticated()">회원가입</a>-->
-<!--        <form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="POST" sec:authorize="isAuthenticated()">-->
-<!--            <span class="text-white" sec:authentication="username">사용자</span>-->
-<!--            <span class="text-white mx-2" sec:authentication="principal.authorities">권한</span>-->
-<!--            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Logout</button>-->
-<!--        </form>-->
+        <a class="btn btn-secondary my-2 mr-2 my-sm-0" th:href="@{/user/login}"
+           sec:authorize="!isAuthenticated()">로그인</a>
 
 
-    </div>
+        <a class="btn btn-secondary my-2 my-sm-0" th:href="@{/user/join}"
+           sec:authorize="!isAuthenticated()">회원가입</a>
+
+
+        <form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="POST" sec:authorize="isAuthenticated()">
+            <span class="text-white" sec:authentication="name">사용자</span>
+            <span class="text-white mx-2" sec:authentication="principal.authorities">권한</span>
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">로그아웃</button>
+        </form>
+
+
+
+
+
+    </div >
+
 
 </body>
 </html>

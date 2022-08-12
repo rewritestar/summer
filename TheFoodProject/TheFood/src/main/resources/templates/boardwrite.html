@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>게시물 작성폼</title>
@@ -26,7 +26,7 @@
 
 <body>
     <div class="layout">
-        <form action="/board/writepro" method="post" enctype="multipart/form-data">
+        <form th:action="@{/board/writepro}" method="post" enctype="multipart/form-data">
             <input name="title" type="text">
             <textarea name="content"></textarea>
             <input type="file" name="file">
