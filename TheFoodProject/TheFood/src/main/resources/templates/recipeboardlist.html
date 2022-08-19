@@ -21,7 +21,7 @@
 <body>
 
     <div class="layout">
-        <a th:href="@{/recipe/write}" >레시피글쓰기</a>
+        <a th:href="@{/recipe/write}" >글쓰기</a>
 
         <table>
             <thead>
@@ -33,12 +33,12 @@
             </thead>
 
             <tbody>
-                <tr th:each="board : ${list}">
-                    <td th:text="${board.id}">1</td>
+                <tr th:each="recipeboard : ${list}">
+                    <td th:text="${recipeboard.id}">1</td>
                     <td>
-                        <a th:text="${board.title}" th:href="@{/board/view(id=${board.id})}"></a>
+                        <a th:text="${recipeboard.recipetitle}" th:href="@{/recipe/view(id=${recipeboard.id})}"></a>
                     </td>
-                    <td th:text="${board.user.username}">홍길동</td>
+                    <td th:text="${recipeboard.user.username}">홍길동</td>
                 </tr>
             </tbody>
         </table>

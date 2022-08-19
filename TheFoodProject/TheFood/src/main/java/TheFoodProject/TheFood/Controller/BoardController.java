@@ -31,6 +31,7 @@ public class BoardController {
         String username = authentication.getName();
         boardService.write(username, board, file);
 
+
         return "redirect:/board/list";
     }
 
