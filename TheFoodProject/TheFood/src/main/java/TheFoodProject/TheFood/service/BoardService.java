@@ -1,8 +1,10 @@
 package TheFoodProject.TheFood.service;
 
 import TheFoodProject.TheFood.entity.Board;
+import TheFoodProject.TheFood.entity.Recipeboard;
 import TheFoodProject.TheFood.entity.User;
 import TheFoodProject.TheFood.repository.BoardRepository;
+import TheFoodProject.TheFood.repository.RecipeboardRepository;
 import TheFoodProject.TheFood.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,9 +20,12 @@ public class BoardService {
 
     @Autowired
     private BoardRepository boardRepository;
-
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private RecipeboardRepository recipeboardRepository;
+
 //글 작성 처리
     public Board write(String username, Board board, MultipartFile file) throws Exception {
 
@@ -40,9 +45,26 @@ public class BoardService {
         board.setFilename(fileName);
         board.setFilepath("/files/" + fileName);
 
-        return boardRepository.save(board);
-}
 
+//        Role role = new Role();
+//        role.setId(1l);
+//        user.getRoles().add(role);
+
+//        Recipeboard recipeboard = new Recipeboard();
+//        recipeboard.setRecipeid(1);
+//        board.getRecipeboards().add(recipeboard);
+
+//        if (100 <= board.getCategory() && board.getCategory() < 200) {
+//            sort(board, new Recipeboard() );
+//        }
+        return boardRepository.save(board);
+    }
+
+
+    public void sort(Board board, Recipeboard recipeboard){
+        recipeboard.setRecipeid(board.getId());
+        recipeboard.setRecipecategory(boardRepository.findByid(board.getId()).get().getCategory());
+    }
     //게시글 리스트 처리
 //    public Page<Board> boardList(Pageable pageable){
 //
