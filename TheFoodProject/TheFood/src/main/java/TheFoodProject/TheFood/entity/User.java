@@ -1,14 +1,17 @@
 package TheFoodProject.TheFood.entity;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Getter
 @Entity
 @Data
-public class User{
+public class User extends Time{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
@@ -34,6 +37,12 @@ public class User{
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Board> boards = new ArrayList<>();
+
+
+    public void modify(String username, String userpassword) {
+        this.username = username;
+        this.userpassword = userpassword;    }
+
 
 
 }

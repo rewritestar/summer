@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>회원탈퇴</title>
+</head>
+
+<style>
+    .layout{
+        width: 500px;
+        margin : 0 auto;
+        margin-top  : 40px;
+    }
+</style>
+
+
+<body>
+
+<div class="layout">
+    <form action="/user/deletepro" method="post" >
+        <label for="userpassword">비번확인</label>
+        <input type="text" id="userpassword" name="userpassword" placeholder="비밀번호를 입력하세요">
+        <button type="submit">탈퇴</button>
+    </form>
+</div>
+
+
+</body>
+</html>
