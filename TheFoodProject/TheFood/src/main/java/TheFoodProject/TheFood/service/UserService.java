@@ -1,13 +1,14 @@
 package TheFoodProject.TheFood.service;
 
+import TheFoodProject.TheFood.DTO.UserRequestDto;
 import TheFoodProject.TheFood.entity.Role;
 import TheFoodProject.TheFood.entity.User;
 import TheFoodProject.TheFood.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
@@ -39,14 +40,14 @@ public class UserService {
     }
 //--------------------------------------------------------------------------------------------------
     //아이디,비밀번호 찾기
-//    public String findid(String useremail){
-//        Optional<User> result = userRepository.findByuseremail(useremail); //입력한 이메일을 가진 회원찾기
-//        if(result.isEmpty()){ //만약 일치하는 회원이 없다면
-//            throw new IllegalStateException("해당 아이디는 존재하지 않습니다.");
-//        }
-//        System.out.println(result.get().getUserid());
-//        return result.get().getUserid();
-//    }
+    public String findid(String useremail){
+        Optional<User> result = userRepository.findByuseremail(useremail); //입력한 이메일을 가진 회원찾기
+        if(result.isEmpty()){ //만약 일치하는 회원이 없다면
+            throw new IllegalStateException("해당 아이디는 존재하지 않습니다.");
+        }
+        System.out.println(result.get().getUserid());
+        return result.get().getUserid();
+    }
 //
 //    public String findpassword(String useremail, String userid){
 //        Optional<User> person1 = userRepository.findByuseremail(useremail);
@@ -95,11 +96,37 @@ public class UserService {
 //
 //        userRepository.save(user);
 //    }
+//    @Transactional
+//    public void usermodify(User user) {
+//        User persistance = userRepository.findByid(user.getId()).orElseThrow(()->{
+//            return new IllegalArgumentException("회원 찾기 실패!!");
+//        });
+//        String rawpassword = user.getUserpassword();
+//        String encpassword = passwordEncoder.encode(rawpassword);
+//        persistance.setUserpassword(encpassword);
+//        persistance.setUsername(user.getUsername());
+//
+//    }
+
+    /* 회원수정 (dirty checking) */
     @Transactional
-    public IllegalArgumentException usermodify(User user){
-        User persistance = userRepository.findByid(user.getId()).orElseThrow())->  {
-            return new IllegalArgumentException("회원찾기실패");
-        }
+    public void modify(UserRequestDto dto) {
+        User user = userRepository.findById(dto.toEntity().getId()).orElseThrow(() ->
+                new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
+        String encPassword = passwordEncoder.encode(dto.getUserpassword());
+        user.modify(dto.getUsername(), encPassword);    }
+
+
+//    public void userDelete(Integer id){
+//
+//        userRepository.deleteById(id);
+//    }
+
+    @Transactional
+    public void delete(User user) throws Exception{
+        userRepository.deleteById(user.getId());
     }
+
+
 }
 
