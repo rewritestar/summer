@@ -26,8 +26,8 @@ public class BoardController {
     @PostMapping("/board/writepro")
     public String boardWritePro(Board board, MultipartFile file, Authentication authentication) throws Exception{
 
-        String username = authentication.getName();
-        boardService.write(username, board, file);
+        String userid = authentication.getName();
+        boardService.write(userid, board, file);
 
         return "redirect:/board/list";
     }

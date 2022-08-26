@@ -23,10 +23,11 @@ public class BoardService {
 
 
 //글 작성 처리
-    public Board write(String username, Board board, MultipartFile file) throws Exception {
+    public Board write(String userid, Board board, MultipartFile file) throws Exception {
 
-        User findUser = userRepository.findByusername(username);
+        User findUser = userRepository.findByuserid(userid);
         board.setUser(findUser);
+
 
         String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
 
@@ -67,8 +68,7 @@ public class BoardService {
 
         return boardRepository.findAll();
     }
-
-        public List<Board> boardList1(Integer category){
+    public List<Board> boardList1(Integer category){
 
         return boardRepository.findBycategory(category);
     }
