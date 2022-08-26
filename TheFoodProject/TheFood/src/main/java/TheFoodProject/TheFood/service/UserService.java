@@ -1,8 +1,8 @@
 package TheFoodProject.TheFood.service;
 
-import TheFoodProject.TheFood.DTO.UserRequestDto;
 import TheFoodProject.TheFood.entity.Role;
 import TheFoodProject.TheFood.entity.User;
+import TheFoodProject.TheFood.repository.BoardRepository;
 import TheFoodProject.TheFood.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,6 +15,9 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private BoardRepository boardRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -84,47 +87,23 @@ public class UserService {
 
     //--------------------------------------------------------------------------------------------------
     //마이페이지
-//    public User userdata(Integer id) { //해당 고유 식별자를 가진 회원에 대한 정보 불러오기
-//
-//        return userRepository.findById(id).get();
-//    }
-//
-//    public void updatejoin(User user) { //마이페이지에서 수정한 정보로 가지고 있는 데이터 업데이트
-//
-//        String encodedPassword = passwordEncoder.encode(user.getUserpassword());
-//        user.setUserpassword(encodedPassword);
-//
-//        userRepository.save(user);
-//    }
-//    @Transactional
-//    public void usermodify(User user) {
-//        User persistance = userRepository.findByid(user.getId()).orElseThrow(()->{
-//            return new IllegalArgumentException("회원 찾기 실패!!");
-//        });
-//        String rawpassword = user.getUserpassword();
-//        String encpassword = passwordEncoder.encode(rawpassword);
-//        persistance.setUserpassword(encpassword);
-//        persistance.setUsername(user.getUsername());
-//
-//    }
-
-    /* 회원수정 (dirty checking) */
+//회원정보수정
     @Transactional
-    public void modify(UserRequestDto dto) {
-        User user = userRepository.findById(dto.toEntity().getId()).orElseThrow(() ->
-                new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
-        String encPassword = passwordEncoder.encode(dto.getUserpassword());
-        user.modify(dto.getUsername(), encPassword);    }
+    public void modify(User user, String userid) {
+        User result = userRepository.findByuserid(userid);
+//        User persistance = userRepository.findById(user.getId()).orElseThrow(() ->
+//                new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
+        String rawpassword = user.getUserpassword();
+        String encpassword = passwordEncoder.encode(rawpassword);
+        result.setUserpassword(encpassword);
+        result.setUsername(user.getUsername());
+    }
 
-
-//    public void userDelete(Integer id){
-//
-//        userRepository.deleteById(id);
-//    }
-
+//회원탈퇴
     @Transactional
-    public void delete(User user) throws Exception{
-        userRepository.deleteById(user.getId());
+    public void delete(String userid) throws Exception{
+        Integer id = userRepository.findByuserid(userid).getId();
+        userRepository.deleteById(id);
     }
 
 

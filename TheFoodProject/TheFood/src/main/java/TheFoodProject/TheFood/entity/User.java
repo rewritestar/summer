@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @Entity
 @Data
-public class User extends Time{
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
@@ -39,10 +39,8 @@ public class User extends Time{
     private List<Board> boards = new ArrayList<>();
 
 
-    public void modify(String username, String userpassword) {
-        this.username = username;
-        this.userpassword = userpassword;    }
-
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> commentList;
 
 
 }
