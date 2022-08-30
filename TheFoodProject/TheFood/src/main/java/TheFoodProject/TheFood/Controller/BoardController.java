@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Controller
 
 public class BoardController {
@@ -36,11 +38,16 @@ public class BoardController {
     }
 
 
-    @GetMapping("/board/list")
-    public String boardList(Model model){
+//    @GetMapping("/board/list")
+//    public String boardList(Model model){
+//
+//        model.addAttribute("list", boardService.boardList());
+//        return "boardlist";
+//    }
 
-        model.addAttribute("list", boardService.boardList());
-        return "boardlist";
+    @PostMapping("/recipe")
+    public List<Board> boardList(){
+        return boardService.boardList();
     }
 
     @GetMapping("/board/list/category")

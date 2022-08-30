@@ -3,6 +3,7 @@ import RecipeButtons from "../buttons/recipe_buttons";
 import Container from "../container/container";
 import Page from "../page/page";
 import styles from "./recipe.module.css";
+import axios from "axios";
 
 const Recipe = ({ user }) => {
   const TYPE_CODE = {
@@ -16,6 +17,9 @@ const Recipe = ({ user }) => {
     야식: 108,
     기타: 109,
   };
+    axios.post("/recipe", data,{headers:{
+    "Content-Type" : "application/json"}}).then(res => {
+    console.log(res.data)});
   const [type, setType] = useState("한식");
   const [boards, setBoards] = useState([
     {
