@@ -41,6 +41,7 @@ public class Board {
     @JsonIgnore
     private User user;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> commentList;
 

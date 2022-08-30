@@ -1,5 +1,6 @@
 package TheFoodProject.TheFood.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -13,10 +14,12 @@ public class Comment {
 
     private String content;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "board_id")
     private Board board;

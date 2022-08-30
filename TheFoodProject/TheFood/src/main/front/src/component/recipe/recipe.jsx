@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import RecipeButtons from "../buttons/recipe_buttons";
 import Container from "../container/container";
 import Page from "../page/page";
 import styles from "./recipe.module.css";
 import axios from "axios";
+
 
 const Recipe = ({ user }) => {
   const TYPE_CODE = {
@@ -17,15 +18,16 @@ const Recipe = ({ user }) => {
     야식: 108,
     기타: 109,
   };
-  axios
-    .post("/recipe", {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-    .then((res) => {
-      console.log(res);
-    });
+  useEffect(()=>{
+    axios
+      .get(`/recipe`)
+      .then((response) => {
+      console.log("ok 됨");
+      console.log(response.data);
+        setBoards(response.data);
+      })
+      .catch(e=>alert(e));
+  },[]);
   const [type, setType] = useState("한식");
   const [boards, setBoards] = useState([
     {
