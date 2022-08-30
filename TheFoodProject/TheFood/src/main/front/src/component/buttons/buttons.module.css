@@ -1,0 +1,21 @@
+@value makerDarkRed, makerRed, makerWhite from '../../common/colors.css';
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  background-color: makerDarkRed;
+}
+.button {
+  width: 100%;
+  background-color: transparent;
+  color: makerWhite;
+  border: 0;
+  cursor: pointer;
+  padding: 1em;
+}
+.button:hover {
+  background-color: makerRed;
+  transition: 0.5s ease-out;
+}

@@ -1,0 +1,33 @@
+@value makerDarkRed, makerRed, makerGrey, makerWhite from '../../common/colors.css';
+
+.container {
+  background-color: makerWhite;
+  border: 2px solid makerRed;
+  border-radius: 10px;
+  margin: 1em;
+  cursor: pointer;
+  box-shadow: 0px 0px 7px 1px makerDarkRed;
+  width: 200px;
+  height: 260px;
+}
+.container:hover {
+  transform: scale(1.02);
+  transition: 0.3s ease-in;
+}
+.thumbnail {
+  width: 190px;
+  height: 200px;
+  padding: 0.5em;
+}
+.data {
+  padding: 0.2em 0.5em;
+}
+.title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.username {
+  font-size: 12px;
+  color: makerGrey;
+}

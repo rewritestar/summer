@@ -1,0 +1,35 @@
+@value makerGold, makerRed, makerWhite from "../../common/colors.css";
+.container {
+  display: flex;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+.show {
+  width: 50px;
+  height: 50px;
+  background-color: makerGold;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 0;
+}
+
+.member_container {
+  display: none;
+}
+
+.container:hover .member_container {
+  display: inline-block;
+  transition: 0.3s ease-out;
+}
+
+.nonMember,
+.member {
+  display: flex;
+}
+
+.user_name {
+  margin-right: 1em;
+}

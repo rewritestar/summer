@@ -1,0 +1,21 @@
+@value makerDarkRed from '../../common/colors.css';
+.container {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+.description {
+  padding: 5em;
+}
+.img_section {
+  margin-left: calc(100% - 55rem);
+  width: 55rem;
+  height: 18rem;
+  background-color: makerDarkRed;
+}
+
+.img_section img {
+  width: 50em;
+  height: 100%;
+  margin-left: 5em;
+}

@@ -1,0 +1,27 @@
+@value makerLightGrey from '../../common/colors.css';
+.container {
+  margin-bottom: 2em;
+}
+.bar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5em;
+}
+
+.writer {
+  margin-bottom: 0.5em;
+  font-weight: bold;
+}
+.option_default {
+  display: flex;
+}
+.input {
+  width: 100%;
+  height: 5em;
+  resize: none;
+  border-radius: 5px;
+  padding: 1em;
+}
+.input:focus {
+  outline: none;
+}

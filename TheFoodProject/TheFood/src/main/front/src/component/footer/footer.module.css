@@ -1,0 +1,22 @@
+@value makerGold, makerWhite from '../../common/colors.css';
+
+.data {
+  width: 100%;
+  height: 100%;
+  background-color: makerGold;
+  color: makerWhite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.data.column {
+  flex-direction: column;
+}
+.data.row {
+  flex-direction: row;
+}
+
+.team {
+  margin-right: 1em;
+}

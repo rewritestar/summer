@@ -1,0 +1,13 @@
+@value makerRed, makerWhite from '../../common/colors.css';
+.button {
+  background-color: makerRed;
+  color: makerWhite;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 0.5em 1em;
+  border: 0;
+  margin-right: 1em;
+}
+.button:hover {
+  opacity: 80%;
+}

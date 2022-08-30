@@ -1,0 +1,15 @@
+@value makerDarkRed,makerWhite from '../../common/colors.css';
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: makerWhite;
+  width: 100%;
+  padding: 2em 0;
+  border-bottom: 0.5em solid makerDarkRed;
+}
+
+.title {
+  font-size: 17px;
+  font-weight: bold;
+}

@@ -1,0 +1,5 @@
+@value makerGrey from '../../common/colors.css';
+.type {
+  margin-top: 1em;
+  color: makerGrey;
+}

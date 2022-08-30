@@ -1,0 +1,70 @@
+@value makerGrey, makerLightGrey, makerRed, makerDarkRed, makerWhite from '../../common/colors.css';
+
+.button {
+  background-color: makerRed;
+  color: makerWhite;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 0.5em 1em;
+  border: 0;
+}
+.button:hover {
+  opacity: 80%;
+}
+
+.container {
+  width: 100%;
+  min-height: 100%;
+  padding: 3em;
+}
+.title_bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 1em;
+  border-bottom: 2px solid makerRed;
+}
+.title_bar .title {
+  font-size: 1.5em;
+  padding: 1em;
+}
+.user_name {
+  color: makerGrey;
+}
+
+.content_bar {
+  padding: 2em 10vw;
+  border-bottom: 1px solid makerLightGrey;
+}
+
+.comment_bar {
+  padding: 2em 10vw;
+}
+
+.titleAndButton {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1em;
+}
+
+.comment_bar .title {
+  font-size: 15px;
+  color: makerGrey;
+}
+.comment_bar .input {
+  width: 100%;
+  height: 7em;
+  resize: none;
+  border-radius: 5px;
+  padding: 1em;
+}
+.comment_bar .input:focus {
+  outline: 0;
+}
+.form {
+  margin-bottom: 1em;
+}
+.board_option {
+  text-align: right;
+  margin-bottom: 1em;
+}
