@@ -5,11 +5,43 @@
     <title>게시글 상세 페이지</title>
 </head>
 <body>
+<input type="hidden" id="board_id" name="board_id" th:value="${board.id}">
 
 <h1 th:text="${board.title}">제목입니다.</h1>
 <p th:text="${board.content}">내용이 들어갈 부분입니다.</p>
 <a th:href="@{/board/delete(id=${board.id})}">글삭제</a>
 <a th:href="@{${board.filepath}}">다운받기</a>
 <a th:href="@{/board/modify/{id}(id = ${board.id})}">수정</a>
+
+<!--댓글목록-->
+<table>
+    <thead>
+    <tr>
+        <th>작성자</th>
+        <th>내용</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="comment : ${list1}">
+        <td th:text="${comment.user.username}">홍길동</td>
+        <td th:text="${comment.content}">홍길동</td>
+        <a th:href="@{/comment/delete(id=${comment.id})}">댓글삭제</a>
+    </tr>
+    </tbody>
+</table>
+
+<!--댓글작성-->
+<div class="input-group mb-3">
+
+    <form id="comment" th:action="@{/comment/write}" method="post">
+        <input type="text" id="content" name="content" class="form-control" placeholder="댓글을 입력해주세요.." aria-label="댓글을 입력해주세요.." aria-describedby="basic-addon2">
+        <input type="hidden" id="boardid" name="boardid" th:value="${board.id}">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit">등록</button>
+        </div>
+    </form>
+</div>
+
 </body>
 </html>

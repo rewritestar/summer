@@ -1,5 +1,6 @@
 package TheFoodProject.TheFood.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,6 +28,7 @@ public class User {
 
     private boolean enabled;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "user_role",
