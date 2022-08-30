@@ -2,6 +2,7 @@ package TheFoodProject.TheFood.Controller;
 
 import TheFoodProject.TheFood.entity.Board;
 import TheFoodProject.TheFood.service.BoardService;
+import TheFoodProject.TheFood.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class BoardController {
 
+    @Autowired
+    private CommentService commentService;
     @Autowired
     private BoardService boardService;
 
@@ -49,6 +52,7 @@ public class BoardController {
     public String boardView(Model model, Integer id){
 
         model.addAttribute("board", boardService.boardView(id));
+        model.addAttribute("list1", commentService.commentList(id));
         return "boardview";
     }
 
