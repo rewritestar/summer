@@ -17,9 +17,15 @@ const Recipe = ({ user }) => {
     야식: 108,
     기타: 109,
   };
-    axios.post("/recipe", data,{headers:{
-    "Content-Type" : "application/json"}}).then(res => {
-    console.log(res.data)});
+  axios
+    .post("/recipe", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+    });
   const [type, setType] = useState("한식");
   const [boards, setBoards] = useState([
     {
