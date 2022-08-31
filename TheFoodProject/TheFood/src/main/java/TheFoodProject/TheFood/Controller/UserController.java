@@ -1,5 +1,6 @@
 package TheFoodProject.TheFood.Controller;
 
+import TheFoodProject.TheFood.entity.LoginForm;
 import TheFoodProject.TheFood.entity.User;
 import TheFoodProject.TheFood.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
@@ -80,8 +82,8 @@ public class UserController {
     }
 
     @PostMapping("/api/login")
-    public void userloginForm(String userid, String userpassword){
-        System.out.println("로그인 axios 연결 성공");
+    public void userloginForm(@RequestBody LoginForm loginForm){
+        System.out.println("로그인 axios 연결 성공" + loginForm);
         return;
     }
 

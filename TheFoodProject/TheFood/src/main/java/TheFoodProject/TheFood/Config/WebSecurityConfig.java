@@ -21,6 +21,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+          http.csrf().disable();
 //        http
 //                .csrf().disable()//보안에는 취약해지지만 테스트를 위함
 //                .authorizeRequests()
@@ -41,7 +42,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 ////                    .invalidateHttpSession(true)
 //
 //        ;
-        return;
     }
 
     @Autowired
