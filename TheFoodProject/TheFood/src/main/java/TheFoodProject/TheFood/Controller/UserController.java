@@ -5,14 +5,14 @@ import TheFoodProject.TheFood.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 
 @RequiredArgsConstructor
-@Controller
+@RestController
 public class UserController {
 
     @Autowired
@@ -25,10 +25,18 @@ public class UserController {
         return "userjoin";
     }
 
-    @PostMapping("user/joinpro")
-    public String userJoinPro(User user){
+    @PostMapping("/signup")
+    public String signupForm(User user){
     userService.save(user);
     return "redirect:/board/list";
+    }
+
+    @PostMapping("/signup")
+    public void signupForm(String userid, String userpassword, String useremail, String username){
+        User user = new User();
+        System.out.println("회원가입 axios 연결 성공"+ username);
+        //userService.save(newUser);
+        return;
     }
 //--------------------------------------------------------------------------------------------------
     //아이디,비밀번호 찾기
