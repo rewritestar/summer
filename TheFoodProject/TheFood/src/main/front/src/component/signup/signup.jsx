@@ -62,6 +62,12 @@ const Signup = ({ onSignup }) => {
       return;
     }
     const signupForm = { userid, userpassword, useremail, usernickname };
+    axios
+      .post("/signup", {
+        signupForm: signupForm,
+      })
+      .then(() => console.log("signup axios 수행"));
+
     onSignup(signupForm);
     navigate("/");
   };

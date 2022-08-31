@@ -1,3 +1,4 @@
+import axios from "axios";
 import { React, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Container from "../container/container";
@@ -20,8 +21,12 @@ const Login = ({ onLogin }) => {
     const userid = idRef.current.value;
     const userpassword = passwordRef.current.value;
     const loginForm = { userid, userpassword };
+    axios
+      .post("/login", {
+        loginForm: loginForm,
+      })
+      .then(() => console.log("login axios 수행"));
     onLogin(loginForm);
-    console.log(loginForm);
     navigate("/");
   };
 
