@@ -20,12 +20,12 @@ public class UserController {
 
 
     //회원가입
-    @GetMapping("/signup")
-    public void userJoinForm(){
-        return;
-    }
+//    @GetMapping("/signup")
+//    public void userJoinForm(){
+//        return;
+//    }
 
-    @PostMapping("/signup")
+    @PostMapping("/api/signup")
     public void usersignupForm(String userid, String userpassword, String useremail, String username){
         User user = new User();
         System.out.println("회원가입 axios 연결 성공"+ username);
@@ -79,7 +79,7 @@ public class UserController {
         return "userlogin";
     }
 
-    @PostMapping("/login")
+    @PostMapping("/api/login")
     public void userloginForm(String userid, String userpassword){
         System.out.println("로그인 axios 연결 성공");
         return;

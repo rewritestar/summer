@@ -9,9 +9,6 @@ import java.util.List;
 @Repository
 public interface BoardRepository extends JpaRepository<Board, Integer> {
         List<Board> findBycategory(Integer category);
-
-//        Optional<Board> findByid(Integer id);
-
         Board findByid(Integer id);
 
 

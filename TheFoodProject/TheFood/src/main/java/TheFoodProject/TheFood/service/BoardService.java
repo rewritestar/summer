@@ -46,7 +46,6 @@ public class BoardService {
 //        Role role = new Role();
 //        role.setId(1l);
 //        user.getRoles().add(role);
-
 //        Recipeboard recipeboard = new Recipeboard();
 //        recipeboard.setRecipeid(1);
 //        board.getRecipeboards().add(recipeboard);
@@ -60,10 +59,6 @@ public class BoardService {
 
 
     //게시글 리스트 처리
-//    public Page<Board> boardList(Pageable pageable){
-//
-//        return boardRepository.findAll(pageable);
-//    }
     public List<Board> boardList(){
 
         return boardRepository.findAll();
@@ -78,7 +73,6 @@ public class BoardService {
 
         return boardRepository.findById(id).get();
     }
-
     //특정 게시글 삭제
     public void boardDelete(Integer id){
 

@@ -8,7 +8,6 @@ import java.util.List;
 
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Integer>{
-
     List<Comment> findByboard_id(Integer board_id);
 
 }
