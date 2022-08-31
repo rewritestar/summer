@@ -24,9 +24,7 @@ public class CommentController {
 
     @GetMapping("/comment/delete")
     public String commentDelete(Integer id){
-
         commentService.commentDelete(id);
-
         return "redirect:/board/list";
     }
 

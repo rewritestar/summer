@@ -69,8 +69,8 @@ public class UserService {
 //    }
 //--------------------------------------------------------------------------------------------------
     //로그인
-//    public String login(String userid, String userpassword){
-//        Optional<User> people1 = userRepository.findByuserpassword(userpassword);
+    public String login(String userid, String userpassword){
+        Optional<User> people1 = userRepository.findByuserpassword(userpassword);
 //        Optional<User> people2 = userRepository.findByuserid(userid);
 //
 //        if(people1.isEmpty() || people2.isEmpty()){
@@ -81,9 +81,9 @@ public class UserService {
 //            System.out.println(people2.get().getUsername() + "님 환영합니다");
 //        }
 //        else {System.out.println("해당하는 회원이 존재하지 않습니다");}
-//
-//        return people2.get().getUsername();
-//    }
+
+        return people1.get().getUsername();
+    }
 
     //--------------------------------------------------------------------------------------------------
     //마이페이지

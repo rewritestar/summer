@@ -20,19 +20,13 @@ public class UserController {
 
 
     //회원가입
-    @GetMapping("/user/join")
-    public String userJoinForm(){
-        return "userjoin";
+    @GetMapping("/signup")
+    public void userJoinForm(){
+        return;
     }
 
     @PostMapping("/signup")
-    public String signupForm(User user){
-    userService.save(user);
-    return "redirect:/board/list";
-    }
-
-    @PostMapping("/signup")
-    public void signupForm(String userid, String userpassword, String useremail, String username){
+    public void usersignupForm(String userid, String userpassword, String useremail, String username){
         User user = new User();
         System.out.println("회원가입 axios 연결 성공"+ username);
         //userService.save(newUser);
@@ -85,10 +79,16 @@ public class UserController {
         return "userlogin";
     }
 
-//    @PostMapping("user/loginpro")
-//    public String userLoginPro(String userid, String userpassword){
-//        userService.login(userid, userpassword);
-//        return "redirect:/board/list";
+    @PostMapping("/login")
+    public void userloginForm(String userid, String userpassword){
+        System.out.println("로그인 axios 연결 성공");
+        return;
+    }
+
+    @PostMapping("user/loginpro")
+    public String userLoginPro(String userid, String userpassword){
+        userService.login(userid, userpassword);
+        return "redirect:/board/list";}
 
 //--------------------------------------------------------------------------------------------------
 //탈퇴

@@ -16,37 +16,32 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
-
-
-
     @Autowired
     private DataSource dataSource;
 
-
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()//보안에는 취약해지지만 테스트를 위함
-                .authorizeRequests()
-                    .antMatchers("/board/**", "/user/**", "/api/**").permitAll()
-                    .anyRequest().authenticated()
-                    .and()
-                .formLogin()
-                    .usernameParameter("userid")
-                    .passwordParameter("userpassword")
-                    .loginPage("/user/login")
-                    .permitAll()
-                    .defaultSuccessUrl("/board/list")
-                    .and()
-                .logout()
-                    .permitAll()
-//                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//                    .logoutSuccessUrl("redirect:/board/list")
-//                    .invalidateHttpSession(true)
-
-        ;
+//        http
+//                .csrf().disable()//보안에는 취약해지지만 테스트를 위함
+//                .authorizeRequests()
+//                    .antMatchers("/","/board/**", "/user/**", "/api/**","/signup").permitAll()
+//                    .anyRequest().authenticated()
+//                    .and()
+//                .formLogin()
+//                    .usernameParameter("userid")
+//                    .passwordParameter("userpassword")
+//                    .loginPage("/login")
+//                    .permitAll()
+//                    .defaultSuccessUrl("/")
+//                    .and()
+//                .logout()
+//                    .permitAll()
+////                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+////                    .logoutSuccessUrl("redirect:/board/list")
+////                    .invalidateHttpSession(true)
+//
+//        ;
+        return;
     }
 
     @Autowired
@@ -54,19 +49,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             throws Exception {
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
-                .passwordEncoder(passwordEncoder())
-                .usersByUsernameQuery("select userid, userpassword, enabled "
-                        + "from user "
-                        + "where userid = ?")
-                .authoritiesByUsernameQuery("select u.username, r.name "
-                        + "from user_role ur inner join user u on ur.user_id = u.id "
-                        + "inner join role r on ur.role_id = r.id "
-                        + "where u.userid = ?");
-
-////                .usersByUsernameQuery("select username, useremail, userid, userpassword, enabled "
+                .passwordEncoder(passwordEncoder());
+//                .usersByUsernameQuery("select userid, userpassword, enabled "
 //                        + "from user "
 //                        + "where userid = ?")
-//                .authoritiesByUsernameQuery("select u.userid, r.name "
+//                .authoritiesByUsernameQuery("select u.username, r.name "
 //                        + "from user_role ur inner join user u on ur.user_id = u.id "
 //                        + "inner join role r on ur.role_id = r.id "
 //                        + "where u.userid = ?");
