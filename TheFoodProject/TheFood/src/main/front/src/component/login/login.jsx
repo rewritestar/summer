@@ -33,7 +33,7 @@ const Login = ({ onLogin }) => {
           "Content-Type": "application/json",
         },
       })
-      .then(() => console.log("login axios 수행"))
+      .then((res) => console.log(`login axios 수행 `))
       .catch(() => console.log("error login axios"));
     onLogin(loginForm);
     navigate("/");
