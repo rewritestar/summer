@@ -15,21 +15,6 @@ import Restaurant from "./component/restaurant/restaurant";
 import Signup from "./component/signup/signup";
 
 function App({ auth, boardApi }) {
-  const [users, setUsers] = useState([
-    {
-      id: "작성자1",
-
-      userid: "user1",
-
-      useremail: "user1@naver.com",
-
-      userpassword: "user1",
-
-      username: "유저1",
-
-      enabled: 1,
-    },
-  ]);
   const [user, setUser] = useState({
     id: "",
 
@@ -74,17 +59,12 @@ function App({ auth, boardApi }) {
   };
   const onLogout = () => {
     setUser({
-      id: "",
-
-      userid: "",
-
-      useremail: "",
-
-      userpassword: "",
-
-      usernickname: "",
-
-      enabled: "",
+      // id: "",
+      // userid: "",
+      // useremail: "",
+      // userpassword: "",
+      // usernickname: "",
+      // enabled: "",
     });
     localStorage.clear();
   };

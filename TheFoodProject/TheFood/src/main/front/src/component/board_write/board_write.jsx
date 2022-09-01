@@ -44,14 +44,14 @@ const BoardWrite = ({ user, boardApi }) => {
       userid,
     };
     boardApi //
-      .write(boardForm) //
+      .boardWrite(boardForm) //
       .then((user) => `게시글 작성 성공 ${user}`);
     //board category에 따라 백엔드로 주는 방향 달라짐
   };
   useEffect(() => {
     //게시글 수정할 때 발생함
     wroteBoard && setBoard(wroteBoard);
-  }, [location.state]);
+  }, [wroteBoard]);
   return (
     <div className={styles.container}>
       <header className={styles.header}>

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Container from "../container/container";
 import Page from "../page/page";
-const Myboards = ({ user }) => {
+const Myboards = ({ user, boardApi }) => {
   const location = useLocation();
   const type = location.state;
   const [boards, setBoards] = useState([
@@ -126,6 +126,17 @@ const Myboards = ({ user }) => {
       userid: "작성자1",
     },
   ]);
+  useEffect(() => {
+    type === "내 댓글 조회" &&
+      boardApi //
+        .getMyCommentBoards(user.id)
+        .then((boards) => setBoards(boards));
+    type === "내 게시글 조회" &&
+      boardApi //
+        .getMyBoards(user.id)
+        .then((boards) => setBoards(boards));
+  }, []);
+
   return (
     <Container title={type} user={user}>
       <Page boards={boards} />

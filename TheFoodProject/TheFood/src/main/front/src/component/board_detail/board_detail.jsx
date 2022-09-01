@@ -1,15 +1,23 @@
 import React, { useRef, useState } from "react";
+import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../button/button";
 import Comment from "../comment/comment";
 import Container from "../container/container";
 import styles from "./board_detail.module.css";
-const BoardDetail = ({ user }) => {
+const BoardDetail = ({ user, boardApi }) => {
+  const [board, setBoard] = useState({
+    // id: "",
+    // category: "",
+    // title: "",
+    // content: "",
+    // filename: "",
+    // filepath: "",
+    // userid: "",
+  });
   const navigate = useNavigate();
   const location = useLocation();
-  const board = location.state;
   const inputRef = useRef();
-
   const [comments, setComments] = useState([
     {
       id: 1,
@@ -24,25 +32,56 @@ const BoardDetail = ({ user }) => {
       content: "다음번에는 양식에 대해서도 글 써주세요!",
     },
   ]);
+  useEffect(() => {
+    boardApi //
+      .getComments() //
+      .then((comments) => {
+        setComments(comments);
+        console.log("댓글 조회 성공");
+      });
+  }, []);
+
+  useEffect(() => {
+    setBoard(location.state);
+  }, [location.state]);
 
   const onSubmit = () => {
     const content = inputRef.current.value;
     onCommentSubmit(content);
   };
   const onCommentSubmit = (content) => {
-    const newComment = {
+    const comment = {
       id: new Date(),
       userid: user.id,
-      username: user.usernickname,
+      username: user.username,
       content: content,
     };
-    //백엔드로 저장해야 함.
-    setComments([...comments, newComment]);
+    boardApi //
+      .commentWrite(comment) //
+      .then((res) => console.log(`댓글이 작성되었습니다.`));
+    setComments([...comments, comment]);
+  };
+  const onCommentDelete = (commentid) => {
+    boardApi //
+      .commentDelte(commentid) //
+      .then((res) => {
+        console.log("댓글이 삭제되었습니다.");
+      });
+    const newComments = comments.map((comment) => comment.id !== commentid);
+    setComments(newComments);
   };
   const onBoardChange = (e) => {
     navigate("/boardwrite", { state: board });
   };
-  const onBoardDelete = (e) => {};
+  const onBoardDelete = (e) => {
+    boardApi //
+      .boardDelete(board.id) //
+      .then((result) => {
+        alert("게시물이 성공적으로 삭제되었습니다.");
+        setBoard({});
+        navigate(`/`);
+      });
+  };
   return (
     <Container title={board.category} user={user.usernickname}>
       <div className={styles.container}>
@@ -88,6 +127,7 @@ const BoardDetail = ({ user }) => {
                   user={user}
                   comment={comment}
                   onCommentSubmit={onCommentSubmit}
+                  onCommentDelete={onCommentDelete}
                 />
               );
             })}
