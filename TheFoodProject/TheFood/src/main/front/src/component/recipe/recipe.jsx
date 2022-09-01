@@ -5,8 +5,7 @@ import Page from "../page/page";
 import styles from "./recipe.module.css";
 import axios from "axios";
 
-
-const Recipe = ({ user }) => {
+const Recipe = ({ user, boardApi }) => {
   const TYPE_CODE = {
     한식: 101,
     양식: 102,
@@ -18,16 +17,6 @@ const Recipe = ({ user }) => {
     야식: 108,
     기타: 109,
   };
-  useEffect(()=>{
-    axios
-      .get(`/recipe`)
-      .then((response) => {
-      console.log("ok 됨");
-      console.log(response.data);
-        setBoards(response.data);
-      })
-      .catch(e=>alert(e));
-  },[]);
   const [type, setType] = useState("한식");
   const [boards, setBoards] = useState([
     {
@@ -151,19 +140,21 @@ const Recipe = ({ user }) => {
     },
   ]);
   const [typeBoards, setTypeBoards] = useState([]);
+  useEffect(() => {
+    boardApi //
+      .getRecipe(TYPE_CODE[type]) //
+      .then((boards) => setTypeBoards(boards));
+  }, [type]);
+
   const handleTypeBtn = (e) => {
     const currentType = e.currentTarget.innerText;
-    console.log(TYPE_CODE[currentType]);
     setType(currentType);
-    //currentType의 board를 백엔드로 요청 TYPE_CODE[currentType]
-    //setTypeBoards(요청값);
-    //page boards={typeBoards}가 대신 들어감
   };
 
   return (
     <Container title="레시피 카테고리" user={user}>
       <p className={styles.type}>{`<${type}>`}</p>
-      <Page boards={boards} />
+      <Page boards={typeBoards} />
       <RecipeButtons handleTypeBtn={handleTypeBtn} />
     </Container>
   );

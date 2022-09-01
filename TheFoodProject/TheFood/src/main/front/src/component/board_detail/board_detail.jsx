@@ -10,8 +10,6 @@ const BoardDetail = ({ user }) => {
   const board = location.state;
   const inputRef = useRef();
 
-  console.log(board.id);
-  console.log(user.id);
   const [comments, setComments] = useState([
     {
       id: 1,

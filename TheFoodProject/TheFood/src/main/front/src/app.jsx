@@ -14,7 +14,7 @@ import Recipe from "./component/recipe/recipe";
 import Restaurant from "./component/restaurant/restaurant";
 import Signup from "./component/signup/signup";
 
-function App(props) {
+function App({ auth, boardApi }) {
   const [users, setUsers] = useState([
     {
       id: "작성자1",
@@ -44,15 +44,15 @@ function App(props) {
     enabled: "",
   });
   const onMypageChange = (mypageForm) => {
-    props.auth.mypageChange(mypageForm).then((user) => {
+    auth.mypageChange(mypageForm).then((user) => {
       setUser(user);
     });
   };
   const onSignup = (signupForm) => {
-    props.auth.signup(signupForm);
+    auth.signup(signupForm);
   };
   const onLogin = (loginForm) => {
-    props.auth.login(loginForm).then((user) => {
+    auth.login(loginForm).then((user) => {
       setUser(user);
       localStorage.clear();
       localStorage.setItem("id", user.id);
@@ -89,7 +89,7 @@ function App(props) {
     localStorage.clear();
   };
   const onFindId = (useremail) => {
-    props.auth
+    auth
       .findId(useremail)
       .then((userid) => alert(`회원님의 아이디는 ${userid} 입니다.`));
   };
@@ -121,7 +121,7 @@ function App(props) {
           <Route
             path="/myboards"
             exact
-            element={<Myboards user={user.usernickname} />}
+            element={<Myboards user={user.usernickname} boardApi={boardApi} />}
           />
           <Route
             path="/findId"
@@ -136,27 +136,29 @@ function App(props) {
           <Route
             path="/boardwrite"
             exact
-            element={<BoardWrite user={user} />}
+            element={<BoardWrite user={user} boardApi={boardApi} />}
           />
           <Route
             path="/boarddetail"
             exact
-            element={<BoardDetail user={user} />}
+            element={<BoardDetail user={user} boardApi={boardApi} />}
           />
           <Route
             path="/recipe"
             exact
-            element={<Recipe user={user.usernickname} />}
+            element={<Recipe user={user.usernickname} boardApi={boardApi} />}
           />
           <Route
             path="/restaurant"
             exact
-            element={<Restaurant user={user.usernickname} />}
+            element={
+              <Restaurant user={user.usernickname} boardApi={boardApi} />
+            }
           />
           <Route
             path="/free"
             exact
-            element={<Free user={user.usernickname} />}
+            element={<Free user={user.usernickname} boardApi={boardApi} />}
           />
         </Routes>
       </BrowserRouter>

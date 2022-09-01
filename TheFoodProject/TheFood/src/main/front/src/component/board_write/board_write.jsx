@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Footer from "../footer/footer";
 import styles from "./board_write.module.css";
-const BoardWrite = ({ user }) => {
+const BoardWrite = ({ user, boardApi }) => {
   const [board, setBoard] = useState({
     id: "",
     title: "",
@@ -25,12 +25,12 @@ const BoardWrite = ({ user }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const id = new Date();
+    const id = "";
     const title = titleRef.current.value;
     const category = categoryRef.current.value;
     const filename = fileRef.current.files[0]
       ? fileRef.current.files[0].name
-      : "noFile";
+      : "Default";
     const filepath = `images/${filename}` || "images/logo.png";
     const content = contentRef.current.value;
     const userid = user.id;
@@ -43,7 +43,9 @@ const BoardWrite = ({ user }) => {
       content,
       userid,
     };
-    console.log(boardForm);
+    boardApi //
+      .write(boardForm) //
+      .then((user) => `게시글 작성 성공 ${user}`);
     //board category에 따라 백엔드로 주는 방향 달라짐
   };
   useEffect(() => {

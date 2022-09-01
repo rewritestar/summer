@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import Container from "../container/container";
 import Page from "../page/page";
 
-const Free = ({ user }) => {
+const Free = ({ user, boardApi }) => {
   const [boards, setBoards] = useState([
     {
       id: 1,
@@ -122,6 +123,11 @@ const Free = ({ user }) => {
       userid: "작성자1",
     },
   ]);
+  useEffect(() => {
+    boardApi //
+      .getFree()
+      .then((boards) => setBoards(boards));
+  }, []);
   return (
     <Container title="일상 카테고리" user={user}>
       <Page boards={boards} />
