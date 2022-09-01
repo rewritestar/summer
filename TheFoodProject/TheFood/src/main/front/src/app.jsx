@@ -50,14 +50,16 @@ function App(props) {
   };
   const onSignup = (signupForm) => {
     console.log(signupForm);
+    const result = props.auth.signup(signupForm);
   };
   const onLogin = (loginForm) => {
     if (
       users[0].userid === loginForm.userid &&
       users[0].userpassword === loginForm.userpassword
     ) {
-      props.auth.login(loginForm);
-      console.log("login auth 실행됨");
+      props.auth
+        .login(loginForm)
+        .then((result) => console.log(JSON.stringify(result)));
       setUser(users[0]);
       localStorage.setItem("userid", users[0].id);
       localStorage.setItem("usernickname", users[0].usernickname);

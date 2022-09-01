@@ -21,10 +21,6 @@ const Login = ({ onLogin }) => {
     const userid = idRef.current.value;
     const userpassword = passwordRef.current.value;
     const loginForm = { userid, userpassword };
-    const data = {
-      userid: userid,
-      userpassword: userpassword,
-    };
     onLogin(loginForm);
     navigate("/");
   };

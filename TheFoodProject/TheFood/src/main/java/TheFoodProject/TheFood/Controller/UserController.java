@@ -82,9 +82,9 @@ public class UserController {
     }
 
     @PostMapping("/api/login")
-    public void userloginForm(@RequestBody LoginForm loginForm){
+    public LoginForm userloginForm(@RequestBody LoginForm loginForm){
         System.out.println("로그인 axios 연결 성공" + loginForm);
-        return;
+        return loginForm;
     }
 
     @PostMapping("user/loginpro")
