@@ -3,8 +3,6 @@ import { React, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Container from "../container/container";
 import styles from "../user_component.module.css";
-axios.defaults.xsrfCookieName = "csrftoken";
-axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 const Login = ({ onLogin }) => {
   const navigate = useNavigate();
   const goToSignup = () => {
@@ -27,14 +25,6 @@ const Login = ({ onLogin }) => {
       userid: userid,
       userpassword: userpassword,
     };
-    axios
-      .post("/api/login/", data, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((res) => console.log(`login axios 수행 `))
-      .catch(() => console.log("error login axios"));
     onLogin(loginForm);
     navigate("/");
   };

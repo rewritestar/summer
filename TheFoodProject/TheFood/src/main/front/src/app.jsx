@@ -14,7 +14,7 @@ import Recipe from "./component/recipe/recipe";
 import Restaurant from "./component/restaurant/restaurant";
 import Signup from "./component/signup/signup";
 
-function App() {
+function App(props) {
   const [users, setUsers] = useState([
     {
       id: "작성자1",
@@ -56,6 +56,8 @@ function App() {
       users[0].userid === loginForm.userid &&
       users[0].userpassword === loginForm.userpassword
     ) {
+      props.auth.login(loginForm);
+      console.log("login auth 실행됨");
       setUser(users[0]);
       localStorage.setItem("userid", users[0].id);
       localStorage.setItem("usernickname", users[0].usernickname);
