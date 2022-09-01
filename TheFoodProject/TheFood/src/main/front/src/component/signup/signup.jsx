@@ -19,7 +19,7 @@ const Signup = ({ onSignup }) => {
   const passwordRef = useRef();
   const password_checkRef = useRef();
   const emailRef = useRef();
-  const nicknameRef = useRef();
+  const nameRef = useRef();
 
   const [check, setCheck] = useState({
     password: "",
@@ -59,26 +59,12 @@ const Signup = ({ onSignup }) => {
     const userpassword = passwordRef.current.value;
     const userpassword_check = password_checkRef.current.value;
     const useremail = emailRef.current.value;
-    const usernickname = nicknameRef.current.value;
+    const username = nameRef.current.value;
     if (userpassword !== userpassword_check) {
       displayAlert("비밀번호가 일치하지 않습니다.");
       return;
     }
-    const signupForm = { userid, userpassword, useremail, usernickname };
-    const data = {
-      userid: userid,
-      userpassword: userpassword,
-      useremail: useremail,
-      username: usernickname,
-    };
-    axios
-      .post("/api/signup/", data, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then(() => console.log("signup axios 수행"))
-      .catch(() => console.log("error signup axios"));
+    const signupForm = { userid, userpassword, useremail, username };
 
     onSignup(signupForm);
     navigate("/");
@@ -143,10 +129,10 @@ const Signup = ({ onSignup }) => {
           <div className={styles.nickname}>
             <span className={styles.title}>닉네임</span>
             <input
-              ref={nicknameRef}
+              ref={nameRef}
               className={styles.input}
               type="text"
-              name="nickname"
+              name="name"
               placeholder="닉네임"
               required
             />

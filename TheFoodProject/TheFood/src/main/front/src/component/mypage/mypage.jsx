@@ -7,13 +7,13 @@ import { useNavigate } from "react-router-dom";
 import Login from "../login/login";
 
 const Mypage = ({ user, onChange }) => {
-  const usernickname = localStorage.getItem("usernickname");
+  const username = localStorage.getItem("username");
   const userid = localStorage.getItem("userid");
-  console.log(`유저아이디: ${userid} \n 유저 닉네임: ${usernickname}`);
+  console.log(`유저아이디: ${userid} \n 유저 닉네임: ${username}`);
 
   const navigate = useNavigate();
   const formRef = useRef();
-  const nicknameRef = useRef();
+  const nameRef = useRef();
   const passwordRef = useRef();
   const password_checkRef = useRef();
   const [check, setCheck] = useState({
@@ -45,20 +45,18 @@ const Mypage = ({ user, onChange }) => {
       setWord({ text: "비밀번호가 일치합니다.", color: "green" });
     }
   };
-  const displayAlert = (text) => {
-    alert(text);
-  };
+
   const onSubmit = (e) => {
     e.preventDefault();
     console.log("onsubmit");
-    const usernickname = nicknameRef.current.value;
+    const username = nameRef.current.value;
     const userpassword = passwordRef.current.value;
     const userpassword_check = password_checkRef.current.value;
     if (userpassword !== userpassword_check) {
-      displayAlert("비밀번호가 일치하지 않습니다.");
+      alert("비밀번호가 일치하지 않습니다.");
       return;
     }
-    const mypageForm = { usernickname, userpassword };
+    const mypageForm = { username, userpassword };
     onChange(mypageForm);
     navigate("/");
   };
@@ -75,7 +73,7 @@ const Mypage = ({ user, onChange }) => {
           <div className={styles.nickname}>
             <span className={styles.title}>닉네임</span>
             <input
-              ref={nicknameRef}
+              ref={nameRef}
               className={styles.input}
               type="text"
               name="nickname"

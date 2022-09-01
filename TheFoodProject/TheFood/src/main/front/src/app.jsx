@@ -25,7 +25,7 @@ function App(props) {
 
       userpassword: "user1",
 
-      usernickname: "유저1",
+      username: "유저1",
 
       enabled: 1,
     },
@@ -39,33 +39,38 @@ function App(props) {
 
     userpassword: "",
 
-    usernickname: "",
+    username: "",
 
     enabled: "",
   });
-  const onChange = (mypageForm) => {
-    const { usernickname, userpassword } = mypageForm;
-    console.log(mypageForm);
-    setUser({ ...user, usernickname, userpassword });
+  const onMypageChange = (mypageForm) => {
+    props.auth.mypageChange(mypageForm).then((user) => {
+      setUser(user);
+    });
   };
   const onSignup = (signupForm) => {
-    console.log(signupForm);
-    const result = props.auth.signup(signupForm);
+    props.auth.signup(signupForm);
   };
   const onLogin = (loginForm) => {
-    if (
-      users[0].userid === loginForm.userid &&
-      users[0].userpassword === loginForm.userpassword
-    ) {
-      props.auth
-        .login(loginForm)
-        .then((result) => console.log(JSON.stringify(result)));
-      setUser(users[0]);
-      localStorage.setItem("userid", users[0].id);
-      localStorage.setItem("usernickname", users[0].usernickname);
-    } else {
-      alert("없는 회원");
-    }
+    props.auth.login(loginForm).then((user) => {
+      setUser(user);
+      localStorage.clear();
+      localStorage.setItem("id", user.id);
+    });
+
+    // if (
+    //   users[0].userid === loginForm.userid &&
+    //   users[0].userpassword === loginForm.userpassword
+    // ) {
+    //   props.auth
+    //     .login(loginForm)
+    //     .then((result) => console.log(JSON.stringify(result)));
+    //   setUser(users[0]);
+    //   localStorage.setItem("userid", users[0].id);
+    //   localStorage.setItem("usernickname", users[0].usernickname);
+    // } else {
+    //   alert("없는 회원");
+    // }
   };
   const onLogout = () => {
     setUser({
@@ -84,7 +89,9 @@ function App(props) {
     localStorage.clear();
   };
   const onFindId = (useremail) => {
-    console.log(useremail);
+    props.auth
+      .findId(useremail)
+      .then((userid) => alert(`회원님의 아이디는 ${userid} 입니다.`));
   };
   const onFindPw = (findPwForm) => {
     console.log(findPwForm);
@@ -107,7 +114,9 @@ function App(props) {
           <Route
             path="/mypage"
             exact
-            element={<Mypage user={user.usernickname} onChange={onChange} />}
+            element={
+              <Mypage user={user.usernickname} onChange={onMypageChange} />
+            }
           />
           <Route
             path="/myboards"
