@@ -33,6 +33,11 @@ function App({ auth, boardApi }) {
       setUser(user);
     });
   };
+  const onwithDrawal = (id) => {
+    auth //
+      .withDrawal(id)
+      .then(() => console.log("회원 탈퇴 완료"));
+  };
   const onSignup = (signupForm) => {
     auth.signup(signupForm);
   };
@@ -95,7 +100,11 @@ function App({ auth, boardApi }) {
             path="/mypage"
             exact
             element={
-              <Mypage user={user.usernickname} onChange={onMypageChange} />
+              <Mypage
+                user={user.usernickname}
+                onChange={onMypageChange}
+                onwithDrawal={onwithDrawal}
+              />
             }
           />
           <Route

@@ -6,7 +6,7 @@ import MypageButtons from "../buttons/mypage_buttons";
 import { useNavigate } from "react-router-dom";
 import Login from "../login/login";
 
-const Mypage = ({ user, onChange }) => {
+const Mypage = ({ user, onChange, onwithDrawal }) => {
   const username = localStorage.getItem("username");
   const userid = localStorage.getItem("userid");
   console.log(`유저아이디: ${userid} \n 유저 닉네임: ${username}`);
@@ -111,7 +111,7 @@ const Mypage = ({ user, onChange }) => {
           </button>
         </section>
       </div>
-      <MypageButtons />
+      <MypageButtons onwithDrawal={onwithDrawal} />
     </Container>
   );
 };
