@@ -4,7 +4,12 @@ import Container from "../container/container";
 import Page from "../page/page";
 import styles from "./recipe.module.css";
 
-const Recipe = ({ user, boardApi }) => {
+const Recipe = ({ boardApi, auth }) => {
+  const [user, setUser] = useState({});
+  const use_id = localStorage.getItem("id") || ""; //추후에 로그인 토큰으로 대체
+  useEffect(() => {
+    use_id && auth.stayLogin(use_id).then((user) => setUser(user));
+  }, [use_id]);
   const TYPE_CODE = {
     한식: 101,
     양식: 102,

@@ -23,9 +23,9 @@ class Auth {
     // console.log(`signup axios async 수행 ${response}`);
     return response.data;
   }
-  async withDrawal(id) {
+  async withDrawal(user_id) {
     this.auth
-      .post("/api/withdrawal/", id)
+      .post("/api/withdrawal/", user_id)
       .catch(() => console.log("error withDrawal axios"));
   }
   async findId(useremail) {
@@ -41,6 +41,15 @@ class Auth {
       .catch(() => console.log("error mypageChange axios"));
     // console.log(`signup axios async 수행 ${response}`);
     return response.data;
+  }
+
+  async stayLogin(user_id) {
+    const user = await this.auth
+      .post("/api/staylogin/", user_id)
+      .catch(() => console.log("error stayLogin axios"));
+    //   .catch((e) => console.log(`error login axios ${e}`));
+    // console.log(`첫번째 결과값 : ${response}`);
+    return user.data;
   }
 }
 

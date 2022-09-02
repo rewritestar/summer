@@ -40,15 +40,15 @@ class BoardApi {
   }
 
   //마이페이지 댓글, 게시글 조회 관련
-  async getMyCommentBoards(id) {
+  async getMyCommentBoards(user_id) {
     const boards = await this.boardApi
-      .post(`/api/myboards/comments`, id)
+      .post(`/api/myboards/comments`, user_id)
       .catch((e) => console.log("error getMyCommentsBoard axios"));
     return boards.data;
   }
-  async getMyBoards(id) {
+  async getMyBoards(user_id) {
     const boards = await this.boardApi
-      .post(`/api/myboards/boards`, id)
+      .post(`/api/myboards/boards`, user_id)
       .catch((e) => console.log("error getMyBoards axios"));
     return boards.data;
   }

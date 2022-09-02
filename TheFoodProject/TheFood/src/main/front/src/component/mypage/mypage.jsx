@@ -7,10 +7,7 @@ import { useNavigate } from "react-router-dom";
 import Login from "../login/login";
 
 const Mypage = ({ user, onChange, onwithDrawal }) => {
-  const username = localStorage.getItem("username");
-  const userid = localStorage.getItem("userid");
-  console.log(`유저아이디: ${userid} \n 유저 닉네임: ${username}`);
-
+  const use_id = localStorage.getItem("id");
   const navigate = useNavigate();
   const formRef = useRef();
   const nameRef = useRef();
@@ -31,6 +28,7 @@ const Mypage = ({ user, onChange, onwithDrawal }) => {
   useEffect(() => {
     checkPw();
   }, [check]);
+  useEffect(() => {});
 
   const handleChange = (e) => {
     const { name, value } = e.target;

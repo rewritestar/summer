@@ -34,9 +34,11 @@ function App({ auth, boardApi }) {
     });
   };
   const onwithDrawal = (id) => {
-    auth //
-      .withDrawal(id)
-      .then(() => console.log("회원 탈퇴 완료"));
+    if (window.confirm("회원 탈퇴를 정말로 하시겠습니까?")) {
+      auth //
+        .withDrawal(id)
+        .then(() => console.log("회원 탈퇴 완료"));
+    }
   };
   const onSignup = (signupForm) => {
     auth.signup(signupForm);
