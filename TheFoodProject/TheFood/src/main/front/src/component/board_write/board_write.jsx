@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Footer from "../footer/footer";
 import styles from "./board_write.module.css";
 const BoardWrite = ({ user, boardApi }) => {
+  const [imgsrc, setImgsrc] = useState("");
   const [board, setBoard] = useState({
     id: "",
     title: "",
@@ -43,10 +44,22 @@ const BoardWrite = ({ user, boardApi }) => {
       content,
       userid,
     };
+    const formdata = new FormData();
+    formdata.append("file", fileRef.current.files[0]);
+    console.log(formdata.get("file"));
     boardApi //
       .boardWrite(boardForm) //
       .then((user) => `게시글 작성 성공 ${user}`);
     //board category에 따라 백엔드로 주는 방향 달라짐
+  };
+
+  const onImgChange = (e) => {
+    const imgTarget = e.target.files[0];
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(imgTarget);
+    fileReader.onload = (e) => {
+      setImgsrc(e.target.result);
+    };
   };
   useEffect(() => {
     //게시글 수정할 때 발생함
@@ -104,15 +117,18 @@ const BoardWrite = ({ user, boardApi }) => {
               <option value="맛집-기타">맛집-수도권</option>
               <option value="일상">일상 게시판</option>
             </select>
+
             <input
               ref={fileRef}
               className={styles.file}
               type="file"
               accept="image/*"
               defaultValue={board.filename}
+              onChange={onImgChange}
             />
           </section>
           <section className={styles.text}>
+            {imgsrc && <img src={imgsrc} />}
             <textarea
               ref={contentRef}
               className={styles.textarea}
