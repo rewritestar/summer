@@ -42,7 +42,7 @@ public class BoardService {
         board.setFilename(fileName);
         board.setFilepath("/files/" + fileName);
 
-
+        //카테고리 나눌때 참고하려고 둔 코드
 //        Role role = new Role();
 //        role.setId(1l);
 //        user.getRoles().add(role);

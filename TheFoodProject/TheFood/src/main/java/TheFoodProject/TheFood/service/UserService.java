@@ -69,24 +69,36 @@ public class UserService {
 //    }
 //--------------------------------------------------------------------------------------------------
     //로그인
-    public String login(String userid, String userpassword){
-        Optional<User> people1 = userRepository.findByuserpassword(userpassword);
-//        Optional<User> people2 = userRepository.findByuserid(userid);
-//
+    public User login(String userid, String userpassword){
+        User people1 = userRepository.findByuserpassword(userpassword);
+        User people2 = userRepository.findByuserid(userid);
+
 //        if(people1.isEmpty() || people2.isEmpty()){
 //            throw new IllegalStateException("해당하는 회원이 존재하지 않습니다.");
 //        }
-//        //입력한 아이디, 비번을 가진 회원인지 확인
+        //입력한 아이디, 비번을 가진 회원인지 확인
 //        if (people2.equals(people1)) {
-//            System.out.println(people2.get().getUsername() + "님 환영합니다");
+//            System.out.println(people2.getUsername() + "님 환영합니다");
 //        }
 //        else {System.out.println("해당하는 회원이 존재하지 않습니다");}
 
-        return people1.get().getUsername();
+        return people2;
     }
 
     //--------------------------------------------------------------------------------------------------
     //마이페이지
+    public User mypage(String username, String userpassword){
+        User people1 = userRepository.findByuserpassword(userpassword);
+        User people2 = userRepository.findByusername(username);
+
+//        //입력한 아이디, 비번을 가진 회원인지 확인
+//        if (people2.equals(people1)) {
+//            System.out.println(people2.getUsername() + "님 환영합니다");
+//        }
+//        else {System.out.println("해당하는 회원이 존재하지 않습니다");}
+
+        return people2;
+    }
 //회원정보수정
     @Transactional
     public void modify(User user, String userid) {
@@ -100,10 +112,15 @@ public class UserService {
     }
 
 //회원탈퇴
-    @Transactional
-    public void delete(String userid) throws Exception{
-        Integer id = userRepository.findByuserid(userid).getId();
+//    @Transactional
+    public void delete(Integer id) {
         userRepository.deleteById(id);
+    }
+
+    //로그인 유지
+    public User stay(Integer id){
+        User user = userRepository.findByid(id);
+        return user;
     }
 
 

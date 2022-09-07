@@ -22,13 +22,7 @@ public class BoardController {
     private CommentService commentService;
     @Autowired
     private BoardService boardService;
-
-    @GetMapping("/board/write")
-    public String boardWriteForm(){
-        return "boardwrite";
-    }
-
-    @PostMapping("/board/writepro")
+    @PostMapping("/api/boardwrite")
     public String boardWritePro(Board board, MultipartFile file, Authentication authentication) throws Exception{
 
         String userid = authentication.getName();
@@ -37,23 +31,19 @@ public class BoardController {
         return "redirect:/board/list";
     }
 
-
-//    @GetMapping("/board/list")
-//    public String boardList(Model model){
-//
-//        model.addAttribute("list", boardService.boardList());
-//        return "boardlist";
-//    }
-
-    @GetMapping("/recipe")
-    public List<Board> boardList(){
-        return boardService.boardList();
+    @PostMapping("/api/recipe")
+    public List<Board> recipeBoardList(Integer category){
+        return boardService.boardList1(category);
+    }
+    @PostMapping("/api/restaurant")
+    public List<Board> restaurantBoardList(Integer category){
+        return boardService.boardList1(category);
+    }
+    @PostMapping("/api/free")
+    public List<Board> freeBoardList(Integer category){
+        return boardService.boardList1(category);
     }
 
-    @GetMapping("/board/list/category")
-    public String boardList1(Model model, Integer category){
-        model.addAttribute("list", boardService.boardList1(category));
-        return "boardlist";}
 
     @GetMapping("/board/view") // localhost:8080/board/view?id=1
     public String boardView(Model model, Integer id){
@@ -63,12 +53,10 @@ public class BoardController {
         return "boardview";
     }
 
-    @GetMapping("/board/delete")
-    public String boardDelete(Integer id){
+    @PostMapping("/api/boarddelete")
+    public void boardDelete(Integer id){
 
         boardService.boardDelete(id);
-
-        return "";
     }
 
 
