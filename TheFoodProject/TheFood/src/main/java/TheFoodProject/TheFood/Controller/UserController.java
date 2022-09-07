@@ -1,5 +1,7 @@
 package TheFoodProject.TheFood.Controller;
 
+import TheFoodProject.TheFood.entity.LoginForm;
+import TheFoodProject.TheFood.entity.SignupForm;
 import TheFoodProject.TheFood.entity.User;
 import TheFoodProject.TheFood.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
@@ -16,13 +19,24 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+//    @PostMapping("/api/signup")
+//    public User usersignupForm(String userid, String userpassword, String useremail, String username){
+//        User newUser = new User();
+//        newUser.setUserid(userid);
+//        newUser.setUserpassword(userpassword);
+//        newUser.setUseremail(useremail);
+//        newUser.setUsername(username);
+//        return userService.save(newUser);
+//    }
+
+
     @PostMapping("/api/signup")
-    public User usersignupForm(String userid, String userpassword, String useremail, String username){
+    public User usersignupForm(@RequestBody SignupForm signupForm){
         User newUser = new User();
-        newUser.setUserid(userid);
-        newUser.setUserpassword(userpassword);
-        newUser.setUseremail(useremail);
-        newUser.setUsername(username);
+        newUser.setUserid(signupForm.getUserid());
+        newUser.setUserpassword(signupForm.getUserpassword());
+        newUser.setUseremail(signupForm.getUseremail());
+        newUser.setUsername(signupForm.getUsername());
         return userService.save(newUser);
     }
 //--------------------------------------------------------------------------------------------------
@@ -67,10 +81,20 @@ public class UserController {
 //        return loginForm;
 //    }
 
-    @PostMapping("api/login")
-    public User userLogin(String userid, String userpassword){
+//    @PostMapping("/api/signup")
+//    public User usersignupForm(@RequestBody SignupForm signupForm){
+//        User newUser = new User();
+//        newUser.setUserid(signupForm.getUserid());
+//        newUser.setUserpassword(signupForm.getUserpassword());
+//        newUser.setUseremail(signupForm.getUseremail());
+//        newUser.setUsername(signupForm.getUsername());
+//        return userService.save(newUser);
+//    }
 
-        return userService.login(userid, userpassword);
+    @PostMapping("api/login")
+    public User userLogin(@RequestBody LoginForm loginForm){
+
+        return userService.login(loginForm.getUserid(), loginForm.getUserpassword());
     }
 
 //--------------------------------------------------------------------------------------------------
