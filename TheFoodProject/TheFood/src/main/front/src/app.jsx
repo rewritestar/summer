@@ -59,7 +59,7 @@ function App({ auth, boardApi }) {
     //     .then((result) => console.log(JSON.stringify(result)));
     //   setUser(users[0]);
     //   localStorage.setItem("userid", users[0].id);
-    //   localStorage.setItem("usernickname", users[0].usernickname);
+    //   localStorage.setItem("username", users[0].username);
     // } else {
     //   alert("없는 회원");
     // }
@@ -70,7 +70,7 @@ function App({ auth, boardApi }) {
       // userid: "",
       // useremail: "",
       // userpassword: "",
-      // usernickname: "",
+      // username: "",
       // enabled: "",
     });
     localStorage.clear();
@@ -90,7 +90,7 @@ function App({ auth, boardApi }) {
           <Route
             path="/"
             exact
-            element={<Home user={user.usernickname} onLogout={onLogout} />}
+            element={<Home user={user.username} onLogout={onLogout} />}
           />
           <Route path="/login" exact element={<Login onLogin={onLogin} />} />
           <Route
@@ -103,7 +103,7 @@ function App({ auth, boardApi }) {
             exact
             element={
               <Mypage
-                user={user.usernickname}
+                user={user.username}
                 onChange={onMypageChange}
                 onwithDrawal={onwithDrawal}
               />
@@ -112,17 +112,17 @@ function App({ auth, boardApi }) {
           <Route
             path="/myboards"
             exact
-            element={<Myboards user={user.usernickname} boardApi={boardApi} />}
+            element={<Myboards user={user.username} boardApi={boardApi} />}
           />
           <Route
             path="/findId"
             exact
-            element={<FindId user={user.usernickname} onFindId={onFindId} />}
+            element={<FindId user={user.username} onFindId={onFindId} />}
           />
           <Route
             path="/findPw"
             exact
-            element={<FindPw user={user.usernickname} onFindPw={onFindPw} />}
+            element={<FindPw user={user.username} onFindPw={onFindPw} />}
           />
           <Route
             path="/boardwrite"
@@ -137,19 +137,17 @@ function App({ auth, boardApi }) {
           <Route
             path="/recipe"
             exact
-            element={<Recipe user={user.usernickname} boardApi={boardApi} />}
+            element={<Recipe user={user.username} boardApi={boardApi} />}
           />
           <Route
             path="/restaurant"
             exact
-            element={
-              <Restaurant user={user.usernickname} boardApi={boardApi} />
-            }
+            element={<Restaurant user={user.username} boardApi={boardApi} />}
           />
           <Route
             path="/free"
             exact
-            element={<Free user={user.usernickname} boardApi={boardApi} />}
+            element={<Free user={user.username} boardApi={boardApi} />}
           />
         </Routes>
       </BrowserRouter>
