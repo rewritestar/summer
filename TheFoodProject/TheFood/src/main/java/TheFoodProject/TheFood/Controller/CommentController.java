@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -25,13 +26,12 @@ public class CommentController {
     }
 
     @GetMapping("/comment/delete")
-    public String commentDelete(Integer id){
+    public void commentDelete(@RequestBody Integer id){
         commentService.commentDelete(id);
-        return "redirect:/board/list";
     }
 
     @PostMapping("/api/getcomments")
-        public List<Comment> commentList(Integer id){
+        public List<Comment> commentList(@RequestBody Integer id){
         return commentService.commentList(id);
     }
 
