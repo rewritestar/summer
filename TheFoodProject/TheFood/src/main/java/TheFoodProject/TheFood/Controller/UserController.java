@@ -1,6 +1,5 @@
 package TheFoodProject.TheFood.Controller;
 
-import TheFoodProject.TheFood.entity.LoginForm;
 import TheFoodProject.TheFood.entity.User;
 import TheFoodProject.TheFood.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -8,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpSession;
 
 @RequiredArgsConstructor
 @RestController
@@ -20,31 +16,20 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-
-    //회원가입
-//    @GetMapping("/signup")
-//    public void userJoinForm(){
-//        return;
-//    }
-
     @PostMapping("/api/signup")
-    public void usersignupForm(String userid, String userpassword, String useremail, String username){
-        User user = new User();
-        System.out.println("회원가입 axios 연결 성공"+ username);
-        //userService.save(newUser);
-        return;
+    public User usersignupForm(String userid, String userpassword, String useremail, String username){
+        User newUser = new User();
+        newUser.setUserid(userid);
+        newUser.setUserpassword(userpassword);
+        newUser.setUseremail(useremail);
+        newUser.setUsername(username);
+        return userService.save(newUser);
     }
 //--------------------------------------------------------------------------------------------------
     //아이디,비밀번호 찾기
-    @GetMapping("/user/findid")
-    public String userFindIdForm(){
-        return "userfindid";
-    }
-
-    @PostMapping("user/findidpro")
-    public String userFindIdPro(String useremail){
-        userService.findid(useremail);
-        return "redirect:/user/login";
+    @PostMapping("api/findid")
+    public String userFindId(String useremail){
+        return userService.findid(useremail);
     }
 
 //    @GetMapping("/user/findpassword")
@@ -76,38 +61,32 @@ public class UserController {
 
 //--------------------------------------------------------------------------------------------------
     //로그인
-    @GetMapping("/user/login")
-    public String userLoginForm(){
-        return "userlogin";
-    }
+//    @PostMapping("/api/login")
+//    public LoginForm userloginForm(@RequestBody LoginForm loginForm){
+//        System.out.println("로그인 axios 연결 성공" + loginForm);
+//        return loginForm;
+//    }
 
-    @PostMapping("/api/login")
-    public LoginForm userloginForm(@RequestBody LoginForm loginForm){
-        System.out.println("로그인 axios 연결 성공" + loginForm);
-        return loginForm;
-    }
+    @PostMapping("api/login")
+    public User userLogin(String userid, String userpassword){
 
-    @PostMapping("user/loginpro")
-    public String userLoginPro(String userid, String userpassword){
-        userService.login(userid, userpassword);
-        return "redirect:/board/list";}
+        return userService.login(userid, userpassword);
+    }
 
 //--------------------------------------------------------------------------------------------------
 //탈퇴
-    @GetMapping("/user/delete")
-    public String delete(User user, HttpSession session, Authentication authentication) throws Exception{
-
-        String userid = authentication.getName();
-
-        userService.delete(userid);
-
-        session.invalidate();
-
-        return "redirect:/board/list";
+    @PostMapping("/api/withdrawal/")
+    public void delete(Integer id){
+        userService.delete(id);
     }
 
 //--------------------------------------------------------------------------------------------------
     //마이페이지
+
+    @PostMapping("/api/mypage")
+    public User mypage(String username, String userpassword){
+        return userService.mypage(username, userpassword);
+    }
 
     @GetMapping("/user/modify")
     public String userModify(){
@@ -122,6 +101,10 @@ public class UserController {
 
         return "redirect:/board/list";
     }
-
-
+//-----------------------------------------------------
+    //stay login
+    @PostMapping("/api/staylogin/")
+    public User userStay(Integer id){
+        return userService.stay(id);
+    }
 }
