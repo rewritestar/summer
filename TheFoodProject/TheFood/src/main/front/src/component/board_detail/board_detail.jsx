@@ -20,16 +20,18 @@ const BoardDetail = ({ user, boardApi }) => {
   const inputRef = useRef();
   const [comments, setComments] = useState([
     {
-      id: 1,
+      id: "",
       userid: "작성자1",
       username: "유저1",
       content: "한식에 대해서 배우게 되어서 좋아요!",
+      boardid: "",
     },
     {
-      id: 2,
+      id: "",
       userid: "작성자2",
       username: "유저2",
       content: "다음번에는 양식에 대해서도 글 써주세요!",
+      boardid: "",
     },
   ]);
   useEffect(() => {
@@ -51,10 +53,10 @@ const BoardDetail = ({ user, boardApi }) => {
   };
   const onCommentSubmit = (content) => {
     const comment = {
-      id: new Date(),
       userid: user.id,
       username: user.username,
       content: content,
+      boardid: board.id,
     };
     boardApi //
       .commentWrite(comment) //
