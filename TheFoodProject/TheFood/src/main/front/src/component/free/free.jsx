@@ -4,6 +4,7 @@ import Container from "../container/container";
 import Page from "../page/page";
 
 const Free = ({ user, boardApi }) => {
+  const [boards, setBoards] = useState([]);
   useEffect(() => {
     boardApi //
       .getFree()
