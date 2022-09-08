@@ -19,7 +19,7 @@ const Comment = ({ user, comment, onCommentSubmit, onCommentDelete }) => {
     <div ref={containerRef} className={styles.container}>
       <div className={styles.bar}>
         <p className={styles.writer}>{`# ${comment.username}`}</p>
-        {user.id === comment.userid && (
+        {user && user.id === comment.userid && (
           <div className={styles.option_default}>
             <Button title="수정" onClick={onCommentChange} />
             <Button title="삭제" onClick={onDelete} />

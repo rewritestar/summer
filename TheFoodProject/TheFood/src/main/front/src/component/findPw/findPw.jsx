@@ -1,8 +1,10 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Container from "../container/container";
 import styles from "../user_component.module.css";
-const FindPw = ({ user, onFindPw }) => {
+const FindPw = ({ onFindPw }) => {
+  const [user, setUser] = useState();
+
   const navigate = useNavigate();
   const goToLogin = () => {
     navigate("/login");

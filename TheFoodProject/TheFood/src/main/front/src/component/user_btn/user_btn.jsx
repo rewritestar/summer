@@ -5,7 +5,8 @@ import styles from "./user_btn.module.css";
 const UserBtn = ({ user }) => {
   const navigate = useNavigate();
   const onLogout = () => {
-    navigate("/", { state: "logout" });
+    localStorage.clear();
+    window.location.href = "/";
   };
   const goToLogin = () => {
     navigate("/login");
@@ -28,7 +29,9 @@ const UserBtn = ({ user }) => {
         )}
         {user && (
           <div className={styles.member}>
-            <span className={styles.user_name}>{user}님! 환영합니다.</span>
+            <span className={styles.user_name}>
+              {user.username}님! 환영합니다.
+            </span>
             <Button title="로그아웃" onClick={onLogout} />
             <Button title="마이 페이지" onClick={goToMypage} />
           </div>

@@ -5,11 +5,13 @@ import Page from "../page/page";
 import styles from "./recipe.module.css";
 
 const Recipe = ({ boardApi, auth }) => {
-  // const [user, setUser] = useState({});
-  // const use_id = localStorage.getItem("id") || ""; //추후에 로그인 토큰으로 대체
-  // useEffect(() => {
-  //   use_id && auth.stayLogin(use_id).then((user) => setUser(user));
-  // }, [use_id]);
+  const [user, setUser] = useState();
+
+  const user_id = localStorage.getItem("id"); //추후에 로그인 토큰으로 대체
+  useEffect(() => {
+    user_id && auth.stayLogin(user_id).then((user) => setUser(user));
+  }, [user_id]);
+
   const TYPE_CODE = {
     한식: 101,
     양식: 102,
@@ -24,6 +26,7 @@ const Recipe = ({ boardApi, auth }) => {
   const [type, setType] = useState("한식");
 
   const [typeBoards, setTypeBoards] = useState([]);
+
   useEffect(() => {
     boardApi //
       .getRecipe(TYPE_CODE[type]) //
@@ -36,7 +39,7 @@ const Recipe = ({ boardApi, auth }) => {
   };
 
   return (
-    <Container title="레시피 카테고리" user={auth}>
+    <Container title="레시피 카테고리" user={user}>
       <p className={styles.type}>{`<${type}>`}</p>
       <Page boards={typeBoards} />
       <RecipeButtons handleTypeBtn={handleTypeBtn} />

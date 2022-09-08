@@ -16,12 +16,12 @@ const Login = ({ onLogin }) => {
   const idRef = useRef();
   const passwordRef = useRef();
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     const userid = idRef.current.value;
     const userpassword = passwordRef.current.value;
     const loginForm = { userid, userpassword };
-    onLogin(loginForm);
+    await onLogin(loginForm);
     navigate("/");
   };
 

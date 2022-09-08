@@ -2,7 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Footer from "../footer/footer";
 import styles from "./board_write.module.css";
-const BoardWrite = ({ user, boardApi }) => {
+const BoardWrite = ({ auth, boardApi }) => {
+  const [user, setUser] = useState();
+
+  const user_id = localStorage.getItem("id"); //추후에 로그인 토큰으로 대체
+  useEffect(() => {
+    user_id && auth.stayLogin(user_id).then((user) => setUser(user));
+  }, [user_id]);
+
   const [imgsrc, setImgsrc] = useState("");
   const [board, setBoard] = useState({
     id: "",

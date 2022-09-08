@@ -6,8 +6,14 @@ import MypageButtons from "../buttons/mypage_buttons";
 import { useNavigate } from "react-router-dom";
 import Login from "../login/login";
 
-const Mypage = ({ user, onChange, onwithDrawal }) => {
-  const use_id = localStorage.getItem("id");
+const Mypage = ({ auth, onChange, onwithDrawal }) => {
+  const [user, setUser] = useState();
+
+  const user_id = localStorage.getItem("id"); //추후에 로그인 토큰으로 대체
+  useEffect(() => {
+    user_id && auth.stayLogin(user_id).then((user) => setUser(user));
+  }, [user_id]);
+
   const navigate = useNavigate();
   const formRef = useRef();
   const nameRef = useRef();

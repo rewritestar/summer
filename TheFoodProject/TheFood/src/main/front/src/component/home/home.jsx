@@ -4,13 +4,13 @@ import Header from "../header/header";
 import MainPage from "../main_page/main_page";
 import styles from "./home.module.css";
 
-const Home = ({ user, onLogout }) => {
-  const location = useLocation();
+const Home = ({ auth, onLogout }) => {
+  const [user, setUser] = useState();
+  const user_id = localStorage.getItem("id"); //추후에 로그인 토큰으로 대체
+
   useEffect(() => {
-    if (location.state === "logout") {
-      onLogout();
-    }
-  }, [location.state]);
+    user_id && auth.stayLogin(user_id).then((user) => setUser(user));
+  }, [user_id]);
 
   return (
     <>

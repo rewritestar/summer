@@ -2,7 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Container from "../container/container";
 import Page from "../page/page";
-const Myboards = ({ user, boardApi }) => {
+const Myboards = ({ auth, boardApi }) => {
+  const [user, setUser] = useState();
+
+  const user_id = localStorage.getItem("id"); //추후에 로그인 토큰으로 대체
+  useEffect(() => {
+    user_id && auth.stayLogin(user_id).then((user) => setUser(user));
+  }, [user_id]);
+
   const location = useLocation();
   const type = location.state;
   const [boards, setBoards] = useState([

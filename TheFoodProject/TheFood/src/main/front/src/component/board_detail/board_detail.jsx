@@ -5,7 +5,14 @@ import Button from "../button/button";
 import Comment from "../comment/comment";
 import Container from "../container/container";
 import styles from "./board_detail.module.css";
-const BoardDetail = ({ user, boardApi }) => {
+const BoardDetail = ({ auth, boardApi }) => {
+  const [user, setUser] = useState();
+
+  const user_id = localStorage.getItem("id"); //추후에 로그인 토큰으로 대체
+  useEffect(() => {
+    user_id && auth.stayLogin(user_id).then((user) => setUser(user));
+  }, [user_id]);
+
   const [board, setBoard] = useState({
     // id: "",
     // category: "",
@@ -85,14 +92,14 @@ const BoardDetail = ({ user, boardApi }) => {
       });
   };
   return (
-    <Container title={board.category} user={user.usernickname}>
+    <Container title={board.category} user={user}>
       <div className={styles.container}>
         <section className={styles.title_bar}>
           <p className={styles.title}>{board.title}</p>
           <p className={styles.user_name}>{board.userid}</p>
         </section>
         <section className={styles.content_bar}>
-          {user.id === board.userid && (
+          {user && user.id === board.userid && (
             <div className={styles.board_option}>
               <Button title="수정하기" onClick={onBoardChange} />
               <Button title="삭제하기" onClick={onBoardDelete} />

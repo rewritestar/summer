@@ -3,7 +3,14 @@ import { useEffect } from "react";
 import Container from "../container/container";
 import Page from "../page/page";
 
-const Free = ({ user, boardApi }) => {
+const Free = ({ auth, boardApi }) => {
+  const [user, setUser] = useState();
+
+  const user_id = localStorage.getItem("id"); //추후에 로그인 토큰으로 대체
+  useEffect(() => {
+    user_id && auth.stayLogin(user_id).then((user) => setUser(user));
+  }, [user_id]);
+
   const [boards, setBoards] = useState([]);
   useEffect(() => {
     boardApi //
