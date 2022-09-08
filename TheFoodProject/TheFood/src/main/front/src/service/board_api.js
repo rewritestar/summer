@@ -67,7 +67,7 @@ class BoardApi {
   }
   async commentDelte(commentid) {
     this.boardApi
-      .post(`/api/commentDelte`, commentid)
+      .post(`/api/commentDelete`, commentid)
       .catch((e) => console.log("error commentDelte axios"));
   }
 }
