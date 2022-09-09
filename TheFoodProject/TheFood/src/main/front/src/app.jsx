@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import styles from "./app.module.css";
 import BoardDetail from "./component/board_detail/board_detail";
 import BoardWrite from "./component/board_write/board_write";
@@ -25,11 +24,17 @@ function App({ auth, boardApi }) {
     if (window.confirm("회원 탈퇴를 정말로 하시겠습니까?")) {
       auth //
         .withDrawal(id)
-        .then(() => console.log("회원 탈퇴 완료"));
+        .then(() => {
+          alert("회원 탈퇴가 성공적으로 완료되었습니다!");
+          localStorage.clear();
+        })
+        .then(() => (window.location.href = "/"));
     }
   };
   const onSignup = (signupForm) => {
-    auth.signup(signupForm);
+    auth
+      .signup(signupForm)
+      .then(() => alert("회원가입이 성공적으로 완료되었습니다!"));
   };
   const onLogin = (loginForm) => {
     auth
@@ -40,10 +45,7 @@ function App({ auth, boardApi }) {
       })
       .then(() => (window.location.href = "/"));
   };
-  const onLogout = () => {
-    localStorage.clear();
-    window.location.href = "/";
-  };
+
   const onFindId = (useremail) => {
     auth
       .findId(useremail)
@@ -57,11 +59,7 @@ function App({ auth, boardApi }) {
     <div className={styles.app}>
       <BrowserRouter>
         <Routes>
-          <Route
-            path="/"
-            exact
-            element={<Home auth={auth} onLogout={onLogout} />}
-          />
+          <Route path="/" exact element={<Home auth={auth} />} />
           <Route path="/login" exact element={<Login onLogin={onLogin} />} />
           <Route
             path="/signup"

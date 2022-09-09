@@ -25,8 +25,8 @@ class Auth {
   }
   async withDrawal(user_id) {
     this.auth
-      .post("/api/withdrawal/", user_id)
-      .catch(() => console.log("error withDrawal axios"));
+      .post("/api/withdrawal/", parseInt(user_id))
+      .catch((e) => console.log(`error withDrawal axios ${e}`));
   }
   async findId(useremail) {
     const response = await this.auth
