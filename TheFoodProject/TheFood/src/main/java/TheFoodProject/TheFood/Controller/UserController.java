@@ -75,7 +75,6 @@ public class UserController {
 //탈퇴
     @PostMapping("/api/withdrawal/")
     public void delete(@RequestBody Integer id){
-
         userService.delete(id);
     }
 
@@ -85,17 +84,9 @@ public class UserController {
     @PostMapping("/api/mypage")
     public User mypage(@RequestBody MypageForm mypageForm){
 
-        return userService.mypage(mypageForm.getUsername(), mypageForm.getUserpassword());
+        return userService.mypage(mypageForm.getId(), mypageForm.getUsername(), mypageForm.getUserpassword());
     }
 
-//    @PostMapping("/user/modifypro")
-//    public String userUpdate(User user, Authentication authentication) throws Exception{
-//
-//        String userid = authentication.getName();
-//        userService.modify(user, userid);
-//
-//        return "redirect:/board/list";
-//    }
 //-----------------------------------------------------
     //stay login
     @PostMapping("/api/staylogin/")
@@ -104,3 +95,5 @@ public class UserController {
         return userService.stay(id);
     }
 }
+
+

@@ -45,10 +45,6 @@ public class UserService {
     //아이디,비밀번호 찾기
     public String findid(String useremail){
         Optional<User> result = userRepository.findByuseremail(useremail); //입력한 이메일을 가진 회원찾기
-        if(result.isEmpty()){ //만약 일치하는 회원이 없다면
-            throw new IllegalStateException("해당 아이디는 존재하지 않습니다.");
-        }
-        System.out.println(result.get().getUserid());
         return result.get().getUserid();
     }
 //
@@ -73,31 +69,26 @@ public class UserService {
         User people1 = userRepository.findByuserpassword(userpassword);
         User people2 = userRepository.findByuserid(userid);
 
-//        if(people1.isEmpty() || people2.isEmpty()){
-//            throw new IllegalStateException("해당하는 회원이 존재하지 않습니다.");
-//        }
-        //입력한 아이디, 비번을 가진 회원인지 확인
-//        if (people2.equals(people1)) {
-//            System.out.println(people2.getUsername() + "님 환영합니다");
-//        }
-//        else {System.out.println("해당하는 회원이 존재하지 않습니다");}
+        if(people1 == null || people2 == null){
+            throw new IllegalStateException("해당하는 회원이 존재하지 않습니다.");
+        }
+//        입력한 아이디, 비번을 가진 회원인지 확인
+        if(!people2.equals(people1)){
+            throw new IllegalStateException("해당하는 회원이 존재하지 않습니다.");
+        }
 
         return people2;
     }
 
     //--------------------------------------------------------------------------------------------------
     //마이페이지
-    public User mypage(String username, String userpassword){
-        User people1 = userRepository.findByuserpassword(userpassword);
-        User people2 = userRepository.findByusername(username);
+    public User mypage(Integer id, String username, String userpassword){
+        User people = userRepository.findByid(id);
+        people.setUsername(username);
+        String encodedPassword = passwordEncoder.encode(userpassword);
+        people.setUserpassword(encodedPassword);
 
-//        //입력한 아이디, 비번을 가진 회원인지 확인
-//        if (people2.equals(people1)) {
-//            System.out.println(people2.getUsername() + "님 환영합니다");
-//        }
-//        else {System.out.println("해당하는 회원이 존재하지 않습니다");}
-
-        return people2;
+        return people;
     }
 //회원정보수정
     @Transactional

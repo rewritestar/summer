@@ -23,19 +23,19 @@ public class CommentService {
     @Autowired
     private CommentRepository commentRepository;
 
-    public void commentwrite(Comment comment, String userid, Integer boardid){
-        User findUser = userRepository.findByuserid(userid);
+    public Comment commentwrite(Integer userid, Integer boardid, Comment comment){
+        User findUser = userRepository.findByid(userid);
         comment.setUser(findUser);
 
         Board findBoard = boardRepository.findByid(boardid);
         comment.setBoard(findBoard);
 
-        commentRepository.save(comment);
+        return commentRepository.save(comment);
     }
 
-    public List<Comment> commentList(Integer board_id){
+    public List<Comment> commentList(Integer boardid){
 
-        return commentRepository.findByboard_id(board_id);
+        return commentRepository.findByboard_id(boardid);
     }
 
     public void commentDelete(Integer id){

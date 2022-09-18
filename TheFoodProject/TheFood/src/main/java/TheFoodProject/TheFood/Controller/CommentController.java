@@ -1,10 +1,10 @@
 package TheFoodProject.TheFood.Controller;
 
 import TheFoodProject.TheFood.entity.Comment;
+import TheFoodProject.TheFood.entity.CommentForm;
 import TheFoodProject.TheFood.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,13 +19,14 @@ public class CommentController {
     private CommentService commentService;
 
     @PostMapping("/api/commentwrite")
-    public String commentwrite(Comment comment, Integer boardid, Authentication authentication) throws Exception{
-        String userid = authentication.getName();
-        commentService.commentwrite(comment, userid, boardid);
-        return "redirect:/board/list";
+    public Comment commentwrite(@RequestBody CommentForm commentForm){
+        Comment newComment = new Comment();
+        newComment.setContent(commentForm.getContent());
+
+        return commentService.commentwrite(commentForm.getUserid() , commentForm.getBoardid(), newComment);
     }
 
-    @GetMapping("/comment/delete")
+    @GetMapping("/api/commentDelete")
     public void commentDelete(@RequestBody Integer id){
         commentService.commentDelete(id);
     }

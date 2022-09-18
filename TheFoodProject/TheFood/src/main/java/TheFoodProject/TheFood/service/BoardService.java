@@ -6,11 +6,8 @@ import TheFoodProject.TheFood.repository.BoardRepository;
 import TheFoodProject.TheFood.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 
@@ -23,24 +20,23 @@ public class BoardService {
 
 
 //글 작성 처리
-    public Board write(String userid, Board board, MultipartFile file) throws Exception {
+    public User write(Board board, Integer userid) throws Exception {
 
-        User findUser = userRepository.findByuserid(userid);
+        User findUser = userRepository.findByid(userid);
         board.setUser(findUser);
 
-
-        String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
-
-        UUID uuid = UUID.randomUUID();
-
-        String fileName = uuid + "_" + file.getOriginalFilename();
-
-        File saveFile = new File(projectPath, fileName);
-
-        file.transferTo(saveFile);
-
-        board.setFilename(fileName);
-        board.setFilepath("/files/" + fileName);
+//        String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
+//
+//        UUID uuid = UUID.randomUUID();
+//
+//        String fileName = uuid + "_" + file.getOriginalFilename();
+//
+//        File saveFile = new File(projectPath, fileName);
+//
+//        file.transferTo(saveFile);
+//
+//        board.setFilename(fileName);
+//        board.setFilepath("/files/" + fileName);
 
         //카테고리 나눌때 참고하려고 둔 코드
 //        Role role = new Role();
@@ -53,9 +49,11 @@ public class BoardService {
 //        if (100 <= board.getCategory() && board.getCategory() < 200) {
 //            sort(board, new Recipeboard() );
 //        }
-        return boardRepository.save(board);
-    }
 
+        boardRepository.save(board);
+
+        return findUser;
+    }
 
 
     //게시글 리스트 처리
@@ -68,14 +66,15 @@ public class BoardService {
         return boardRepository.findBycategory(category);
     }
 
-    //특정 게시글 불러오기
-    public Board boardView(Integer id) {
-
-        return boardRepository.findById(id).get();
-    }
     //특정 게시글 삭제
     public void boardDelete(Integer id){
 
         boardRepository.deleteById(id);
+    }
+
+    //내가 쓴 글
+    public List<Board> myboard(Integer userid){
+
+        return boardRepository.findByuser(userid);
     }
 }
