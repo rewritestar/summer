@@ -66,16 +66,16 @@ public class UserService {
 //--------------------------------------------------------------------------------------------------
     //로그인
     public User login(String userid, String userpassword){
-        User people1 = userRepository.findByuserpassword(userpassword);
+//        User people1 = userRepository.findByuserpassword(userpassword);
         User people2 = userRepository.findByuserid(userid);
 
-        if(people1 == null || people2 == null){
-            throw new IllegalStateException("해당하는 회원이 존재하지 않습니다.");
-        }
-//        입력한 아이디, 비번을 가진 회원인지 확인
-        if(!people2.equals(people1)){
-            throw new IllegalStateException("해당하는 회원이 존재하지 않습니다.");
-        }
+//        if(people1 == null || people2 == null){
+//            throw new IllegalStateException("해당하는 회원이 존재하지 않습니다.");
+//        }
+////        입력한 아이디, 비번을 가진 회원인지 확인
+//        if(!people2.equals(people1)){
+//            throw new IllegalStateException("해당하는 회원이 존재하지 않습니다.");
+//        }
 
         return people2;
     }
