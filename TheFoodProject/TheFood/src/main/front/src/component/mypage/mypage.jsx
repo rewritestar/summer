@@ -4,7 +4,6 @@ import styles from "../user_component.module.css";
 import Container from "../container/container";
 import MypageButtons from "../buttons/mypage_buttons";
 import { useNavigate } from "react-router-dom";
-import Login from "../login/login";
 
 const Mypage = ({ auth, onChange, onwithDrawal }) => {
   const [user, setUser] = useState();
@@ -53,6 +52,7 @@ const Mypage = ({ auth, onChange, onwithDrawal }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     console.log("onsubmit");
+    const userid = user.id;
     const username = nameRef.current.value;
     const userpassword = passwordRef.current.value;
     const userpassword_check = password_checkRef.current.value;
@@ -60,7 +60,8 @@ const Mypage = ({ auth, onChange, onwithDrawal }) => {
       alert("비밀번호가 일치하지 않습니다.");
       return;
     }
-    const mypageForm = { username, userpassword };
+    const mypageForm = { userid, username, userpassword };
+    console.log(mypageForm);
     onChange(mypageForm);
     navigate("/");
   };

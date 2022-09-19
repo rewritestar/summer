@@ -60,9 +60,9 @@ class BoardApi {
       .catch((e) => console.log("error getComments axios"));
     return comments.data;
   }
-  async commentWrite(comment) {
+  async commentWrite(commentForm) {
     this.boardApi
-      .post(`/api/commentwrite`, comment)
+      .post(`/api/commentwrite`, commentForm)
       .catch((e) => console.log("error commentWrite axios"));
   }
   async commentDelte(commentid) {

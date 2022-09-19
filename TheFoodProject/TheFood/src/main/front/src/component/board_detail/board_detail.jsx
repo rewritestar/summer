@@ -59,16 +59,16 @@ const BoardDetail = ({ auth, boardApi }) => {
     onCommentSubmit(content);
   };
   const onCommentSubmit = (content) => {
-    const comment = {
+    const commentForm = {
       userid: user.id,
       username: user.username,
       content: content,
       boardid: board.id,
     };
     boardApi //
-      .commentWrite(comment) //
+      .commentWrite(commentForm) //
       .then((res) => console.log(`댓글이 작성되었습니다.`));
-    setComments([...comments, comment]);
+    setComments([...comments, commentForm]);
   };
   const onCommentDelete = (commentid) => {
     boardApi //

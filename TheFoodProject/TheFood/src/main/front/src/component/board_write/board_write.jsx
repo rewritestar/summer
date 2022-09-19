@@ -4,15 +4,21 @@ import Footer from "../footer/footer";
 import styles from "./board_write.module.css";
 const BoardWrite = ({ auth, boardApi }) => {
   const [user, setUser] = useState();
-
+  const navigate = useNavigate();
+  const location = useLocation();
   const user_id = localStorage.getItem("id"); //추후에 로그인 토큰으로 대체
   useEffect(() => {
-    user_id && auth.stayLogin(user_id).then((user) => setUser(user));
+    if (user_id) {
+      auth.stayLogin(user_id).then((user) => setUser(user));
+    } else {
+      alert("로그인이 필요합니다.");
+      navigate("/login");
+    }
   }, [user_id]);
 
   const [imgsrc, setImgsrc] = useState("");
   const [board, setBoard] = useState({
-    id: "",
+    id: 0,
     title: "",
     category: "",
     filepath: "",
@@ -20,8 +26,7 @@ const BoardWrite = ({ auth, boardApi }) => {
     content: "",
     userid: "",
   });
-  const navigate = useNavigate();
-  const location = useLocation();
+
   const wroteBoard = location.state || "";
   const goToHome = () => {
     navigate("/");
@@ -33,17 +38,16 @@ const BoardWrite = ({ auth, boardApi }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const id = "";
-    const title = titleRef.current.value;
+    const id = board ? board.id : 0;
+    const title = titleRef.current.value || "no title";
     const category = categoryRef.current.value;
     const filename = fileRef.current.files[0]
       ? fileRef.current.files[0].name
       : "Default";
     const filepath = `images/${filename}` || "images/logo.png";
-    const content = contentRef.current.value;
+    const content = contentRef.current.value || "no content";
     const userid = user.id;
     const boardForm = {
-      id,
       title,
       category,
       filename,
@@ -51,9 +55,11 @@ const BoardWrite = ({ auth, boardApi }) => {
       content,
       userid,
     };
+    board.id && boardForm.id(id);
     const formdata = new FormData();
     formdata.append("file", fileRef.current.files[0]);
-    console.log(formdata.get("file"));
+
+    console.log(boardForm);
     boardApi //
       .boardWrite(boardForm) //
       .then((user) => `게시글 작성 성공 ${user}`);
