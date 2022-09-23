@@ -2,7 +2,6 @@ package TheFoodProject.TheFood.Controller;
 
 import TheFoodProject.TheFood.entity.Board;
 import TheFoodProject.TheFood.entity.BoardForm;
-import TheFoodProject.TheFood.entity.User;
 import TheFoodProject.TheFood.service.BoardService;
 import TheFoodProject.TheFood.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,14 +31,21 @@ public class BoardController {
 //    }
 
     @PostMapping("/api/boardwrite")
-    public User boardWritePro(@RequestBody BoardForm boardForm) throws Exception{
+    public Board boardWritePro(@RequestBody BoardForm boardForm) throws Exception{
         Board newBoard = new Board();
         newBoard.setTitle(boardForm.getTitle());
         newBoard.setContent(boardForm.getContent());
         newBoard.setCategory(boardForm.getCategory());
         newBoard.setFilepath(boardForm.getFilepath());
         newBoard.setFilename(boardForm.getFilename());
-        return boardService.write(newBoard, boardForm.getUserid());
+        newBoard.setUsername(boardForm.getUsername());
+        newBoard.setUser_id(boardForm.getUserid());
+
+        if (boardForm.getId() != 0){
+            return boardService.update(boardForm.getId(), newBoard);
+        }
+        else{
+        return boardService.write(newBoard);}
     }
 
     @PostMapping("/api/recipe")
@@ -51,8 +57,8 @@ public class BoardController {
         return boardService.boardList1(category);
     }
     @GetMapping("/api/free")
-    public List<Board> freeBoardList(@RequestBody Integer category){
-        return boardService.boardList1(category);
+    public List<Board> freeBoardList(){
+        return boardService.boardList1(300);
     }
 
 

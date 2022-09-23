@@ -1,10 +1,11 @@
 package TheFoodProject.TheFood.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 @Data
@@ -26,6 +27,8 @@ public class Board {
 
     private String filepath;
 
+    private String username;
+
 
     //recipe 부분
 //    @ManyToOne
@@ -35,15 +38,12 @@ public class Board {
 //
 //    private List<Recipeboard> recipeboards = new ArrayList<>();
 
-    //user 정보
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    @JsonIgnore
-    private User user;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Comment> commentList;
+    private Integer user_id;
+
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Comment> commentList;
 
 
 }

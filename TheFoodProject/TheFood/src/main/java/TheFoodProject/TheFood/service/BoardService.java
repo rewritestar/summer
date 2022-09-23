@@ -1,7 +1,6 @@
 package TheFoodProject.TheFood.service;
 
 import TheFoodProject.TheFood.entity.Board;
-import TheFoodProject.TheFood.entity.User;
 import TheFoodProject.TheFood.repository.BoardRepository;
 import TheFoodProject.TheFood.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +19,8 @@ public class BoardService {
 
 
 //글 작성 처리
-    public User write(Board board, Integer userid) throws Exception {
+    public Board write(Board board) throws Exception {
 
-        User findUser = userRepository.findByid(userid);
-        board.setUser(findUser);
 
 //        String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
 //
@@ -52,7 +49,22 @@ public class BoardService {
 
         boardRepository.save(board);
 
-        return findUser;
+        return board;
+    }
+
+    public Board update(Integer boardid, Board board) throws Exception {
+
+        Board updateboard = boardRepository.findByid(boardid);
+
+        updateboard.setTitle(board.getTitle());
+        updateboard.setContent(board.getContent());
+        updateboard.setFilename(board.getFilename());
+        updateboard.setFilepath(board.getFilepath());
+        updateboard.setCategory(board.getCategory());
+
+        boardRepository.save(updateboard);
+
+        return updateboard;
     }
 
 
