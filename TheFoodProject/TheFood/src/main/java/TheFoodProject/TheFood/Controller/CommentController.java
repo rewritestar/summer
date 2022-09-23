@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor
 public class CommentController {
     @Autowired
     private CommentService commentService;
@@ -22,8 +21,10 @@ public class CommentController {
     public Comment commentwrite(@RequestBody CommentForm commentForm){
         Comment newComment = new Comment();
         newComment.setContent(commentForm.getContent());
-
-        return commentService.commentwrite(commentForm.getUserid() , commentForm.getBoardid(), newComment);
+        newComment.setBoardid(commentForm.getBoardid());
+        newComment.setUserid(commentForm.getUserid());
+        newComment.setUsername(commentForm.getUsername());
+        return commentService.commentwrite(newComment);
     }
 
     @GetMapping("/api/commentDelete")

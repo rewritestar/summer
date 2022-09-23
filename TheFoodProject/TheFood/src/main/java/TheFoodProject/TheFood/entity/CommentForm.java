@@ -9,4 +9,5 @@ public class CommentForm {
     private Integer userid;
     private String content;
     private Integer boardid;
+    private String username;
 }

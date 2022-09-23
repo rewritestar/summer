@@ -16,8 +16,8 @@ import java.util.List;
 
 public class BoardController {
 
-    @Autowired
-    private CommentService commentService;
+//    @Autowired
+//    private CommentService commentService;
     @Autowired
     private BoardService boardService;
 
@@ -39,7 +39,7 @@ public class BoardController {
         newBoard.setFilepath(boardForm.getFilepath());
         newBoard.setFilename(boardForm.getFilename());
         newBoard.setUsername(boardForm.getUsername());
-        newBoard.setUser_id(boardForm.getUserid());
+        newBoard.setUserid(boardForm.getUserid());
 
         if (boardForm.getId() != 0){
             return boardService.update(boardForm.getId(), newBoard);

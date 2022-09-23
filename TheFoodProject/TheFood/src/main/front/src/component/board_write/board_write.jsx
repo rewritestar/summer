@@ -3,6 +3,26 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Footer from "../footer/footer";
 import styles from "./board_write.module.css";
 const BoardWrite = ({ auth, boardApi }) => {
+  const TYPE_CODE = {
+    "레시피-한식": 101,
+    "레시피-양식": 102,
+    "레시피-아시안식": 103,
+    "레시피-디저트": 104,
+    "레시피-음료": 105,
+    "레시피-다이어트": 106,
+    "레시피-비건": 107,
+    "레시피-야식": 108,
+    "레시피-기타": 109,
+    "맛집-수도권": 201,
+    "맛집-충북/충남/대전": 202,
+    "맛집-전북/전남/광주": 203,
+    "맛집-경북/대구": 204,
+    "맛집-경남/부산/울산": 205,
+    "맛집-강원": 206,
+    "맛집-제주": 207,
+    "맛집-기타": 208,
+    일상게시판: 300,
+  };
   const [user, setUser] = useState();
   const navigate = useNavigate();
   const location = useLocation();
@@ -24,7 +44,8 @@ const BoardWrite = ({ auth, boardApi }) => {
     filepath: "",
     filename: "",
     content: "",
-    userid: "",
+    user_id: "",
+    username: "",
   });
 
   const wroteBoard = location.state || "";
@@ -40,24 +61,26 @@ const BoardWrite = ({ auth, boardApi }) => {
     e.preventDefault();
     const id = board ? board.id : 0;
     const title = titleRef.current.value || "no title";
-    const category = categoryRef.current.value;
+    const category = TYPE_CODE[categoryRef.current.value];
     const filename = fileRef.current.files[0]
       ? fileRef.current.files[0].name
       : "Default";
     const filepath = `images/${filename}` || "images/logo.png";
     const content = contentRef.current.value || "no content";
     const userid = user.id;
+    const username = user.username;
     const boardForm = {
+      id,
       title,
       category,
       filename,
       filepath,
       content,
       userid,
+      username,
     };
-    board.id && boardForm.id(id);
-    const formdata = new FormData();
-    formdata.append("file", fileRef.current.files[0]);
+    // const formdata = new FormData();
+    // formdata.append("file", fileRef.current.files[0]);
 
     console.log(boardForm);
     boardApi //
@@ -128,7 +151,7 @@ const BoardWrite = ({ auth, boardApi }) => {
               <option value="맛집-강원">맛집-강원</option>
               <option value="맛집-제주">맛집-제주</option>
               <option value="맛집-기타">맛집-수도권</option>
-              <option value="일상">일상 게시판</option>
+              <option value="일상게시판">일상게시판</option>
             </select>
 
             <input

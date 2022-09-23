@@ -1,6 +1,5 @@
 package TheFoodProject.TheFood.service;
 
-import TheFoodProject.TheFood.entity.Role;
 import TheFoodProject.TheFood.entity.User;
 import TheFoodProject.TheFood.repository.BoardRepository;
 import TheFoodProject.TheFood.repository.UserRepository;
@@ -35,10 +34,6 @@ public class UserService {
         String encodedPassword = passwordEncoder.encode(user.getUserpassword());
         user.setUserpassword(encodedPassword);
 
-        user.setEnabled(true);
-        Role role = new Role();
-        role.setId(1l);
-        user.getRoles().add(role);
         return userRepository.save(user);
     }
 //--------------------------------------------------------------------------------------------------

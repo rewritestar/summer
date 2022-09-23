@@ -39,7 +39,7 @@ public class Board {
 //    private List<Recipeboard> recipeboards = new ArrayList<>();
 
 
-    private Integer user_id;
+    private Integer userid;
 
 //    @JsonIgnore
 //    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)

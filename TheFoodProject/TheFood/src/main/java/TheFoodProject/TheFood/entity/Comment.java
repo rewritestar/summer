@@ -13,15 +13,18 @@ public class Comment{
     private Integer id;
 
     private String content;
+    private Integer userid;
+    private Integer boardid;
+    private String username;
 
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "board_id")
-    private Board board;
+//    @JsonIgnore
+//    @ManyToOne
+//    @JoinColumn(name = "user_id")
+//    private User user;
+//
+//    @JsonIgnore
+//    @ManyToOne
+//    @JoinColumn(name = "board_id")
+//    private Board board;
 
 }

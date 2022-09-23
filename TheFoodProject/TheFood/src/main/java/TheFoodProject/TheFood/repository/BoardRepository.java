@@ -11,7 +11,7 @@ public interface BoardRepository extends JpaRepository<Board, Integer> {
         List<Board> findBycategory(Integer category);
         Board findByid(Integer id);
 
-        List<Board> findByuser(Integer user);
+        List<Board> findByuserid(Integer userid);
 
 
 }

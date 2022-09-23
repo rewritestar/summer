@@ -84,3 +84,6 @@ task copyReactBuildFiles(type: Copy) {
 	into "$projectDir/src/main/resources/static"
 }
 
+test.onlyIf {
+	!project.hasProperty('test')
+}

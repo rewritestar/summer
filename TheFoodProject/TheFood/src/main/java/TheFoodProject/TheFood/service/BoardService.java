@@ -87,6 +87,6 @@ public class BoardService {
     //내가 쓴 글
     public List<Board> myboard(Integer userid){
 
-        return boardRepository.findByuser(userid);
+        return boardRepository.findByuserid(userid);
     }
 }
