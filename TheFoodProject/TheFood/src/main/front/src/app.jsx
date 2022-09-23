@@ -25,10 +25,10 @@ function App({ auth, boardApi }) {
       auth //
         .withDrawal(id)
         .then(() => {
-          alert("회원 탈퇴가 성공적으로 완료되었습니다!");
+          //alert("회원 탈퇴가 성공적으로 완료되었습니다!");
           localStorage.clear();
-        })
-        .then(() => (window.location.href = "/"));
+        });
+      //.then(() => (window.location.href = "/"));
     }
   };
   const onSignup = (signupForm) => {

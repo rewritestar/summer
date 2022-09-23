@@ -23,9 +23,9 @@ class Auth {
     // console.log(`signup axios async 수행 ${response}`);
     return response.data;
   }
-  async withDrawal(user_id) {
+  async withDrawal(id) {
     this.auth
-      .post("/api/withdrawal/", parseInt(user_id))
+      .post("/api/withdrawal/", parseInt(id))
       .catch((e) => console.log(`error withDrawal axios ${e}`));
   }
   async findId(useremail) {

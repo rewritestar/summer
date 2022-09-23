@@ -66,10 +66,11 @@ class BoardApi {
       .post(`/api/commentwrite`, commentForm)
       .catch((e) => console.log("error commentWrite axios"));
   }
-  async commentDelte(commentid) {
+  async commentDelte(id) {
+    console.log(id);
     this.boardApi
-      .post(`/api/commentDelete`, commentid)
-      .catch((e) => console.log("error commentDelte axios"));
+      .post(`/api/commentDelete`, id)
+      .catch((e) => console.log("error commentDelete axios"));
   }
 }
 

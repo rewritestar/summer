@@ -82,7 +82,7 @@ public class UserService {
         people.setUsername(username);
         String encodedPassword = passwordEncoder.encode(userpassword);
         people.setUserpassword(encodedPassword);
-
+        userRepository.save(people);
         return people;
     }
 //회원정보수정

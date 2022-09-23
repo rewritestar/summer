@@ -27,14 +27,14 @@ public class CommentController {
         return commentService.commentwrite(newComment);
     }
 
-    @GetMapping("/api/commentDelete")
+    @PostMapping("/api/commentDelete")
     public void commentDelete(@RequestBody Integer id){
         commentService.commentDelete(id);
     }
 
     @PostMapping("/api/getcomments")
-        public List<Comment> commentList(@RequestBody Integer id){
-        return commentService.commentList(id);
+        public List<Comment> commentList(@RequestBody Integer boardid){
+        return commentService.commentList(boardid);
     }
 
 }

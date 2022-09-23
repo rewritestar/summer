@@ -42,8 +42,9 @@ const BoardDetail = ({ auth, boardApi }) => {
     },
   ]);
   useEffect(() => {
+    console.log(location.state.id);
     boardApi //
-      .getComments() //
+      .getComments(location.state.id) //
       .then((comments) => {
         setComments(comments);
         console.log("댓글 조회 성공");
