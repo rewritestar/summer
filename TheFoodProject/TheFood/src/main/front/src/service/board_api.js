@@ -22,9 +22,10 @@ class BoardApi {
     return boards.data;
   }
   async getFree() {
-    const boards = axios
+    const boards = await axios
       .get(`/api/free`)
       .catch((e) => console.log("error getFree axios"));
+    console.log(boards);
     return boards.data;
   }
   async boardWrite(boardForm) {

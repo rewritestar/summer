@@ -85,7 +85,10 @@ const BoardWrite = ({ auth, boardApi }) => {
     console.log(boardForm);
     boardApi //
       .boardWrite(boardForm) //
-      .then((user) => `게시글 작성 성공 ${user}`);
+      .then((user) => {
+        alert(`게시글 작성에 성공했습니다!`);
+        navigate("/");
+      });
     //board category에 따라 백엔드로 주는 방향 달라짐
   };
 

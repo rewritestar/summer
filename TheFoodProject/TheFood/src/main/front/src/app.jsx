@@ -43,7 +43,10 @@ function App({ auth, boardApi }) {
         localStorage.clear();
         localStorage.setItem("id", user.id);
       })
-      .then(() => (window.location.href = "/"));
+      .then(() => {
+        alert("로그인이 성공적으로 완료 됐습니다.");
+        window.location.href = "/";
+      });
   };
 
   const onFindId = (useremail) => {
