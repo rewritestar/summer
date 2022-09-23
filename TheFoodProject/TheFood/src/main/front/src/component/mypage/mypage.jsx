@@ -52,7 +52,7 @@ const Mypage = ({ auth, onChange, onwithDrawal }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     console.log("onsubmit");
-    const userid = user.id;
+    const id = user.id;
     const username = nameRef.current.value;
     const userpassword = passwordRef.current.value;
     const userpassword_check = password_checkRef.current.value;
@@ -60,7 +60,7 @@ const Mypage = ({ auth, onChange, onwithDrawal }) => {
       alert("비밀번호가 일치하지 않습니다.");
       return;
     }
-    const mypageForm = { userid, username, userpassword };
+    const mypageForm = { id, username, userpassword };
     console.log(mypageForm);
     onChange(mypageForm);
     navigate("/");

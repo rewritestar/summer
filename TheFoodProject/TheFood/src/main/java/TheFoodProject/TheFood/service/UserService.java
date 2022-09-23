@@ -86,6 +86,7 @@ public class UserService {
         return people;
     }
 //회원정보수정
+    /*
     @Transactional
     public void modify(User user, String userid) {
         User result = userRepository.findByuserid(userid);
@@ -96,7 +97,7 @@ public class UserService {
         result.setUserpassword(encpassword);
         result.setUsername(user.getUsername());
     }
-
+*/
 //회원탈퇴
 //    @Transactional
     public void delete(Integer id) {
