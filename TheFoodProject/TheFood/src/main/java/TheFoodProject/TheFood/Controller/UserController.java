@@ -5,7 +5,6 @@ import TheFoodProject.TheFood.entity.MypageForm;
 import TheFoodProject.TheFood.entity.SignupForm;
 import TheFoodProject.TheFood.entity.User;
 import TheFoodProject.TheFood.service.UserService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

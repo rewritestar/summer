@@ -3,9 +3,7 @@ package TheFoodProject.TheFood.Controller;
 import TheFoodProject.TheFood.entity.Comment;
 import TheFoodProject.TheFood.entity.CommentForm;
 import TheFoodProject.TheFood.service.CommentService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,5 +34,8 @@ public class CommentController {
         public List<Comment> commentList(@RequestBody Integer boardid){
         return commentService.commentList(boardid);
     }
+
+//    @PostMapping("api/myboards/comments")
+
 
 }

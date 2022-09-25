@@ -1,9 +1,7 @@
 package TheFoodProject.TheFood.service;
 
 
-import TheFoodProject.TheFood.entity.Board;
 import TheFoodProject.TheFood.entity.Comment;
-import TheFoodProject.TheFood.entity.User;
 import TheFoodProject.TheFood.repository.BoardRepository;
 import TheFoodProject.TheFood.repository.CommentRepository;
 import TheFoodProject.TheFood.repository.UserRepository;
@@ -24,22 +22,27 @@ public class CommentService {
     private CommentRepository commentRepository;
 
     public Comment commentwrite(Comment comment){
-//        User findUser = userRepository.findByid(userid);
-//        comment.setUser(findUser);
-//
-//        Board findBoard = boardRepository.findByid(boardid);
-//        comment.setBoard(findBoard);
-
         return commentRepository.save(comment);
     }
 
     public List<Comment> commentList(Integer boardid){
-
         return commentRepository.findByboardid(boardid);
     }
 
     public void commentDelete(Integer id){
-
         commentRepository.deleteById(id);
     }
+
+
+
+    public List<Comment> commentList1(Integer userid){
+        return commentRepository.findByboardid(userid);
+    }
+
+//    public static void main(String[] args){
+//        List<Integer> boardid = new ArrayList<Integer>();
+//
+//        int size = commentList1;
+//    }
+
 }

@@ -1,13 +1,17 @@
 package TheFoodProject.TheFood.service;
 
+import TheFoodProject.TheFood.entity.Board;
+import TheFoodProject.TheFood.entity.Comment;
 import TheFoodProject.TheFood.entity.User;
 import TheFoodProject.TheFood.repository.BoardRepository;
+import TheFoodProject.TheFood.repository.CommentRepository;
 import TheFoodProject.TheFood.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,6 +24,9 @@ public class UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private CommentRepository commentRepository;
 
 
     //회원가입
@@ -61,22 +68,24 @@ public class UserService {
 //--------------------------------------------------------------------------------------------------
     //로그인
     public User login(String userid, String userpassword){
-//        User people1 = userRepository.findByuserpassword(userpassword);
-        User people2 = userRepository.findByuserid(userid);
+        User people = userRepository.findByuserid(userid);
 
-//        if(people1 == null || people2 == null){
-//            throw new IllegalStateException("해당하는 회원이 존재하지 않습니다.");
-//        }
-////        입력한 아이디, 비번을 가진 회원인지 확인
-//        if(!people2.equals(people1)){
-//            throw new IllegalStateException("해당하는 회원이 존재하지 않습니다.");
-//        }
+        if(people == null){
+            throw new IllegalStateException("해당하는 회원이 존재하지 않습니다.");
+        }
+//        입력한 아이디, 비번을 가진 회원인지 확인
+        if(passwordEncoder.matches(userpassword, people.getUserpassword()))
+        {
+            return people;
+        }
+        else{
+            throw new IllegalStateException("해당하는 회원이 존재하지 않습니다.");
+        }
 
-        return people2;
     }
 
     //--------------------------------------------------------------------------------------------------
-    //마이페이지
+    //마이페이지/회원정보수정
     public User mypage(Integer id, String username, String userpassword){
         User people = userRepository.findByid(id);
         people.setUsername(username);
@@ -85,23 +94,23 @@ public class UserService {
         userRepository.save(people);
         return people;
     }
-//회원정보수정
-    /*
-    @Transactional
-    public void modify(User user, String userid) {
-        User result = userRepository.findByuserid(userid);
-//        User persistance = userRepository.findById(user.getId()).orElseThrow(() ->
-//                new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
-        String rawpassword = user.getUserpassword();
-        String encpassword = passwordEncoder.encode(rawpassword);
-        result.setUserpassword(encpassword);
-        result.setUsername(user.getUsername());
-    }
-*/
+
 //회원탈퇴
-//    @Transactional
+    @Transactional
     public void delete(Integer id) {
         userRepository.deleteById(id);
+        //보드이름변경
+        List<Board> newboard = boardRepository.findByuserid(id);
+        for(int i=0; i< newboard.size(); i++){
+            newboard.get(i).setUsername("알 수 없음");
+            newboard.get(i).setUserid(-1);
+        }
+        //댓글변경
+        List<Comment> newcomment = commentRepository.findByuserid(id);
+        for(int i=0; i< newcomment.size(); i++){
+            newcomment.get(i).setUsername("알 수 없음");
+            newcomment.get(i).setUserid(-1);
+        }
     }
 
     //로그인 유지
