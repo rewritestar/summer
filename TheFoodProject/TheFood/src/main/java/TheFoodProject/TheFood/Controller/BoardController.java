@@ -3,7 +3,6 @@ package TheFoodProject.TheFood.Controller;
 import TheFoodProject.TheFood.entity.Board;
 import TheFoodProject.TheFood.entity.BoardForm;
 import TheFoodProject.TheFood.service.BoardService;
-import TheFoodProject.TheFood.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -82,9 +81,10 @@ public class BoardController {
 //    }
 
     @PostMapping("/api/myboards/boards")
-    public List<Board> mywriteboard(@RequestBody Integer id){
-
-        return boardService.myboard(id);
+    public List<Board> mywriteboard(@RequestBody Integer userid){
+        return boardService.myboard(userid);
     }
+
+
 
 }

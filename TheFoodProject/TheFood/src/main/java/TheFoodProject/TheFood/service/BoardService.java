@@ -74,7 +74,7 @@ public class BoardService {
         return boardRepository.findAll();
     }
     public List<Board> boardList1(Integer category){
-
+//        boardRepository.findBycategory(category).get(1).setTitle("변경");
         return boardRepository.findBycategory(category);
     }
 
