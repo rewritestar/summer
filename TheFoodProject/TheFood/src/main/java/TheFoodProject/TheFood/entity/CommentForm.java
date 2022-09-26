@@ -6,8 +6,9 @@ package TheFoodProject.TheFood.entity;
 @Getter
 @Setter
 public class CommentForm {
-    private Integer userid;
+    private Integer id;
     private String content;
+    private Integer userid;
     private Integer boardid;
     private String username;
 }

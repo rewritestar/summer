@@ -16,18 +16,13 @@ public class Board {
 
 
     private Integer id;
-
     private Integer category;
-
     private String title;
-
     private String content;
-
     private String filename;
-
     private String filepath;
-
     private String username;
+    private Integer userid;
 
 
     //recipe 부분
@@ -38,8 +33,6 @@ public class Board {
 //
 //    private List<Recipeboard> recipeboards = new ArrayList<>();
 
-
-    private Integer userid;
 
 //    @JsonIgnore
 //    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)

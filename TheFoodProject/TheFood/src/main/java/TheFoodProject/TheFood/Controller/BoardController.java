@@ -15,20 +15,17 @@ import java.util.List;
 
 public class BoardController {
 
-//    @Autowired
-//    private CommentService commentService;
     @Autowired
     private BoardService boardService;
 
 //    @PostMapping("/api/boardwrite")
 //    public String boardWritePro(Board board, MultipartFile file, Authentication authentication) throws Exception{
-//
 //        String userid = authentication.getName();
 //        boardService.write(userid, board, file);
-//
 //        return "redirect:/board/list";
 //    }
 
+    //보드 작성
     @PostMapping("/api/boardwrite")
     public Board boardWritePro(@RequestBody BoardForm boardForm) throws Exception{
         Board newBoard = new Board();
@@ -47,6 +44,7 @@ public class BoardController {
         return boardService.write(newBoard);}
     }
 
+    //카테고리별 게시판 분류
     @PostMapping("/api/recipe")
     public List<Board> recipeBoardList(@RequestBody Integer category){
         return boardService.boardList1(category);
@@ -60,26 +58,13 @@ public class BoardController {
         return boardService.boardList1(300);
     }
 
-
+    //보드 삭제
     @PostMapping("/api/boarddelete")
     public void boardDelete(@RequestBody Integer id){
         boardService.boardDelete(id);
     }
 
-
-//    @PostMapping("/board/update/{id}")
-//    public String boardUpdate(@PathVariable("id") Integer id, Board board, MultipartFile file, Authentication authentication) throws Exception{
-//
-//        Board boardTemp = boardService.boardView(id);
-//        boardTemp.setTitle(board.getTitle());
-//        boardTemp.setContent(board.getContent());
-//
-//        String username = authentication.getName();
-//        boardService.write(username, boardTemp, file);
-//
-//        return "redirect:/board/list";
-//    }
-
+    //내가 쓴 게시글
     @PostMapping("/api/myboards/boards")
     public List<Board> mywriteboard(@RequestBody Integer userid){
         return boardService.myboard(userid);

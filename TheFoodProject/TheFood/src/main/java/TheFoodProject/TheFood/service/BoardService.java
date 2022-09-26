@@ -2,7 +2,6 @@ package TheFoodProject.TheFood.service;
 
 import TheFoodProject.TheFood.entity.Board;
 import TheFoodProject.TheFood.repository.BoardRepository;
-import TheFoodProject.TheFood.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,13 +13,9 @@ public class BoardService {
 
     @Autowired
     private BoardRepository boardRepository;
-    @Autowired
-    private UserRepository userRepository;
 
-
-//글 작성 처리
+    //보드 작성
     public Board write(Board board) throws Exception {
-
 
 //        String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
 //
@@ -52,6 +47,7 @@ public class BoardService {
         return board;
     }
 
+    //보드 수정
     public Board update(Integer boardid, Board board) throws Exception {
 
         Board updateboard = boardRepository.findByid(boardid);
@@ -63,30 +59,25 @@ public class BoardService {
         updateboard.setCategory(board.getCategory());
 
         boardRepository.save(updateboard);
-
         return updateboard;
     }
 
-
-    //게시글 리스트 처리
+    //카테고리별 게시판 분류
     public List<Board> boardList(){
-
         return boardRepository.findAll();
     }
     public List<Board> boardList1(Integer category){
-//        boardRepository.findBycategory(category).get(1).setTitle("변경");
         return boardRepository.findBycategory(category);
     }
 
-    //특정 게시글 삭제
+    //보드 삭제
     public void boardDelete(Integer id){
 
         boardRepository.deleteById(id);
     }
 
-    //내가 쓴 글
+    //내가 쓴 게시글
     public List<Board> myboard(Integer userid){
-
         return boardRepository.findByuserid(userid);
     }
 }
