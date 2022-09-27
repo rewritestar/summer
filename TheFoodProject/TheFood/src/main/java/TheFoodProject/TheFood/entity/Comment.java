@@ -1,9 +1,11 @@
 package TheFoodProject.TheFood.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 @Data
@@ -11,20 +13,9 @@ public class Comment{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     private String content;
     private Integer userid;
     private Integer boardid;
     private String username;
-
-//    @JsonIgnore
-//    @ManyToOne
-//    @JoinColumn(name = "user_id")
-//    private User user;
-//
-//    @JsonIgnore
-//    @ManyToOne
-//    @JoinColumn(name = "board_id")
-//    private Board board;
 
 }

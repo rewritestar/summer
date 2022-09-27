@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 public class UserController {
 
@@ -31,45 +30,14 @@ public class UserController {
     //아이디,비밀번호 찾기
     @PostMapping("api/findid")
     public String userFindId(@RequestBody String useremail){
-
         return userService.findid(useremail);
     }
-
-//    @GetMapping("/user/findpassword")
-//    public String userFindPasswordForm(){
-//        return "userfindpassword";
-//    }
-//
-//    @PostMapping("user/findpasswordpro")
-//    public String userFindPasswordPro(String useremail, String userid){
-//        userService.findpassword(useremail, userid);
-//        return "redirect:/user/login";
-//    }
-//    @PostMapping("")
-//    public String checkPw(String userpassword, HttpSession session) throws Exception {
-//        String result = null;
-//        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//
-//        User dbuser = (User)session.getAttribute("login");
-//
-//        if(encoder.matches(userpassword, dbuser.getUserpassword())){
-//            result = "pwConfirmOk";
-//        }
-//        else{
-//            result = "pwConfirmNo";
-//        }
-//
-//        return result;
-//    }
-
 //--------------------------------------------------------------------------------------------------
     //로그인
     @PostMapping("api/login")
     public User userLogin(@RequestBody LoginForm loginForm){
-
         return userService.login(loginForm.getUserid(), loginForm.getUserpassword());
     }
-
 //--------------------------------------------------------------------------------------------------
 //탈퇴
     @PostMapping("/api/withdrawal/")
@@ -79,18 +47,14 @@ public class UserController {
 
 //--------------------------------------------------------------------------------------------------
     //마이페이지
-
     @PostMapping("/api/mypage")
     public User mypage(@RequestBody MypageForm mypageForm){
-
         return userService.mypage(mypageForm.getId(), mypageForm.getUsername(), mypageForm.getUserpassword());
     }
-
 //-----------------------------------------------------
-    //stay login
+    //로그인 유지
     @PostMapping("/api/staylogin/")
     public User userStay(@RequestBody Integer id){
-
         return userService.stay(id);
     }
 }

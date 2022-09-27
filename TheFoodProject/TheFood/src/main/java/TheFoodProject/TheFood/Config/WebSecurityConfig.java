@@ -22,8 +22,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
           http.csrf().disable();
-//        http
-//                .csrf().disable()//보안에는 취약해지지만 테스트를 위함
 //                .authorizeRequests()
 //                    .antMatchers("/","/board/**", "/user/**", "/api/**","/signup").permitAll()
 //                    .anyRequest().authenticated()
@@ -39,9 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                    .permitAll()
 ////                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 ////                    .logoutSuccessUrl("redirect:/board/list")
-////                    .invalidateHttpSession(true)
-//
-//        ;
+////                    .invalidateHttpSession(true);
     }
 
     @Autowired
@@ -64,7 +60,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {

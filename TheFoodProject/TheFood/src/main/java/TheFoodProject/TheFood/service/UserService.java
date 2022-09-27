@@ -18,15 +18,12 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private BoardRepository boardRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     @Autowired
     private CommentRepository commentRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     //회원가입
@@ -37,7 +34,7 @@ public class UserService {
         result1.ifPresent(u -> {
             throw new IllegalStateException("이미 존재하는 회원입니다");
         });
-
+        //비밀번호 암호화
         String encodedPassword = passwordEncoder.encode(user.getUserpassword());
         user.setUserpassword(encodedPassword);
 
@@ -49,7 +46,7 @@ public class UserService {
         Optional<User> result = userRepository.findByuseremail(useremail); //입력한 이메일을 가진 회원찾기
         return result.get().getUserid();
     }
-//
+
 //    public String findpassword(String useremail, String userid){
 //        Optional<User> person1 = userRepository.findByuseremail(useremail);
 //        Optional<User> person2 = userRepository.findByuserid(userid);
@@ -81,21 +78,9 @@ public class UserService {
         else{
             throw new IllegalStateException("해당하는 회원이 존재하지 않습니다.");
         }
-
     }
-
     //--------------------------------------------------------------------------------------------------
-    //마이페이지/회원정보수정
-    public User mypage(Integer id, String username, String userpassword){
-        User people = userRepository.findByid(id);
-        people.setUsername(username);
-        String encodedPassword = passwordEncoder.encode(userpassword);
-        people.setUserpassword(encodedPassword);
-        userRepository.save(people);
-        return people;
-    }
-
-//회원탈퇴
+    //회원탈퇴
     @Transactional
     public void delete(Integer id) {
         userRepository.deleteById(id);
@@ -113,12 +98,20 @@ public class UserService {
         }
     }
 
+    //마이페이지/회원정보수정
+    public User mypage(Integer id, String username, String userpassword){
+        User people = userRepository.findByid(id);
+        people.setUsername(username);
+        String encodedPassword = passwordEncoder.encode(userpassword);
+        people.setUserpassword(encodedPassword);
+        userRepository.save(people);
+        return people;
+    }
+
     //로그인 유지
     public User stay(Integer id){
         User user = userRepository.findByid(id);
         return user;
     }
-
-
 }
 
