@@ -20,22 +20,26 @@ public class CommentService {
     private BoardRepository boardRepository;
 
     //댓글 작성
-    public Comment write(Comment comment){
+    public List<Comment> write(Comment comment){
         commentRepository.save(comment);
-        return comment;
+        List<Comment> commentList = commentRepository.findByboardid(comment.getBoardid());
+        return commentList;
     }
     //댓글 수정
-    public Comment update(Integer commentid, Comment comment) throws Exception {
+    public List<Comment> update(Integer commentid, Comment comment) throws Exception {
 
         Comment updateComment = commentRepository.findByid(commentid);
         updateComment.setContent(comment.getContent());
 
         commentRepository.save(updateComment);
-        return updateComment;
+        List<Comment> commentList = commentRepository.findByboardid(comment.getBoardid());
+        return commentList;
     }
     //댓글 삭제
-    public void commentDelete(Integer id){
+    public List<Comment> commentDelete(Integer id){
+        Comment comment = commentRepository.findByid(id);
         commentRepository.deleteById(id);
+        return commentRepository.findByboardid(comment.getBoardid());
     }
     //댓글 불러오기
     public List<Comment> commentList(Integer boardid){

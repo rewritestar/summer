@@ -12,7 +12,6 @@ import Mypage from "./component/mypage/mypage";
 import Recipe from "./component/recipe/recipe";
 import Restaurant from "./component/restaurant/restaurant";
 import Signup from "./component/signup/signup";
-
 function App({ auth, boardApi }) {
   const onMypageChange = (mypageForm) => {
     auth.mypageChange(mypageForm).then((user) => {
@@ -25,10 +24,10 @@ function App({ auth, boardApi }) {
       auth //
         .withDrawal(id)
         .then(() => {
-          //alert("회원 탈퇴가 성공적으로 완료되었습니다!");
+          alert("회원 탈퇴가 성공적으로 완료되었습니다!");
           localStorage.clear();
-        });
-      //.then(() => (window.location.href = "/"));
+        })
+        .then(() => (window.location.href = "/"));
     }
   };
   const onSignup = (signupForm) => {
@@ -83,7 +82,7 @@ function App({ auth, boardApi }) {
           <Route
             path="/myboards"
             exact
-            element={<Myboards authr={auth} boardApi={boardApi} />}
+            element={<Myboards auth={auth} boardApi={boardApi} />}
           />
           <Route
             path="/findId"

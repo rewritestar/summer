@@ -12,7 +12,7 @@ const BoardItem = ({ board }) => {
       <img className={styles.thumbnail} src={board.filepath} alt="" />
       <div className={styles.data}>
         <p className={styles.title}>{board.title}</p>
-        <p className={styles.username}>{board.userid}</p>
+        <p className={styles.username}>{board.username}</p>
       </div>
     </div>
   );

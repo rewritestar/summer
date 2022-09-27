@@ -12,15 +12,12 @@ class Auth {
     const response = await this.auth
       .post("/api/login/", loginForm)
       .catch(() => console.log("error login axios"));
-    //   .catch((e) => console.log(`error login axios ${e}`));
-    // console.log(`첫번째 결과값 : ${response}`);
     return response.data;
   }
   async signup(signupForm) {
     const response = await this.auth
       .post("/api/signup/", signupForm)
       .catch(() => console.log("error signup axios"));
-    // console.log(`signup axios async 수행 ${response}`);
     return response.data;
   }
   async withDrawal(id) {
@@ -29,6 +26,7 @@ class Auth {
       .catch((e) => console.log(`error withDrawal axios ${e}`));
   }
   async findId(useremail) {
+    console.log(`useremail: ${useremail} and type ${typeof useremail}`);
     const response = await this.auth
       .post("/api/findid/", useremail)
       .catch(() => console.log("error findid axios"));

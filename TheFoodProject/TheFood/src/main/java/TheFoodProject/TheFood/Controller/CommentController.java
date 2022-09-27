@@ -18,7 +18,7 @@ public class CommentController {
 
     //댓글 작성
     @PostMapping("/api/commentwrite")
-    public Comment commentwrite(@RequestBody CommentForm commentForm) throws Exception {
+    public List<Comment> commentwrite(@RequestBody CommentForm commentForm) throws Exception {
         Comment newComment = new Comment();
         newComment.setContent(commentForm.getContent());
         newComment.setBoardid(commentForm.getBoardid());
@@ -34,8 +34,8 @@ public class CommentController {
 
     //댓글 삭제
     @PostMapping("/api/commentDelete")
-    public void commentDelete(@RequestBody Integer id){
-        commentService.commentDelete(id);
+    public List<Comment> commentDelete(@RequestBody Integer id){
+        return commentService.commentDelete(id);
     }
 
     //댓글 불러오기

@@ -48,6 +48,7 @@ class BoardApi {
     return boards.data;
   }
   async getMyBoards(user_id) {
+    console.log(user_id);
     const boards = await this.boardApi
       .post(`/api/myboards/boards`, user_id)
       .catch((e) => console.log("error getMyBoards axios"));
@@ -62,15 +63,17 @@ class BoardApi {
     return comments.data;
   }
   async commentWrite(commentForm) {
-    this.boardApi
+    const comments = await this.boardApi
       .post(`/api/commentwrite`, commentForm)
       .catch((e) => console.log("error commentWrite axios"));
+    return comments.data;
   }
   async commentDelte(id) {
     console.log(id);
-    this.boardApi
+    const comments = await this.boardApi
       .post(`/api/commentDelete`, id)
       .catch((e) => console.log("error commentDelete axios"));
+    return comments.data;
   }
 }
 
