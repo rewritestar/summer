@@ -1,7 +1,9 @@
 package TheFoodProject.TheFood.service;
 
 import TheFoodProject.TheFood.entity.Board;
+import TheFoodProject.TheFood.entity.Comment;
 import TheFoodProject.TheFood.repository.BoardRepository;
+import TheFoodProject.TheFood.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,8 @@ public class BoardService {
 
     @Autowired
     private BoardRepository boardRepository;
+    @Autowired
+    private CommentRepository commentRepository;
 
     //보드 작성
     public Board write(Board board) throws Exception {
@@ -72,8 +76,12 @@ public class BoardService {
 
     //보드 삭제
     public void boardDelete(Integer id){
-
         boardRepository.deleteById(id);
+        //해당 보드의 댓글 삭제
+        List<Comment> deletecomment = commentRepository.findByboardid(id);
+        for(int i=0; i< deletecomment.size(); i++){
+            commentRepository.deleteById(deletecomment.get(i).getId());
+        }
     }
 
     //내가 쓴 게시글
