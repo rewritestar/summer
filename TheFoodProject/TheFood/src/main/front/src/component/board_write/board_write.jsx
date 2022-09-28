@@ -64,7 +64,7 @@ const BoardWrite = ({ auth, boardApi }) => {
     const category = TYPE_CODE[categoryRef.current.value];
     const filename = fileRef.current.files[0]
       ? fileRef.current.files[0].name
-      : "Default";
+      : "logo.png";
     const filepath = `images/${filename}` || "images/logo.png";
     const content = contentRef.current.value || "no content";
     const userid = user.id;
@@ -85,7 +85,7 @@ const BoardWrite = ({ auth, boardApi }) => {
     console.log(boardForm);
     boardApi //
       .boardWrite(boardForm) //
-      .then((user) => {
+      .then((_) => {
         alert(`게시글 작성에 성공했습니다!`);
         navigate("/");
       });

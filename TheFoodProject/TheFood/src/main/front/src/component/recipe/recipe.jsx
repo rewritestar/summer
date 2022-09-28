@@ -13,6 +13,7 @@ const Recipe = ({ boardApi, auth }) => {
   }, [user_id]);
 
   const TYPE_CODE = {
+    전체: 100,
     한식: 101,
     양식: 102,
     아시안식: 103,

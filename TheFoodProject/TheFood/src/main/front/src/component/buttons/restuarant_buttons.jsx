@@ -4,6 +4,9 @@ const RestaurantButtons = ({ handleTypeBtn }) => {
   return (
     <div className={styles.container}>
       <button className={styles.button} onClick={handleTypeBtn}>
+        전체
+      </button>
+      <button className={styles.button} onClick={handleTypeBtn}>
         수도권
       </button>
       <button className={styles.button} onClick={handleTypeBtn}>

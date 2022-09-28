@@ -30,14 +30,12 @@ class Auth {
     const response = await this.auth
       .post("/api/findid/", useremail)
       .catch(() => console.log("error findid axios"));
-    // console.log(`signup axios async 수행 ${response}`);
     return response.data;
   }
   async mypageChange(mypageForm) {
     const response = await this.auth
       .post("/api/mypage/", mypageForm)
       .catch(() => console.log("error mypageChange axios"));
-    // console.log(`signup axios async 수행 ${response}`);
     return response.data;
   }
 
@@ -45,8 +43,6 @@ class Auth {
     const user = await this.auth
       .post("/api/staylogin/", user_id)
       .catch(() => console.log("error stayLogin axios"));
-    //   .catch((e) => console.log(`error login axios ${e}`));
-    // console.log(`첫번째 결과값 : ${response}`);
     return user.data;
   }
 }

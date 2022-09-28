@@ -6,13 +6,13 @@ import styles from "./restaurant.module.css";
 
 const Restaurant = ({ auth, boardApi }) => {
   const [user, setUser] = useState();
-
   const user_id = localStorage.getItem("id"); //추후에 로그인 토큰으로 대체
   useEffect(() => {
     user_id && auth.stayLogin(user_id).then((user) => setUser(user));
   }, [user_id]);
 
   const TYPE_CODE = {
+    전체: 200,
     수도권: 201,
     "충북/충남/대전": 202,
     "전북/전남/광주": 203,

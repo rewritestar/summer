@@ -4,6 +4,9 @@ const RecipeButtons = ({ handleTypeBtn }) => {
   return (
     <div className={styles.container}>
       <button className={styles.button} onClick={handleTypeBtn}>
+        전체
+      </button>
+      <button className={styles.button} onClick={handleTypeBtn}>
         한식
       </button>
       <button className={styles.button} onClick={handleTypeBtn}>
