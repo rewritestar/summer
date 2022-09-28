@@ -6,7 +6,6 @@ import TheFoodProject.TheFood.entity.User;
 import TheFoodProject.TheFood.repository.BoardRepository;
 import TheFoodProject.TheFood.repository.CommentRepository;
 import TheFoodProject.TheFood.repository.UserRepository;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -34,6 +33,7 @@ public class UserService {
         //중복회원가입 불가
         Optional<User> result1 = userRepository.findByuseremail(user.getUseremail());
         result1.ifPresent(u -> {
+            System.out.println("이미 존재하는 회원입니다22");
             throw new IllegalStateException("이미 존재하는 회원입니다");
         });
         //비밀번호 암호화
@@ -70,6 +70,7 @@ public class UserService {
         User people = userRepository.findByuserid(userid);
 
         if(people == null){
+            System.out.println("해당하는 회원이 존재하지 않습니다.22");
             throw new IllegalStateException("해당하는 회원이 존재하지 않습니다.");
         }
 //        입력한 아이디, 비번을 가진 회원인지 확인
@@ -78,6 +79,7 @@ public class UserService {
             return people;
         }
         else{
+            System.out.println("해당하는 회원이 존재하지 않습니다.22");
             throw new IllegalStateException("해당하는 회원이 존재하지 않습니다.");
         }
     }
@@ -107,6 +109,21 @@ public class UserService {
         String encodedPassword = passwordEncoder.encode(userpassword);
         people.setUserpassword(encodedPassword);
         userRepository.save(people);
+
+        //바뀐 닉네임 보드와 댓글에도 적용되도록
+        //보드
+        List<Board> newboard = boardRepository.findByuserid(id);
+        for(int i=0; i< newboard.size(); i++){
+            newboard.get(i).setUsername(username);
+            boardRepository.save(newboard.get(i));
+        }
+        //댓글
+        List<Comment> newcomment = commentRepository.findByuserid(id);
+        for(int i=0; i< newcomment.size(); i++){
+            newcomment.get(i).setUsername(username);
+            commentRepository.save(newcomment.get(i));
+        }
+
         return people;
     }
 

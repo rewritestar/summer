@@ -8,6 +8,7 @@ import TheFoodProject.TheFood.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,7 +51,7 @@ public class CommentService {
     public List<Board> commentBoard(Integer userid) throws Exception {
         List<Comment> comments = commentRepository.findByuserid(userid); //해당 유저가 쓴 댓글리스트를 조회
 
-        List<Integer> boardidlist = null;  //댓글리스트들의 보드 아이디를 다른 리스트로 추출
+        ArrayList<Integer> boardidlist = new ArrayList<Integer>();  //댓글리스트들의 보드 아이디를 다른 리스트로 추출
         for(int i=0; i< comments.size(); i++){
             boardidlist.add(comments.get(i).getBoardid());
         }
@@ -59,12 +60,10 @@ public class CommentService {
         List<Integer> newList = boardidlist.stream().distinct().collect(Collectors.toList());
 
         //보드아이디 값을 통해 보드 추출
-        List<Board> myboard = null;
+        ArrayList<Board> myboard = new ArrayList<Board>();
         for(int j=0; j< newList.size(); j++){
             myboard.add(boardRepository.findByid(newList.get(j)));
         }
-
-        System.out.println(myboard);
 
         return myboard;
     }
