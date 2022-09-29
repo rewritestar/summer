@@ -3,17 +3,16 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "../user_component.module.css";
 import Container from "../container/container";
 import MypageButtons from "../buttons/mypage_buttons";
-import { useNavigate } from "react-router-dom";
 
 const Mypage = ({ auth, onChange, onwithDrawal }) => {
   const [user, setUser] = useState();
   const user_id = localStorage.getItem("id"); //추후에 로그인 토큰으로 대체
+
   useEffect(() => {
     console.log(user_id);
     user_id && auth.stayLogin(user_id).then((user) => setUser(user));
   }, []);
 
-  const navigate = useNavigate();
   const formRef = useRef();
   const nameRef = useRef();
   const passwordRef = useRef();
@@ -63,10 +62,9 @@ const Mypage = ({ auth, onChange, onwithDrawal }) => {
     const mypageForm = { id, username, userpassword };
     console.log(mypageForm);
     onChange(mypageForm);
-    navigate("/");
   };
   return (
-    <Container title="마이 페이지" user={user}>
+    <Container title="마이 페이지">
       <div className={styles.form_container}>
         <p className={styles.subTitle}>회원 정보 수정</p>
         <form

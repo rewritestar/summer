@@ -3,6 +3,22 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Footer from "../footer/footer";
 import styles from "./board_write.module.css";
 const BoardWrite = ({ auth, boardApi }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const user_id = localStorage.getItem("id"); //추후에 로그인 토큰으로 대체
+
+  const [user, setUser] = useState();
+  const [imgsrc, setImgsrc] = useState("");
+  const [board, setBoard] = useState();
+
+  const wroteBoard = location.state || "";
+
+  const categoryRef = useRef();
+  const titleRef = useRef();
+  const fileRef = useRef();
+  const contentRef = useRef();
+
   const TYPE_CODE = {
     "레시피-한식": 101,
     "레시피-양식": 102,
@@ -23,10 +39,7 @@ const BoardWrite = ({ auth, boardApi }) => {
     "맛집-기타": 208,
     일상게시판: 300,
   };
-  const [user, setUser] = useState();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const user_id = localStorage.getItem("id"); //추후에 로그인 토큰으로 대체
+
   useEffect(() => {
     if (user_id) {
       auth.stayLogin(user_id).then((user) => setUser(user));
@@ -36,26 +49,14 @@ const BoardWrite = ({ auth, boardApi }) => {
     }
   }, [user_id]);
 
-  const [imgsrc, setImgsrc] = useState("");
-  const [board, setBoard] = useState({
-    id: 0,
-    title: "",
-    category: "",
-    filepath: "",
-    filename: "",
-    content: "",
-    user_id: "",
-    username: "",
-  });
+  //게시글 수정할 때 발생함
+  useEffect(() => {
+    wroteBoard && setBoard(wroteBoard);
+  }, [wroteBoard]);
 
-  const wroteBoard = location.state || "";
   const goToHome = () => {
     navigate("/");
   };
-  const categoryRef = useRef();
-  const titleRef = useRef();
-  const fileRef = useRef();
-  const contentRef = useRef();
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -81,17 +82,16 @@ const BoardWrite = ({ auth, boardApi }) => {
     };
     // const formdata = new FormData();
     // formdata.append("file", fileRef.current.files[0]);
-
-    console.log(boardForm);
     boardApi //
       .boardWrite(boardForm) //
-      .then((_) => {
+      .then((newBoard) => {
+        console.log(newBoard);
         alert(`게시글 작성에 성공했습니다!`);
-        navigate("/");
+        navigate("/boarddetail", { state: newBoard });
       });
-    //board category에 따라 백엔드로 주는 방향 달라짐
   };
 
+  //이미지 미리보기
   const onImgChange = (e) => {
     const imgTarget = e.target.files[0];
     const fileReader = new FileReader();
@@ -100,10 +100,7 @@ const BoardWrite = ({ auth, boardApi }) => {
       setImgsrc(e.target.result);
     };
   };
-  useEffect(() => {
-    //게시글 수정할 때 발생함
-    wroteBoard && setBoard(wroteBoard);
-  }, [wroteBoard]);
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -124,7 +121,7 @@ const BoardWrite = ({ auth, boardApi }) => {
               className={styles.input}
               type="text"
               placeholder="제목을 입력해주세요"
-              defaultValue={board.title}
+              defaultValue={board ? board.title : ""}
             />
           </section>
           <section className={styles.selector}>
@@ -132,7 +129,7 @@ const BoardWrite = ({ auth, boardApi }) => {
               ref={categoryRef}
               className={styles.category}
               name="category"
-              defaultValue={board.category}
+              defaultValue={board ? board.category : ""}
             >
               <option value="none" disabled>
                 -카테고리 선택-
@@ -162,7 +159,7 @@ const BoardWrite = ({ auth, boardApi }) => {
               className={styles.file}
               type="file"
               accept="image/*"
-              defaultValue={board.filename}
+              defaultValue={board ? board.filename : ""}
               onChange={onImgChange}
             />
           </section>
@@ -172,7 +169,7 @@ const BoardWrite = ({ auth, boardApi }) => {
               ref={contentRef}
               className={styles.textarea}
               placeholder="내용을 입력해주세요."
-              defaultValue={board.content}
+              defaultValue={board ? board.content : ""}
             ></textarea>
           </section>
         </form>

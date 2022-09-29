@@ -14,7 +14,7 @@ const Home = ({ auth }) => {
   return (
     <>
       <div className={styles.home}>
-        <Header user={user} />
+        <Header />
         <section className={styles.content}>
           <MainPage />
         </section>

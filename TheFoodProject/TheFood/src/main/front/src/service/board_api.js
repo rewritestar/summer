@@ -29,10 +29,10 @@ class BoardApi {
     return boards.data;
   }
   async boardWrite(boardForm) {
-    const user = await this.boardApi
+    const board = await this.boardApi
       .post(`/api/boardwrite`, boardForm)
       .catch((e) => console.log("error boardWrite axios"));
-    return user;
+    return board.data;
   }
   async boardDelete(boardid) {
     this.boardApi

@@ -15,12 +15,11 @@ const Free = ({ auth, boardApi }) => {
     boardApi //
       .getFree()
       .then((boards) => {
-        console.log(boards);
         setBoards(boards);
       });
   }, []);
   return (
-    <Container title="일상 카테고리" user={user}>
+    <Container title="일상 카테고리">
       <Page boards={boards} />
     </Container>
   );

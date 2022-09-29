@@ -3,14 +3,8 @@ import { React, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Container from "../container/container";
 import styles from "../user_component.module.css";
-const Login = ({ onLogin }) => {
+const Login = ({ onLogin, goToSignup, goToFindId }) => {
   const navigate = useNavigate();
-  const goToSignup = () => {
-    navigate("/signup");
-  };
-  const goToFindId = () => {
-    navigate("/findId");
-  };
 
   const formRef = useRef();
   const idRef = useRef();

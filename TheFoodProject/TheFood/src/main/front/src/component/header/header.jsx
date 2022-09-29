@@ -4,7 +4,7 @@ import Footer from "../footer/footer";
 import UserBtn from "../user_btn/user_btn";
 import styles from "./header.module.css";
 
-const Header = ({ user }) => {
+const Header = () => {
   const navigate = useNavigate();
   const goToHome = () => {
     navigate("/");
@@ -60,9 +60,9 @@ const Header = ({ user }) => {
       <div className={styles.footer}>
         <Footer display="column" />
       </div>
-      <div className={styles.user_btn}>
+      {/* <div className={styles.user_btn}>
         <UserBtn user={user} />
-      </div>
+      </div> */}
     </div>
   );
 };

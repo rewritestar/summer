@@ -1,22 +1,7 @@
-import { useNavigate } from "react-router-dom";
 import Button from "../button/button";
 import styles from "./user_btn.module.css";
 
-const UserBtn = ({ user }) => {
-  const navigate = useNavigate();
-  const onLogout = () => {
-    localStorage.clear();
-    window.location.href = "/";
-  };
-  const goToLogin = () => {
-    navigate("/login");
-  };
-  const goToSignup = () => {
-    navigate("/signup");
-  };
-  const goToMypage = () => {
-    navigate("/mypage");
-  };
+const UserBtn = ({ user, goToLogin, goToSignup, goToMypage, onLogout }) => {
   return (
     <div className={styles.container}>
       <div className={styles.show}></div>

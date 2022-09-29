@@ -6,10 +6,10 @@ import styles from "./restaurant.module.css";
 
 const Restaurant = ({ auth, boardApi }) => {
   const [user, setUser] = useState();
+  const [typeBoards, setTypeBoards] = useState([]);
+  const [type, setType] = useState("수도권");
+
   const user_id = localStorage.getItem("id"); //추후에 로그인 토큰으로 대체
-  useEffect(() => {
-    user_id && auth.stayLogin(user_id).then((user) => setUser(user));
-  }, [user_id]);
 
   const TYPE_CODE = {
     전체: 200,
@@ -22,11 +22,12 @@ const Restaurant = ({ auth, boardApi }) => {
     제주: 207,
     기타: 208,
   };
-  const [type, setType] = useState("수도권");
 
-  const [typeBoards, setTypeBoards] = useState([]);
   useEffect(() => {
-    console.log(typeof TYPE_CODE[type]);
+    user_id && auth.stayLogin(user_id).then((user) => setUser(user));
+  }, [user_id]);
+
+  useEffect(() => {
     boardApi //
       .getRecipe(TYPE_CODE[type]) //
       .then((boards) => setTypeBoards(boards));
@@ -37,7 +38,7 @@ const Restaurant = ({ auth, boardApi }) => {
     setType(currentType);
   };
   return (
-    <Container title="맛집 카테고리" user={user}>
+    <Container title="맛집 카테고리">
       <p className={styles.type}>{`<${type}>`}</p>
       <Page boards={typeBoards} />
       <RestaurantButtons handleTypeBtn={handleTypeBtn} />

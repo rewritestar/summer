@@ -2,24 +2,21 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Container from "../container/container";
 import styles from "../user_component.module.css";
-const FindId = ({ onFindId }) => {
+const FindId = ({ onFindId, goToLogin, goToFindPw }) => {
+  const navigate = useNavigate();
+
   const [user, setUser] = useState();
 
-  const navigate = useNavigate();
-  const goToLogin = () => {
-    navigate("/login");
-  };
-  const goToFindPw = () => {
-    navigate("/findPw");
-  };
   const formRef = useRef();
   const emailRef = useRef();
+
   const onSubmit = (e) => {
     e.preventDefault();
     const useremail = emailRef.current.value;
     onFindId(useremail);
     navigate("/");
   };
+
   return (
     <Container title="아이디 찾기" user={user}>
       <div className={styles.form_container}>

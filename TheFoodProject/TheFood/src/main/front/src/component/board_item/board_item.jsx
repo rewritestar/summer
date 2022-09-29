@@ -4,6 +4,7 @@ import styles from "./board_item.module.css";
 
 const BoardItem = ({ board }) => {
   const navigate = useNavigate();
+  //게시물 상세보기 이동
   const handleClick = (e) => {
     navigate("/boarddetail", { state: board });
   };

@@ -2,27 +2,32 @@ import React, { useRef, useState } from "react";
 import Button from "../button/button";
 import styles from "./comment.module.css";
 const Comment = ({ user, comment, onCommentDelete, onCommentChange }) => {
-  const containerRef = useRef();
   const [input, setInput] = useState("");
   const inputRef = useRef();
 
-  //댓글 수정 관련. 구현 못함
+  //댓글 수정 모드
   const handleChange = (e) => {
     setInput(comment.content);
   };
+
+  //댓글 수정 작성
   const handleSubmit = () => {
     onCommentChange(inputRef.current.value, comment.id);
     setInput("");
   };
+
+  //댓글 삭제
   const handleDelete = (e) => {
     onCommentDelete(comment.id);
   };
+
+  //댓글 수정 취소
   const handleBack = (e) => {
     setInput("");
   };
 
   return (
-    <div ref={containerRef} className={styles.container}>
+    <div className={styles.container}>
       <div className={styles.bar}>
         <p className={styles.writer}>{`# ${comment.username}`}</p>
         {user && user.id === comment.userid && !input && (
@@ -52,21 +57,6 @@ const Comment = ({ user, comment, onCommentDelete, onCommentChange }) => {
       )}
     </div>
   );
-  // <div ref={containerRef} className={styles.container}>
-  //     <div className={styles.bar}>
-  //       <p className={styles.writer}>{`# ${comment.username}`}</p>
-  //       {user.id === comment.userid && (
-  //         <div className={styles.option_default}>
-  //           <Button title="등록" onClick={handleSubmit} />
-  //         </div>
-  //       )}
-  //     </div>
-  //     <textarea
-  //       ref={inputRef}
-  //       className={styles.input}
-  //       defaultValue={comment.content}
-  //     />
-  //   </div>
 };
 
 export default Comment;

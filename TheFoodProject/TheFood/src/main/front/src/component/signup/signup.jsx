@@ -5,14 +5,8 @@ import Container from "../container/container";
 import styles from "../user_component.module.css";
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
-const Signup = ({ onSignup }) => {
+const Signup = ({ onSignup, goToLogin, goToFindId }) => {
   const navigate = useNavigate();
-  const goToLogin = () => {
-    navigate("/login");
-  };
-  const goToFindId = () => {
-    navigate("/findId");
-  };
 
   const formRef = useRef();
   const idRef = useRef();
@@ -67,7 +61,6 @@ const Signup = ({ onSignup }) => {
     const signupForm = { userid, userpassword, useremail, username };
 
     onSignup(signupForm);
-    navigate("/");
   };
   return (
     <Container title="회원가입">
