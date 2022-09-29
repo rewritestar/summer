@@ -1,18 +1,19 @@
-@value makerRed, makerWhite from '../../common/colors.css';
+@value colorSecond, colorFourth, colorWhite from '../../common/colors.css';
 .container {
   display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 1em;
-  padding-top: 0;
 }
 .button {
-  background-color: makerRed;
+  background-color: colorFourth;
+  color: colorWhite;
   border: 0;
-  cursor: pointer;
+  border-radius: 5px;
   margin-right: 0.2em;
   padding: 0.5em;
-  border-radius: 5px;
-  color: makerWhite;
+  cursor: pointer;
 }
 .button:hover {
-  opacity: 80%;
+  background-color: colorSecond;
 }

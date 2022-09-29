@@ -1,16 +1,13 @@
 import React from "react";
 import Header from "../header/header";
-import TitleBar from "../title_bar/title_bar";
 import styles from "./container.module.css";
-const Container = ({ title, children }) => {
+const Container = ({ children }) => {
   return (
     <>
       <div className={styles.container}>
+        <div className={styles.bg_subcolor}></div>
         <Header />
-        <section className={styles.content}>
-          <TitleBar title={title} />
-          {children}
-        </section>
+        <section className={styles.content}>{children}</section>
       </div>
     </>
   );

@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Container from "../container/container";
 import styles from "../user_component.module.css";
+import TitleBar from "../title_bar/title_bar";
+
 const FindId = ({ onFindId, goToLogin, goToFindPw }) => {
   const navigate = useNavigate();
 
@@ -18,7 +20,8 @@ const FindId = ({ onFindId, goToLogin, goToFindPw }) => {
   };
 
   return (
-    <Container title="아이디 찾기" user={user}>
+    <Container>
+      <TitleBar title="아이디 찾기" />
       <div className={styles.form_container}>
         <form
           ref={formRef}

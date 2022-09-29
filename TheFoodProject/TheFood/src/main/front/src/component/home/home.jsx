@@ -12,14 +12,13 @@ const Home = ({ auth }) => {
   }, [user_id, auth]);
 
   return (
-    <>
-      <div className={styles.home}>
-        <Header />
-        <section className={styles.content}>
-          <MainPage />
-        </section>
-      </div>
-    </>
+    <div className={styles.container}>
+      <Header />
+      <section className={styles.content}>
+        <MainPage />
+      </section>
+      <div className={styles.bg_subcolor}></div>
+    </div>
   );
 };
 

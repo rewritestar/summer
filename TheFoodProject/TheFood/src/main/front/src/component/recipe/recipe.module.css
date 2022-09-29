@@ -1,5 +1,17 @@
-@value makerGrey from '../../common/colors.css';
+@value colorGrey from '../../common/colors.css';
+@value fontKR from '../../common/fonts.css';
 .type {
-  margin-top: 1em;
-  color: makerGrey;
+  text-align: center;
+  font-family: fontKR;
+  font-weight: 900;
+  color: colorGrey;
+  padding: 1em;
+}
+
+.content {
+  min-height: 75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

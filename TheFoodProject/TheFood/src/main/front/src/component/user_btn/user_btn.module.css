@@ -1,4 +1,5 @@
-@value makerGold, makerRed, makerWhite from "../../common/colors.css";
+@value colorThird, colorFourth, colorWhite from "../../common/colors.css";
+
 .container {
   display: flex;
   position: fixed;
@@ -6,16 +7,23 @@
   right: 20px;
   flex-direction: row-reverse;
   align-items: center;
+  z-index: 20;
 }
 .show {
   width: 50px;
   height: 50px;
-  background-color: makerGold;
+  background-color: colorFourth;
   border-radius: 10px;
   cursor: pointer;
-  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
+.show .icon {
+  color: colorWhite;
+  width: 90%;
+  height: 90%;
+}
 .member_container {
   display: none;
 }
@@ -32,4 +40,10 @@
 
 .user_name {
   margin-right: 1em;
+}
+
+@media screen and (max-width: 650px) {
+  .container {
+    top: 90vh;
+  }
 }

@@ -1,15 +1,19 @@
-@value makerDarkRed,makerWhite from '../../common/colors.css';
+@value colorBlack,makerWhite from '../../common/colors.css';
+@value fontKR from '../../common/fonts.css';
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: makerWhite;
+  text-align: center;
+  color: colorBlack;
   width: 100%;
-  padding: 2em 0;
-  border-bottom: 0.5em solid makerDarkRed;
+  padding: 2.1em 0;
 }
 
 .title {
   font-size: 17px;
+  font-family: fontKR;
   font-weight: bold;
+}
+@media screen and (max-width: 1200px) {
+  .container {
+    margin-top: 11vh;
+  }
 }

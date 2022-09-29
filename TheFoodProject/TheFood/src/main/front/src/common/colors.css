@@ -1,9 +1,15 @@
-@value makerDarkRed:  #6c0b00;
-@value makerGold: rgb(202, 143, 8);
-@value makerRed: rgb(165, 53, 0);
-@value makerWhite: white;
-@value makerBlack: black;
-@value makerLightGrey: rgb(178, 178, 178);
-@value makerGrey: grey;
-@value makerGreen: rgb(0, 200, 0);
-@value makerPink: rgb(255, 0, 128);
+@value colorDarkRed:  #6c0b00;
+@value colorGold: rgb(202, 143, 8);
+@value colorRed: rgb(165, 53, 0);
+@value colorWhite: white;
+@value colorBlack: #20211F;
+@value colorLightGrey: rgb(178, 178, 178);
+@value colorGrey: grey;
+@value colorGreen: rgb(0, 200, 0);
+@value colorPink: rgb(255, 0, 128);
+
+@value colorFirst: #F3F0D7;
+@value colorSecond: #CEE5D0;
+@value colorThird: #FED2AA;
+@value colorFourth: #FFBF86;
+@value colorMajorGradient: linear-gradient(to bottom, #CEE5D0, #FFBF86);

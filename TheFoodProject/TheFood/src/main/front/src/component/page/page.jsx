@@ -4,7 +4,7 @@ import Pagination from "../pagination/pagination";
 import styles from "./page.module.css";
 
 const Page = ({ boards }) => {
-  const [limit, setLimit] = useState(4);
+  const [limit, setLimit] = useState(8);
   const [pageNumber, setPageNumber] = useState(1);
   const offset = (pageNumber - 1) * limit;
   const handlePageNumber = (number) => {

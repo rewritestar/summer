@@ -1,10 +1,12 @@
 import Button from "../button/button";
 import styles from "./user_btn.module.css";
-
+import { BiUserCircle } from "react-icons/bi";
 const UserBtn = ({ user, goToLogin, goToSignup, goToMypage, onLogout }) => {
   return (
     <div className={styles.container}>
-      <div className={styles.show}></div>
+      <div className={styles.show}>
+        <BiUserCircle className={styles.icon} />
+      </div>
       <div className={styles.member_container}>
         {!user && (
           <div className={styles.nonMember}>

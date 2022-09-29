@@ -1,41 +1,39 @@
-@value makerGrey, makerLightGrey, makerRed, makerDarkRed, makerWhite from '../../common/colors.css';
-
-.button {
-  background-color: makerRed;
-  color: makerWhite;
-  cursor: pointer;
-  border-radius: 5px;
-  padding: 0.5em 1em;
-  border: 0;
-}
-.button:hover {
-  opacity: 80%;
-}
+@value colorFourth,colorWhite,colorGrey, colorLightGrey from '../../common/colors.css';
+@value fontKR from '../../common/fonts.css';
 
 .container {
-  width: 100%;
+  width: 80%;
   min-height: 100%;
-  padding: 3em;
+  margin: auto;
+  font-family: fontKR;
 }
 .title_bar {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-bottom: 1em;
-  border-bottom: 2px solid makerRed;
+  border-bottom: 2px solid colorWhite;
 }
 .title_bar .title {
   font-size: 1.5em;
   padding: 1em;
 }
 .user_name {
-  color: makerGrey;
+  color: colorGrey;
 }
 
-.form {
-  margin-bottom: 1em;
-}
 .board_option {
   text-align: right;
   margin-bottom: 1em;
+}
+.content_bar {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid colorLightGrey;
+  margin: 2em 0;
+}
+.img {
+  max-width: 60%;
+  max-height: 10em;
+  padding: 1em;
 }

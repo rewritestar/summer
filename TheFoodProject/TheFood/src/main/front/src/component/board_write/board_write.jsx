@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import Footer from "../footer/footer";
 import styles from "./board_write.module.css";
 const BoardWrite = ({ auth, boardApi }) => {
   const navigate = useNavigate();
@@ -105,7 +104,7 @@ const BoardWrite = ({ auth, boardApi }) => {
     <div className={styles.container}>
       <header className={styles.header}>
         <section className={styles.logo} onClick={goToHome}>
-          <img className={styles.icon} src="/images/logo.png" alt="logo"></img>
+          <img className={styles.img} src="/images/logo.png" alt="logo"></img>
           <h1 className={styles.title}>The Food</h1>
         </section>
         <button type="submit" form="form" className={styles.button}>
@@ -115,7 +114,6 @@ const BoardWrite = ({ auth, boardApi }) => {
       <section className={styles.content}>
         <form className={styles.form} id="form" onSubmit={onSubmit}>
           <section className={styles.titles}>
-            <p className={styles.title}>title</p>
             <input
               ref={titleRef}
               className={styles.input}
@@ -174,9 +172,6 @@ const BoardWrite = ({ auth, boardApi }) => {
           </section>
         </form>
       </section>
-      <div className={styles.footer}>
-        <Footer display="row" />
-      </div>
     </div>
   );
 };

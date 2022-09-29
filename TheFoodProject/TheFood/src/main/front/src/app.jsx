@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import styles from "./app.module.css";
+import AboutUs from "./component/about_us/about_us";
 import BoardDetail from "./component/board_detail/board_detail";
 import BoardWrite from "./component/board_write/board_write";
 import FindId from "./component/findId/findId";
@@ -193,6 +194,7 @@ function App({ auth, boardApi }) {
           exact
           element={<Free auth={auth} boardApi={boardApi} />}
         />
+        <Route path="/aboutus" exact element={<AboutUs />} />
       </Routes>
     </div>
   );

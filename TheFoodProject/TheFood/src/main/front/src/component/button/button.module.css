@@ -1,13 +1,18 @@
-@value makerRed, makerWhite from '../../common/colors.css';
+@value colorSecond, colorThird, colorWhite,colorBlack from '../../common/colors.css';
+@value fontKR from '../../common/fonts.css';
 .button {
-  background-color: makerRed;
-  color: makerWhite;
+  background-color: colorSecond;
+  color: colorBlack;
+  font-family: fontKR;
+  font-size: 15px;
+  font-weight: 600;
   cursor: pointer;
+
   border-radius: 5px;
   padding: 0.5em 1em;
-  border: 0;
-  margin-right: 1em;
+  border: 2px solid colorWhite;
+  margin-right: 1.5em;
 }
 .button:hover {
-  opacity: 80%;
+  background-color: colorThird;
 }

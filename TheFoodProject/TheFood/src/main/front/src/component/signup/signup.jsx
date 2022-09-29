@@ -3,8 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Container from "../container/container";
 import styles from "../user_component.module.css";
-axios.defaults.xsrfCookieName = "csrftoken";
-axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+import TitleBar from "../title_bar/title_bar";
+
 const Signup = ({ onSignup, goToLogin, goToFindId }) => {
   const navigate = useNavigate();
 
@@ -23,9 +23,11 @@ const Signup = ({ onSignup, goToLogin, goToFindId }) => {
     word: "",
     color: "pink",
   });
+
   const style_color = word.color === "pink" ? styles.pink : styles.green;
   const { password, password_check } = check;
   const { text, color } = word;
+
   useEffect(() => {
     checkPw();
   }, [check]);
@@ -43,9 +45,6 @@ const Signup = ({ onSignup, goToLogin, goToFindId }) => {
       setWord({ text: "비밀번호가 일치합니다.", color: "green" });
     }
   };
-  const displayAlert = (text) => {
-    alert(text);
-  };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -55,7 +54,7 @@ const Signup = ({ onSignup, goToLogin, goToFindId }) => {
     const useremail = emailRef.current.value;
     const username = nameRef.current.value;
     if (userpassword !== userpassword_check) {
-      displayAlert("비밀번호가 일치하지 않습니다.");
+      alert("비밀번호가 일치하지 않습니다.");
       return;
     }
     const signupForm = { userid, userpassword, useremail, username };
@@ -63,7 +62,8 @@ const Signup = ({ onSignup, goToLogin, goToFindId }) => {
     onSignup(signupForm);
   };
   return (
-    <Container title="회원가입">
+    <Container>
+      <TitleBar title="회원가입" />
       <div className={styles.form_container}>
         <form
           ref={formRef}
@@ -96,7 +96,6 @@ const Signup = ({ onSignup, goToLogin, goToFindId }) => {
           </div>
           <div className={styles.password_check}>
             <span className={styles.title}>비밀번호 확인</span>
-
             <input
               ref={password_checkRef}
               className={styles.input}

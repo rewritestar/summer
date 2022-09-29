@@ -1,87 +1,87 @@
-@value makerDarkRed, makerRed,makerWhite, makerGold from '../../common/colors.css';
+@value colorFirst, colorSecond, colorThird, colorFourth, colorWhite, colorLightGrey, colorGrey, colorBlack from '../../common/colors.css';
+@value fontTitle, fontSub, fontKR from '../../common/fonts.css';
 .container {
   width: 100%;
   height: 100vh;
-  min-height: 0;
+  background-color: colorFirst;
+  overflow-y: hidden;
 }
 .header {
   width: 100%;
-  padding: 1em 15%;
-  background-color: makerDarkRed;
+  padding: 1.4em 17.5%;
+  background-color: colorSecond;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .header .logo {
   display: flex;
   align-items: center;
   cursor: pointer;
 }
-.header .logo .icon {
-  width: 30px;
-  height: 30px;
+.header .logo .img {
+  width: 50px;
+  height: 50px;
   margin-right: 0.5em;
 }
 .header .logo .title {
-  color: makerWhite;
+  color: colorBlack;
   font-size: 30px;
+  font-family: fontTitle;
 }
 
 .button {
-  background-color: makerRed;
+  background-color: colorFourth;
   border: 0;
-  color: makerWhite;
-  padding: 0.5em 1em;
+  color: colorBlack;
   border-radius: 5px;
+  padding: 0.5em 1em;
+
+  font-family: fontKR;
+  font-weight: 600;
   cursor: pointer;
+}
+.button:hover {
+  background-color: colorThird;
 }
 
 .content {
   overflow-y: auto;
-  width: 100%;
-  padding: 4em 15%;
+  width: 65%;
+  height: 100%;
+  margin: auto;
   padding-bottom: 0;
 }
 
-.titles {
-  display: flex;
-  align-items: center;
-  margin-bottom: 0.5em;
-}
-
-.titles .title {
-  font-size: 17px;
-  background-color: makerDarkRed;
-  color: makerWhite;
-  padding: 0.9em 2em;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-}
-
 .titles .input {
-  margin: 0;
   width: 100%;
   height: 100%;
-  background-color: transparent;
-  padding: 0.5em;
+  background-color: colorWhite;
+  padding: 1em;
+  margin-top: 1em;
+  border: none;
+  border-radius: 10px;
   font-size: 20px;
-  border: 5px solid makerDarkRed;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
 }
 .titles .input:focus {
   outline: 0;
 }
 .selector {
-  background-color: transparent;
+  background-color: colorWhite;
   padding: 0.5em 1em;
-  border-radius: 5px;
-  border: 2px solid makerRed;
-  margin-bottom: 0.5em;
+  border-radius: 10px;
+  margin: 0.5em 0;
 }
 
 .category {
   border: 0;
-  margin-right: 1em;
+  padding: 0.5em;
+  border-radius: 10px;
+  margin-right: 0.5em;
+  cursor: pointer;
+}
+.category:hover {
+  background-color: colorThird;
 }
 
 .category:focus {
@@ -89,18 +89,20 @@
   border: 0;
 }
 .file {
-  border-left: 2px solid makerRed;
+  border-left: 2px solid colorFourth;
   padding: 0 1em;
+  cursor: pointer;
 }
 
 .textarea {
   width: 100%;
-  height: 40rem;
+  height: 34em;
   border: 0;
   padding: 1em;
   border: 2px solid makerRed;
-  border-radius: 5px;
+  border-radius: 10px;
   resize: none;
+  overflow-y: auto;
 }
 .textarea:focus {
   outline: 0;

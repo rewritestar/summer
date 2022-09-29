@@ -1,12 +1,12 @@
-@value makerDarkRed, makerRed, makerGrey, makerWhite from '../../common/colors.css';
+@value colorGrey, colorLightGrey from '../../common/colors.css';
 
-.content_bar {
+/* .content_bar {
   padding: 2em 10vw;
-  border-bottom: 1px solid makerLightGrey;
-}
+  
+} */
 
 .comment_bar {
-  padding: 2em 10vw;
+  padding: 4em;
 }
 
 .titleAndButton {
@@ -17,7 +17,7 @@
 
 .comment_bar .title {
   font-size: 15px;
-  color: makerGrey;
+  color: colorGrey;
 }
 .comment_bar .input {
   width: 100%;
@@ -28,4 +28,8 @@
 }
 .comment_bar .input:focus {
   outline: 0;
+}
+
+.comment_bar .form {
+  margin-bottom: 2em;
 }

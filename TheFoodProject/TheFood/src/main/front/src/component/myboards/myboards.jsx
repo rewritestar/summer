@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Container from "../container/container";
 import Page from "../page/page";
+import TitleBar from "../title_bar/title_bar";
+import styles from "./myboards.module.css";
 const Myboards = ({ auth, boardApi }) => {
   const [boards, setBoards] = useState([]);
   const [user, setUser] = useState();
@@ -20,16 +22,22 @@ const Myboards = ({ auth, boardApi }) => {
     type === "내 댓글 조회" &&
       boardApi //
         .getMyCommentBoards(user_id)
-        .then((boards) => setBoards(boards));
+        .then((getboards) => {
+          console.log(getboards);
+          setBoards(getboards);
+        });
     type === "내 게시글 조회" &&
       boardApi //
         .getMyBoards(user_id)
-        .then((boards) => setBoards(boards));
+        .then((getboards) => setBoards(getboards));
   }, []);
 
   return (
-    <Container title={type}>
-      <Page boards={boards} />
+    <Container>
+      <TitleBar title={type} />
+      <div className={styles.content}>
+        <Page boards={boards} />
+      </div>
     </Container>
   );
 };

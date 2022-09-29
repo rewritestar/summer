@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "../user_component.module.css";
 import Container from "../container/container";
 import MypageButtons from "../buttons/mypage_buttons";
+import TitleBar from "../title_bar/title_bar";
 
 const Mypage = ({ auth, onChange, onwithDrawal }) => {
   const [user, setUser] = useState();
@@ -64,9 +65,10 @@ const Mypage = ({ auth, onChange, onwithDrawal }) => {
     onChange(mypageForm);
   };
   return (
-    <Container title="마이 페이지">
+    <Container>
+      <TitleBar title="마이 페이지" />
       <div className={styles.form_container}>
-        <p className={styles.subTitle}>회원 정보 수정</p>
+        <p className={styles.subTitle}>- 회원 정보 수정 -</p>
         <form
           ref={formRef}
           className={styles.form}

@@ -39,9 +39,11 @@ const Restaurant = ({ auth, boardApi }) => {
   };
   return (
     <Container title="맛집 카테고리">
-      <p className={styles.type}>{`<${type}>`}</p>
-      <Page boards={typeBoards} />
       <RestaurantButtons handleTypeBtn={handleTypeBtn} />
+      <p className={styles.type}>{`< 맛집 - ${type} >`}</p>
+      <div className={styles.content}>
+        <Page boards={typeBoards} />
+      </div>
     </Container>
   );
 };

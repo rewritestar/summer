@@ -1,8 +1,8 @@
-import axios from "axios";
 import { React, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Container from "../container/container";
 import styles from "../user_component.module.css";
+import TitleBar from "../title_bar/title_bar";
 const Login = ({ onLogin, goToSignup, goToFindId }) => {
   const navigate = useNavigate();
 
@@ -20,7 +20,8 @@ const Login = ({ onLogin, goToSignup, goToFindId }) => {
   };
 
   return (
-    <Container title="로그인">
+    <Container>
+      <TitleBar title="로그인" />
       <div className={styles.form_container}>
         <form
           ref={formRef}
