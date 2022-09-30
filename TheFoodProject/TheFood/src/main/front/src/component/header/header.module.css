@@ -2,23 +2,26 @@
 @value fontTitle,fontSub, fontKR from '../../common/fonts.css';
 .container {
   position: fixed;
-  background-color: colorWhite;
   margin-left: 4em;
   width: 22%;
   height: 100vh;
-  box-shadow: -5px 0px 10px 0px rgba(0, 0, 0, 0.2);
 
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
   z-index: 10;
+  box-shadow: -14px 0px 10px -2px rgba(0, 0, 0, 0.2);
 }
 
 .container .logo {
   display: flex;
   align-items: center;
+  justify-content: center;
   cursor: pointer;
+  padding: 1em;
+
+  width: 100%;
+  background-color: colorWhite;
 }
 .container .logo .img {
   width: 30px;
@@ -28,6 +31,15 @@
 .container .logo .title {
   font-size: 30px;
   font-family: fontTitle;
+}
+.menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  flex: auto;
+  width: 100%;
+  background-color: colorWhite;
 }
 
 .category .name,
@@ -91,9 +103,8 @@
 .res_btn {
   display: none;
   position: absolute;
-  top: 50%;
+  top: 1em;
   right: 5%;
-  transform: translateY(-50%);
   cursor: pointer;
   font-size: 25px;
   color: colorBlack;
@@ -105,14 +116,27 @@
 @media screen and (max-width: 1200px) {
   .container {
     width: 80%;
-    height: 10vh;
-  }
-  .category,
-  .about_btn,
-  .write {
-    display: none;
+    height: 70vh;
+    box-shadow: none;
   }
   .res_btn {
     display: block;
+  }
+  .menu {
+    border-radius: 0 0 10px 10px;
+  }
+  .menu.active {
+    display: flex;
+  }
+  .menu.none {
+    display: none;
+  }
+  .container,
+  .menu.none {
+    height: 10vh;
+  }
+  .container,
+  .menu.active {
+    height: 70vh;
   }
 }
