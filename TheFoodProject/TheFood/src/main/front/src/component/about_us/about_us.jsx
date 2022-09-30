@@ -67,7 +67,10 @@ const AboutUs = ({ goToHome }) => {
               <BsInstagram
                 className={styles.icon}
                 onClick={() =>
-                  window.open("https://github.com/su-jin02", "_blank")
+                  window.open(
+                    "https://www.instagram.com/su_record21/",
+                    "_blank"
+                  )
                 }
               />
             </div>

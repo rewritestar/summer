@@ -6,6 +6,7 @@ import TheFoodProject.TheFood.entity.User;
 import TheFoodProject.TheFood.repository.BoardRepository;
 import TheFoodProject.TheFood.repository.CommentRepository;
 import TheFoodProject.TheFood.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 
+@Slf4j
 @Service
 public class UserService {
     @Autowired
@@ -31,11 +33,11 @@ public class UserService {
     public User save(User user) {
 
         //중복회원가입 불가
-        Optional<User> result1 = userRepository.findByuseremail(user.getUseremail());
-        result1.ifPresent(u -> {
+        User result1 = userRepository.findByUseremail(user.getUseremail());
+        if(result1 != null) {
             System.out.println("이미 존재하는 회원입니다22");
             throw new IllegalStateException("이미 존재하는 회원입니다");
-        });
+        };
         //비밀번호 암호화
         String encodedPassword = passwordEncoder.encode(user.getUserpassword());
         user.setUserpassword(encodedPassword);
@@ -45,8 +47,16 @@ public class UserService {
 //--------------------------------------------------------------------------------------------------
     //아이디,비밀번호 찾기
     public String findid(String useremail){
-        Optional<User> result = userRepository.findByuseremail(useremail); //입력한 이메일을 가진 회원찾기
-        return result.get().getUserid();
+        User result = userRepository.findByUseremail(useremail); //입력한 이메일을 가진 회원찾기
+        log.info(useremail + "useremail");
+        if(result != null){
+            log.info(result.getUserid() + "userid 찾음!");
+            return result.getUserid();
+        }else{
+            log.info("userid 못찾음");
+            return null;
+        }
+
     }
 
 //    public String findpassword(String useremail, String userid){
@@ -67,7 +77,7 @@ public class UserService {
 //--------------------------------------------------------------------------------------------------
     //로그인
     public User login(String userid, String userpassword){
-        User people = userRepository.findByuserid(userid);
+        User people = userRepository.findByUserid(userid);
 
         if(people == null){
             System.out.println("해당하는 회원이 존재하지 않습니다.22");
@@ -104,11 +114,13 @@ public class UserService {
 
     //마이페이지/회원정보수정
     public User mypage(Integer id, String username, String userpassword){
-        User people = userRepository.findByid(id);
-        people.setUsername(username);
-        String encodedPassword = passwordEncoder.encode(userpassword);
-        people.setUserpassword(encodedPassword);
-        userRepository.save(people);
+        Optional<User> people = userRepository.findById(id);
+       people.ifPresent((u)->{
+           u.setUsername(username);
+           String encodedPassword = passwordEncoder.encode(userpassword);
+           u.setUserpassword(encodedPassword);
+           userRepository.save(u);
+       });
 
         //바뀐 닉네임 보드와 댓글에도 적용되도록
         //보드
@@ -124,13 +136,13 @@ public class UserService {
             commentRepository.save(newcomment.get(i));
         }
 
-        return people;
+        return people.get();
     }
 
     //로그인 유지
     public User stay(Integer id){
-        User user = userRepository.findByid(id);
-        return user;
+        Optional<User> user = userRepository.findById(id);
+        return user.get();
     }
 }
 
