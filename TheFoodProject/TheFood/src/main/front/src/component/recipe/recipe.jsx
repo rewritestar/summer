@@ -8,7 +8,7 @@ const Recipe = ({ boardApi, auth }) => {
   const [user, setUser] = useState();
   const user_id = localStorage.getItem("id"); //추후에 로그인 토큰으로 대체
 
-  const [type, setType] = useState("한식");
+  const [type, setType] = useState("전체");
   const [typeBoards, setTypeBoards] = useState([]);
 
   const TYPE_CODE = {

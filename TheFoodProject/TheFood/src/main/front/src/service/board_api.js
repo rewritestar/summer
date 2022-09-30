@@ -10,16 +10,30 @@ class BoardApi {
   }
   //게시물 관련
   async getRecipe(type) {
-    const boards = await this.boardApi
-      .post(`/api/recipe`, type)
-      .catch((e) => console.log("error getRecipe axios"));
-    return boards.data;
+    if (type === 100) {
+      const boards = await this.boardApi
+        .get(`/api/recipe/all`)
+        .catch((e) => console.log("error getRecipe axios"));
+      return boards.data;
+    } else {
+      const boards = await this.boardApi
+        .post(`/api/recipe`, type)
+        .catch((e) => console.log("error getRecipe axios"));
+      return boards.data;
+    }
   }
   async getRestaurant(type) {
-    const boards = await this.boardApi
-      .post(`/api/restaurant`, type)
-      .catch((e) => console.log("error getRestaurant axios"));
-    return boards.data;
+    if (type === 200) {
+      const boards = await this.boardApi
+        .get(`/api/restaurant/all`)
+        .catch((e) => console.log("error getRestaurant axios"));
+      return boards.data;
+    } else {
+      const boards = await this.boardApi
+        .post(`/api/restaurant`, type)
+        .catch((e) => console.log("error getRestaurant axios"));
+      return boards.data;
+    }
   }
   async getFree() {
     const boards = await axios

@@ -113,7 +113,7 @@ const Signup = ({ onSignup, goToLogin, goToFindId }) => {
               ref={emailRef}
               className={styles.input}
               type="email"
-              name="username"
+              name="email"
               placeholder="이메일"
               required
             />

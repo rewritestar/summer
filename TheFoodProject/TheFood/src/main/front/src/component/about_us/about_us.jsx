@@ -81,7 +81,7 @@ const AboutUs = ({ goToHome }) => {
         className={styles.logo}
         onClick={() => (window.location.href = "/")}
       >
-        <img className={styles.logo_img} src="images/logo_proto.png" alt="" />
+        <img className={styles.logo_img} src="images/logo.png" alt="" />
         <p className={styles.logo_title}>The Food</p>
       </section>
     </div>

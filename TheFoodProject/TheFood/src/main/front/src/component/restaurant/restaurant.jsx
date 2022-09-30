@@ -6,9 +6,9 @@ import styles from "./restaurant.module.css";
 
 const Restaurant = ({ auth, boardApi }) => {
   const [user, setUser] = useState();
-  const [typeBoards, setTypeBoards] = useState([]);
-  const [type, setType] = useState("수도권");
 
+  const [type, setType] = useState("전체");
+  const [typeBoards, setTypeBoards] = useState([]);
   const user_id = localStorage.getItem("id"); //추후에 로그인 토큰으로 대체
 
   const TYPE_CODE = {
@@ -29,7 +29,7 @@ const Restaurant = ({ auth, boardApi }) => {
 
   useEffect(() => {
     boardApi //
-      .getRecipe(TYPE_CODE[type]) //
+      .getRestaurant(TYPE_CODE[type]) //
       .then((boards) => setTypeBoards(boards));
   }, [type]);
 

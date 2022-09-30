@@ -2,42 +2,39 @@
 @value fontKR from '../../common/fonts.css';
 .container {
   position: relative;
-  width: 100%;
+  width: 70%;
   height: 100vh;
   display: flex;
+  margin: auto;
 }
 
 .board_container {
   background-color: colorWhite;
-  width: 13vw;
+  width: 13em;
   height: 75vh;
-  margin-right: 5em;
 }
 .board_container:nth-child(1) {
   position: absolute;
   border-radius: 10px 10px 0 0;
   bottom: 0;
-  right: 45%;
-  transform: translateX(-45%);
+  left: 0;
 }
 .board_container:nth-child(2) {
   position: absolute;
-  border-radius: 10px 10px 0 0;
+  border-radius: 0 0 10px 10px;
   top: 0;
-  right: 25%;
-  transform: translateX(-25%);
+  right: 50%;
+  transform: translateX(50%);
 }
 .board_container:nth-child(3) {
   position: absolute;
   border-radius: 10px 10px 0 0;
   bottom: 0;
-  right: 5%;
-  transform: translateX(-5%);
+  right: 0;
 }
-.board_container.down .img {
+.board_container:nth-child(1) .img,
+.board_container:nth-child(3) .img {
   border-radius: 10px 10px 0 0;
-}
-.board_container.up .img {
 }
 
 .img {
@@ -52,11 +49,7 @@
 }
 
 @media screen and (max-width: 1200px) {
-  .container {
-    justify-content: center;
-  }
   .board_container {
-    width: 20vw;
-    margin-right: 0;
+    width: 12em;
   }
 }

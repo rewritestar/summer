@@ -10,6 +10,7 @@
   flex-direction: column;
   align-items: center;
   z-index: 20;
+
   box-shadow: -14px 0px 10px -2px rgba(0, 0, 0, 0.2);
 }
 
@@ -25,7 +26,7 @@
 }
 .container .logo .img {
   width: 30px;
-  height: 45px;
+  height: 30px;
   margin-right: 0.5em;
 }
 .container .logo .title {
@@ -103,7 +104,7 @@
 .res_btn {
   display: none;
   position: absolute;
-  top: 1em;
+  top: 20px;
   right: 5%;
   cursor: pointer;
   font-size: 25px;
@@ -116,27 +117,24 @@
 @media screen and (max-width: 1200px) {
   .container {
     width: 80%;
-    height: 70vh;
+    height: 10vh;
     box-shadow: none;
+    margin: 0;
+    left: 50%;
+    transform: translateX(-50%);
   }
   .res_btn {
     display: block;
   }
   .menu {
+    padding: 1em 0;
     border-radius: 0 0 10px 10px;
   }
-  .menu.active {
+  .menu.active,
+  .container .logo {
     display: flex;
   }
   .menu.none {
     display: none;
-  }
-  .container,
-  .menu.none {
-    height: 10vh;
-  }
-  .container,
-  .menu.active {
-    height: 70vh;
   }
 }

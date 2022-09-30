@@ -44,9 +44,8 @@ const MainPage = ({ propsBoards }) => {
       {boards.map((board, i) => {
         let even = 0;
         if (i % 2) even = 1;
-        const positon = even ? styles.up : styles.down;
         return (
-          <div className={`${styles.board_container} ${positon}`}>
+          <div className={styles.board_container}>
             <img className={styles.img} src={board.filepath} alt="" />
             <p className={styles.title}>{board.title}</p>
           </div>

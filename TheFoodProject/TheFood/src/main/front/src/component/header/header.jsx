@@ -31,11 +31,7 @@ const Header = () => {
   return (
     <div className={styles.container}>
       <section className={styles.logo} onClick={goToHome}>
-        <img
-          className={styles.img}
-          src="/images/logo_proto.png"
-          alt="logo"
-        ></img>
+        <img className={styles.img} src="/images/logo.png" alt="logo"></img>
         <h1 className={styles.title}>The Food</h1>
       </section>
       <section className={`${styles.menu} ${styles_res}`}>

@@ -42,7 +42,7 @@
   margin-right: 1em;
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 940px) {
   .container {
     top: 90vh;
   }
