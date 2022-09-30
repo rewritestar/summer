@@ -49,10 +49,19 @@ public class BoardController {
     public List<Board> recipeBoardList(@RequestBody Integer category){
         return boardService.boardList1(category);
     }
+
+    @GetMapping("/api/recipe/all")
+    public List<Board> recipeBoardList1(){
+        return boardService.RecipeCategory();
+    }
     @PostMapping("/api/restaurant")
     public List<Board> restaurantBoardList(@RequestBody Integer category){
         return boardService.boardList1(category);
     }
+    @GetMapping("/api/restaurant/all")
+    public List<Board> restaurantBoardList1(){
+        return boardService.RestautantCategory();}
+
     @GetMapping("/api/free")
     public List<Board> freeBoardList(){
         return boardService.boardList1(300);
