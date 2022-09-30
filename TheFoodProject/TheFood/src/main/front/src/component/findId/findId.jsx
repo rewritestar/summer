@@ -15,7 +15,9 @@ const FindId = ({ onFindId, goToLogin, goToFindPw }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     const useremail = emailRef.current.value;
-    onFindId(useremail);
+    const findIdForm = { useremail };
+    console.log(findIdForm);
+    onFindId(findIdForm);
     navigate("/");
   };
 

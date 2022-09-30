@@ -25,10 +25,11 @@ class Auth {
       .post("/api/withdrawal/", parseInt(id))
       .catch((e) => console.log(`error withDrawal axios ${e}`));
   }
-  async findId(useremail) {
-    console.log(`useremail: ${useremail} and type ${typeof useremail}`);
+  async findId(findIdForm) {
+    console.log(`useremail: ${findIdForm} and type ${typeof findIdForm}`);
+    console.log(findIdForm);
     const response = await this.auth
-      .post("/api/findid/", useremail)
+      .post("/api/findid/", findIdForm)
       .catch(() => console.log("error findid axios"));
     return response.data;
   }

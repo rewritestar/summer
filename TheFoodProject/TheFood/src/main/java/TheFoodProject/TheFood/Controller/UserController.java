@@ -1,13 +1,11 @@
 package TheFoodProject.TheFood.Controller;
 
-import TheFoodProject.TheFood.entity.LoginForm;
-import TheFoodProject.TheFood.entity.MypageForm;
-import TheFoodProject.TheFood.entity.SignupForm;
-import TheFoodProject.TheFood.entity.User;
+import TheFoodProject.TheFood.entity.*;
 import TheFoodProject.TheFood.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -30,8 +28,8 @@ public class UserController {
 //--------------------------------------------------------------------------------------------------
     //아이디,비밀번호 찾기
     @PostMapping("api/findid")
-    public String userFindId(@RequestBody String useremail){
-        return userService.findid(useremail);
+    public String userFindId(@RequestBody FindIdForm findIdForm){
+        return userService.findid(findIdForm.getUseremail());
     }
 //--------------------------------------------------------------------------------------------------
     //로그인

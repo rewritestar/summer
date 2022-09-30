@@ -73,9 +73,9 @@ function App({ auth, boardApi }) {
     window.location.href = "/";
   };
 
-  const onFindId = (useremail) => {
+  const onFindId = (findIdForm) => {
     auth
-      .findId(useremail)
+      .findId(findIdForm)
       .then((userid) => alert(`회원님의 아이디는 ${userid} 입니다.`));
   };
   const onFindPw = (findPwForm) => {
