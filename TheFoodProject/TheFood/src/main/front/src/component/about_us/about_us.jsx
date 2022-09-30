@@ -3,7 +3,7 @@ import styles from "./about_us.module.css";
 import { AiFillGithub } from "react-icons/ai";
 import { HiOutlineMail } from "react-icons/hi";
 import { BsInstagram } from "react-icons/bs";
-
+import { FaBlog } from "react-icons/fa";
 const AboutUs = ({ goToHome }) => {
   return (
     <div className={styles.container}>
@@ -31,10 +31,10 @@ const AboutUs = ({ goToHome }) => {
                   window.open("mailto:rewritestar@naver.com", "_blank")
                 }
               />
-              <BsInstagram
+              <FaBlog
                 className={styles.icon}
                 onClick={() =>
-                  window.open("https://github.com/su-jin02", "_blank")
+                  window.open("https://rewritestar.tistory.com/", "_blank")
                 }
               />
             </div>
@@ -48,7 +48,7 @@ const AboutUs = ({ goToHome }) => {
               <img className={styles.img} src="images/ex2.jpg" alt="" />
               <div className={styles.info}>
                 <p className={styles.text}>전수진</p>
-                <p className={styles.text}>성신여자대학교 과</p>
+                <p className={styles.text}>성신여자대학교 AI융합학부</p>
               </div>
             </div>
             <div className={styles.links}>
@@ -60,7 +60,9 @@ const AboutUs = ({ goToHome }) => {
               />
               <HiOutlineMail
                 className={styles.icon}
-                onClick={() => window.open("mailto:@naver.com", "_blank")}
+                onClick={() =>
+                  window.open("mailto:20211398@sungshin.ac.kr", "_blank")
+                }
               />
               <BsInstagram
                 className={styles.icon}

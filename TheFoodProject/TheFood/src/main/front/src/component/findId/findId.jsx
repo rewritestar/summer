@@ -35,7 +35,7 @@ const FindId = ({ onFindId, goToLogin, goToFindPw }) => {
               ref={emailRef}
               className={styles.input}
               type="text"
-              name="email"
+              name="useremail"
               placeholder="이메일"
             />
           </div>
