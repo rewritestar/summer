@@ -1,7 +1,6 @@
 @value colorWhite from '../../common/colors.css';
 @value fontKR from '../../common/fonts.css';
 .container {
-  background-color: brown;
   position: relative;
   width: 100%;
   height: 100vh;
