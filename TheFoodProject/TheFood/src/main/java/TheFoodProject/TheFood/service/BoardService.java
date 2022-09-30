@@ -7,7 +7,10 @@ import TheFoodProject.TheFood.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 
@@ -73,6 +76,20 @@ public class BoardService {
     public List<Board> boardList1(Integer category){
         return boardRepository.findBycategory(category);
     }
+
+    public List<Board> RecipeCategory(){
+        Stream<Board> newBoards = boardRepository.findAll().stream().filter(board ->
+                100 < board.getCategory()  && board.getCategory()< 200
+        );
+        return newBoards.collect(Collectors.toList());
+}
+
+    public List<Board> RestautantCategory(){
+        Stream<Board> newBoards = boardRepository.findAll().stream().filter(board ->
+                200 < board.getCategory()  && board.getCategory()< 300
+        );
+        return newBoards.collect(Collectors.toList());}
+
 
     //보드 삭제
     public void boardDelete(Integer id){
