@@ -1,17 +1,22 @@
 @value colorFirst,colorSecond from "../../common/colors.css";
 .container {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background-color: colorFirst;
   z-index: -1;
 }
 .bg_subcolor {
-  position: absolute;
-  bottom: 0;
   width: 100%;
   height: 30vh;
+  position: absolute;
+  bottom: 0;
   background-color: colorSecond;
-  z-index: 0;
+  z-index: 5;
 }
 .content {
+  position: absolute;
+  right: 0px;
+  width: 73%;
+  min-height: 100vh;
+  z-index: 100;
 }
