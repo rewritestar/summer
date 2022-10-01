@@ -1,4 +1,4 @@
-@value colorFirst, colorSecond, colorFourth,colorGrey,colorWhite from '../../common/colors.css';
+@value colorFirst, colorSecond, colorFourth,colorGrey,colorWhite, colorBlack from '../../common/colors.css';
 @value fontTitle,fontSub, fontKR from '../../common/fonts.css';
 .container {
   position: fixed;
@@ -25,13 +25,16 @@
   background-color: colorWhite;
 }
 .container .logo .img {
-  width: 30px;
-  height: 30px;
+  width: 43px;
+  height: 40px;
   margin-right: 0.5em;
+  object-fit: cover;
 }
 .container .logo .title {
   font-size: 30px;
   font-family: fontTitle;
+  color: colorBlack;
+  margin-top: 0.2em;
 }
 .menu {
   display: flex;

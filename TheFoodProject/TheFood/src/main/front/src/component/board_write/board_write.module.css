@@ -20,14 +20,16 @@
   cursor: pointer;
 }
 .header .logo .img {
-  width: 30px;
-  height: 30px;
+  width: 43px;
+  height: 40px;
   margin-right: 0.5em;
+  object-fit: cover;
 }
 .header .logo .title {
   color: colorBlack;
   font-size: 30px;
   font-family: fontTitle;
+  margin-top: 0.2em;
 }
 
 .button {
