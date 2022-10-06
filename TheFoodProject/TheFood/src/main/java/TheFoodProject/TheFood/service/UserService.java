@@ -28,6 +28,8 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private SecurityService securityService;
 
     //회원가입
     public User save(User user) {
@@ -46,18 +48,18 @@ public class UserService {
     }
 //--------------------------------------------------------------------------------------------------
     //아이디,비밀번호 찾기
-    public String findid(String useremail){
-        User result = userRepository.findByUseremail(useremail); //입력한 이메일을 가진 회원찾기
-        log.info(useremail + "useremail");
-        if(result != null){
-            log.info(result.getUserid() + "userid 찾음!");
-            return result.getUserid();
-        }else{
-            log.info("userid 못찾음");
-            return null;
-        }
-
-    }
+//    public String findid(String useremail){
+//        User result = userRepository.findByUseremail(useremail); //입력한 이메일을 가진 회원찾기
+//        log.info(useremail + "useremail");
+//        if(result != null){
+//            log.info(result.getUserid() + "userid 찾음!");
+//            return result.getUserid();
+//        }else{
+//            log.info("userid 못찾음");
+//            return null;
+//        }
+//
+//    }
 
 //    public String findpassword(String useremail, String userid){
 //        Optional<User> person1 = userRepository.findByuseremail(useremail);
@@ -76,8 +78,8 @@ public class UserService {
 //    }
 //--------------------------------------------------------------------------------------------------
     //로그인
-    public User login(String userid, String userpassword){
-        User people = userRepository.findByUserid(userid);
+    public String login(String useremail, String userpassword){
+        User people = userRepository.findByUseremail(useremail);
 
         if(people == null){
             System.out.println("해당하는 회원이 존재하지 않습니다.22");
@@ -86,11 +88,16 @@ public class UserService {
 //        입력한 아이디, 비번을 가진 회원인지 확인
         if(passwordEncoder.matches(userpassword, people.getUserpassword()))
         {
-            return people;
+            String token = securityService.createToken(useremail) ;
+            System.out.println("토큰은 " + token);
+//            System.out.println("토큰이 유효한가요?" + securityService.validateToken(token));
+//            System.out.println("user : " + securityService.getUser(token));
+
+            return token;
         }
         else{
             System.out.println("해당하는 회원이 존재하지 않습니다.22");
-            throw new IllegalStateException("해당하는 회원이 존재하지 않습니다.");
+            throw new IllegalStateException("해당하는 회원이 존재하지 " + "않습니다.");
         }
     }
     //--------------------------------------------------------------------------------------------------
