@@ -1,11 +1,11 @@
 package TheFoodProject.TheFood.Controller;
 
 import TheFoodProject.TheFood.entity.*;
+import TheFoodProject.TheFood.service.SecurityService;
 import TheFoodProject.TheFood.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -15,11 +15,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private SecurityService securityService;
+
     //회원가입
     @PostMapping("/api/signup")
     public User usersignupForm(@RequestBody SignupForm signupForm){
         User newUser = new User();
-        newUser.setUserid(signupForm.getUserid());
         newUser.setUserpassword(signupForm.getUserpassword());
         newUser.setUseremail(signupForm.getUseremail());
         newUser.setUsername(signupForm.getUsername());
@@ -27,15 +29,16 @@ public class UserController {
     }
 //--------------------------------------------------------------------------------------------------
     //아이디,비밀번호 찾기
-    @PostMapping("api/findid")
-    public String userFindId(@RequestBody FindIdForm findIdForm){
-        return userService.findid(findIdForm.getUseremail());
-    }
+//    @PostMapping("api/findid")
+//    public String userFindId(@RequestBody FindIdForm findIdForm){
+//        return userService.findid(findIdForm.getUseremail());
+//    }
 //--------------------------------------------------------------------------------------------------
     //로그인
     @PostMapping("api/login")
-    public User userLogin(@RequestBody LoginForm loginForm) throws Exception {
-        return userService.login(loginForm.getUserid(), loginForm.getUserpassword());
+    public String userLogin(@RequestBody LoginForm loginForm) throws Exception {
+        return userService.login(loginForm.getUseremail(), loginForm.getUserpassword());
+
     }
 //--------------------------------------------------------------------------------------------------
 //탈퇴
@@ -56,6 +59,19 @@ public class UserController {
     public User userStay(@RequestBody Integer id){
         return userService.stay(id);
     }
+
+
+    //토큰을 통해 유저 정보 주는 코드
+//    @PostMapping("/")
+//    public User tokenUser(@RequestBody String token){
+//        return securityService.getUser(token);
+//    }
+
+    //토큰 타당성 확인 코드
+//    @PostMapping("/")
+//    public boolean validtoken(@RequestBody String token){
+//        return securityService.validateToken(token);
+//    }
 }
 
 

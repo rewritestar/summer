@@ -30,12 +30,19 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.security:spring-security-test'
 
+	//토큰
+	implementation 'javax.xml.bind:jaxb-api'
+	implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.2'
+	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.2'
+	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.2'
+
+	//이메일
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+
 	// https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity5
 	implementation group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5'
 
 //	, version: '3.0.4.RELEASE'
-
-
 }
 
 tasks.named('test') {
