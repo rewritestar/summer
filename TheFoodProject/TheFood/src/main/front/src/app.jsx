@@ -22,6 +22,7 @@ function App({ auth, boardApi }) {
   //재접속 자동 로그인
   useEffect(() => {
     const localToken = JSON.parse(localStorage.getItem("token"));
+    console.log("재접속");
     console.log(localToken);
     if (localToken) {
       const currentTokenExpiration = new Date(localToken.expiration);
@@ -63,7 +64,6 @@ function App({ auth, boardApi }) {
 
   //로그인 유지
   const onStayLogin = (t, tokenExpireTime) => {
-    const currentTokenExpiration = new Date(tokenExpireTime);
     const tokenForm = { token: t };
     console.log(tokenForm);
     auth
@@ -72,7 +72,7 @@ function App({ auth, boardApi }) {
         console.log(u);
         setUser(u);
         setToken(t);
-        setTokenExpiration(currentTokenExpiration);
+        setTokenExpiration(tokenExpireTime);
       })
       .catch((e) => {
         console.log("token error: there is no token");
@@ -82,7 +82,7 @@ function App({ auth, boardApi }) {
 
   //첫 로그인
   const onLogin = (loginForm) => {
-    const tokenExpireTime = new Date(new Date().getTime() + 1000 * 30 * 60);
+    const tokenExpireTime = new Date(new Date().getTime() + 1000 * 15);
     auth
       .login(loginForm)
       .then((t) => {

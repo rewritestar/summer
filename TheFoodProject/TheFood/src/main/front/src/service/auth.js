@@ -28,10 +28,9 @@ class Auth {
   async findPw(findPwForm) {
     console.log(`useremail: ${findPwForm} and type ${typeof findPwForm}`);
     console.log(findPwForm);
-    const response = await this.auth
+    this.auth
       .post("/api/findpw/", findPwForm)
       .catch(() => console.log("error findpw axios"));
-    // return response.data;
   }
   async mypageChange(mypageForm) {
     const response = await this.auth
