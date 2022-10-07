@@ -1,5 +1,6 @@
 package TheFoodProject.TheFood.service;
 
+import TheFoodProject.TheFood.Controller.MailUtil;
 import TheFoodProject.TheFood.entity.Board;
 import TheFoodProject.TheFood.entity.Comment;
 import TheFoodProject.TheFood.entity.User;
@@ -37,7 +38,7 @@ public class UserService {
         //중복회원가입 불가
         User result1 = userRepository.findByUseremail(user.getUseremail());
         if(result1 != null) {
-            System.out.println("이미 존재하는 회원입니다22");
+//            System.out.println("이미 존재하는 회원입니다22");
             throw new IllegalStateException("이미 존재하는 회원입니다");
         };
         //비밀번호 암호화
@@ -76,14 +77,34 @@ public class UserService {
 //
 //        return person2.get().getUserpassword();
 //    }
+
+//    @Override
+    public void findPw(String useremail) throws Exception{
+        User result = userRepository.findByUseremail(useremail); //입력한 이메일을 가진 회원찾기
+        if(result != null) {
+            throw new IllegalStateException("해당 이메일을 가진 사용자가 존재하지 않습니다.");
+        };
+        String tempPw = "";
+        for (int i =0; i<12; i++){
+            tempPw += (char)((Math.random() *26) + 97);
+        }
+        MailUtil mail = new MailUtil();
+        mail.sendMail(useremail, tempPw);
+
+        //임시 비번 저장
+        String encodedPassword = passwordEncoder.encode(tempPw);
+        result.setUserpassword(encodedPassword);
+
+//        throw new Exception("에러가 발생하였습니다");
+    }
 //--------------------------------------------------------------------------------------------------
     //로그인
     public String login(String useremail, String userpassword){
         User people = userRepository.findByUseremail(useremail);
 
         if(people == null){
-            System.out.println("해당하는 회원이 존재하지 않습니다.22");
-            throw new IllegalStateException("해당하는 회원이 존재하지 않습니다.");
+//            System.out.println("해당하는 회원이 존재하지 않습니다.22");
+            throw new IllegalStateException("해당 이메일을 가진 회원이 존재하지 않습니다.");
         }
 //        입력한 아이디, 비번을 가진 회원인지 확인
         if(passwordEncoder.matches(userpassword, people.getUserpassword()))
@@ -96,8 +117,7 @@ public class UserService {
             return token;
         }
         else{
-            System.out.println("해당하는 회원이 존재하지 않습니다.22");
-            throw new IllegalStateException("해당하는 회원이 존재하지 " + "않습니다.");
+            throw new IllegalStateException("비밀번호가 일치하지 않습니다.");
         }
     }
     //--------------------------------------------------------------------------------------------------
@@ -147,9 +167,9 @@ public class UserService {
     }
 
     //로그인 유지
-    public User stay(Integer id){
-        Optional<User> user = userRepository.findById(id);
-        return user.get();
-    }
+//    public User stay(Integer id){
+//        Optional<User> user = userRepository.findById(id);
+//        return user.get();
+//    }
 }
 

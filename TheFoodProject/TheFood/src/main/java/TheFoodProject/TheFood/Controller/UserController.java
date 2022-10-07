@@ -33,6 +33,11 @@ public class UserController {
 //    public String userFindId(@RequestBody FindIdForm findIdForm){
 //        return userService.findid(findIdForm.getUseremail());
 //    }
+
+    @PostMapping("api/findpw")
+    public void userFindPw(@RequestBody FindPwForm findPwForm) throws Exception {
+        userService.findPw(findPwForm.getUseremail());
+    }
 //--------------------------------------------------------------------------------------------------
     //로그인
     @PostMapping("api/login")
@@ -67,7 +72,7 @@ public class UserController {
         return securityService.getUser(tokenForm.getToken());
     }
 
-    //토큰 타당성 확인 코드
+    //토큰 유효성 확인 코드
 //    @PostMapping("/")
 //    public boolean validtoken(@RequestBody String token){
 //        return securityService.validateToken(token);

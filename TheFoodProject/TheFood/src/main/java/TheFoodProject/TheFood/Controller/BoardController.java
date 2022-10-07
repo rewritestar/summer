@@ -31,7 +31,7 @@ public class BoardController {
 
     //보드 작성
     @PostMapping("/api/boardwrite")
-    public Board boardWritePro(@RequestBody BoardForm boardForm) throws Exception{
+    public Board boardWritePro(@RequestBody BoardForm boardForm) throws Exception {
         Board newBoard = new Board();
         newBoard.setTitle(boardForm.getTitle());
         newBoard.setContent(boardForm.getContent());
@@ -42,10 +42,14 @@ public class BoardController {
         newBoard.setUserid(boardForm.getUserid());
 
         if (boardForm.getId() != 0){
+
             return boardService.update(boardForm.getId(), newBoard);
+
         }
         else{
         return boardService.write(newBoard);}
+
+
     }
 
     //카테고리별 게시판 분류

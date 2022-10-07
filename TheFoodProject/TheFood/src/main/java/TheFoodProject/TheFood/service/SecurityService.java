@@ -76,7 +76,20 @@ public class SecurityService {
         catch (JwtException e){
             e.printStackTrace();
         }
+//        catch (JwtException e){
+//            throw new JwtException("토큰 유효기간이 만료 되었습니다.");
+//
+//        }
         return false;
+//        Jwts.parserBuilder()
+//                .setSigningKey(key)
+//                .build()
+//                .parseClaimsJws(token);
+//        return true;
+//
+//        throw new JwtException("토큰 유효기간이 만료 되었습니다.");
+
+
     }
 
 
