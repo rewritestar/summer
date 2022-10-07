@@ -10,7 +10,7 @@ public class MailUtil {
         String charSet = "utf-8";
         String hostSMTP = "smtp.gmail.com";
         String hostSMTPid = "sujinjeon587";
-        String hostSMTPpw = "hera17451745^^";
+        String hostSMTPpw = "";
 
         //보내는 사람
         String fromEmail = "sujinjeon587@gmail.com";

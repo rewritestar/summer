@@ -12,6 +12,11 @@ class Auth {
     const response = await this.auth
       .post("/api/login/", loginForm)
       .catch(() => console.log("error login axios"));
+    console.log("login auth.js");
+    console.log(response);
+    if (response.data === "") {
+      return;
+    }
     return response.data;
   }
   async signup(signupForm) {

@@ -80,18 +80,20 @@ function App({ auth, boardApi }) {
   //첫 로그인
   const onLogin = (loginForm) => {
     const tokenExpireTime = new Date(new Date().getTime() + 1000 * 15);
-    auth
-      .login(loginForm)
-      .then((t) => {
+    auth.login(loginForm).then((t) => {
+      console.log("onlogin res");
+      console.log(t);
+      if (!t) {
+        alert("이메일 혹은 비밀번호를 다시 확인해주세요.");
+      } else {
         const tokenLocal = { token: t, expiration: tokenExpireTime };
         localStorage.removeItem("token");
         localStorage.setItem("token", JSON.stringify(tokenLocal));
         onStayLogin(t, tokenExpireTime);
-      })
-      .then(() => {
         alert("로그인이 성공적으로 완료 됐습니다.");
         navigate("/");
-      });
+      }
+    });
   };
 
   const onLogout = () => {
