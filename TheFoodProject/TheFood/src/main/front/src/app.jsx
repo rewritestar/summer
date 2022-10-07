@@ -18,27 +18,16 @@ function App({ auth, boardApi }) {
   const [user, setUser] = useState();
   const [tokenExpiration, setTokenExpiration] = useState();
   const [token, setToken] = useState();
-  const localToken = JSON.parse(localStorage.getItem("token"));
 
+  //재접속 자동 로그인
   useEffect(() => {
+    const localToken = JSON.parse(localStorage.getItem("token"));
+    console.log(localToken);
     if (localToken) {
       const currentTokenExpiration = new Date(localToken.expiration);
-      const tokenForm = { token: localToken.token };
-      console.log(tokenForm);
-      auth
-        .stayLogin(tokenForm) //
-        .then((user) => {
-          console.log(user);
-          setUser(user);
-          setToken(localToken.token);
-          setTokenExpiration(currentTokenExpiration);
-        })
-        .catch((e) => {
-          console.log("token error: there is no token");
-          setUser();
-        });
+      onStayLogin(localToken.token, currentTokenExpiration);
     }
-  }, [token]);
+  }, []);
 
   const navigate = useNavigate();
   const onMypageChange = (mypageForm) => {
@@ -71,16 +60,36 @@ function App({ auth, boardApi }) {
         navigate("/");
       });
   };
+
+  //로그인 유지
+  const onStayLogin = (t, tokenExpireTime) => {
+    const currentTokenExpiration = new Date(tokenExpireTime);
+    const tokenForm = { token: t };
+    console.log(tokenForm);
+    auth
+      .stayLogin(tokenForm) //
+      .then((u) => {
+        console.log(u);
+        setUser(u);
+        setToken(t);
+        setTokenExpiration(currentTokenExpiration);
+      })
+      .catch((e) => {
+        console.log("token error: there is no token");
+        setUser();
+      });
+  };
+
+  //첫 로그인
   const onLogin = (loginForm) => {
-    const tokenExpireTime = new Date(new Date().getTime() + 1000 * 15);
+    const tokenExpireTime = new Date(new Date().getTime() + 1000 * 30 * 60);
     auth
       .login(loginForm)
-      .then((token) => {
-        const tokenLocal = { token, expiration: tokenExpireTime };
+      .then((t) => {
+        const tokenLocal = { token: t, expiration: tokenExpireTime };
         localStorage.removeItem("token");
         localStorage.setItem("token", JSON.stringify(tokenLocal));
-        setTokenExpiration(tokenExpireTime);
-        setToken(token);
+        onStayLogin(t, tokenExpireTime);
       })
       .then(() => {
         alert("로그인이 성공적으로 완료 됐습니다.");
@@ -117,6 +126,7 @@ function App({ auth, boardApi }) {
     navigate("/mypage");
   };
 
+  //자동 로그아웃
   let logoutTimer;
   useEffect(() => {
     console.log(`token 있나? ${token}`);

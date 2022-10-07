@@ -32,6 +32,7 @@ public class UserService {
     @Autowired
     private SecurityService securityService;
 
+
     //회원가입
     public User save(User user) {
 
@@ -88,8 +89,8 @@ public class UserService {
         for (int i =0; i<12; i++){
             tempPw += (char)((Math.random() *26) + 97);
         }
-        MailUtil mail = new MailUtil();
-        mail.sendMail(useremail, tempPw);
+        MailUtil mailUtil = new MailUtil();
+        mailUtil.sendMail(useremail, tempPw);
 
         //임시 비번 저장
         String encodedPassword = passwordEncoder.encode(tempPw);
