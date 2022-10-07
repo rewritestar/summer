@@ -6,9 +6,7 @@ import CommentList from "../comment_list/comment_list";
 import Container from "../container/container";
 import styles from "./board_detail.module.css";
 import TitleBar from "../title_bar/title_bar";
-const BoardDetail = ({ auth, boardApi }) => {
-  const user_id = localStorage.getItem("id"); //추후에 로그인 토큰으로 대체
-
+const BoardDetail = ({ user, boardApi }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -36,11 +34,6 @@ const BoardDetail = ({ auth, boardApi }) => {
   const locationBoard = location.state;
 
   const [board, setBoard] = useState(locationBoard);
-  const [user, setUser] = useState();
-
-  useEffect(() => {
-    user_id && auth.stayLogin(user_id).then((user) => setUser(user));
-  }, [user_id]);
 
   //게시물 수정버튼
   const onBoardChange = (e) => {
@@ -82,7 +75,7 @@ const BoardDetail = ({ auth, boardApi }) => {
           boardApi={boardApi}
           board={board}
           boardid={locationBoard.id}
-          user={user}
+          user={user ? user : null}
         />
       </div>
     </Container>

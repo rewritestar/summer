@@ -1,13 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./board_write.module.css";
-const BoardWrite = ({ auth, boardApi }) => {
+const BoardWrite = ({ user, boardApi }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const user_id = localStorage.getItem("id"); //추후에 로그인 토큰으로 대체
-
-  const [user, setUser] = useState();
   const [imgsrc, setImgsrc] = useState("");
   const [board, setBoard] = useState();
 
@@ -38,15 +35,6 @@ const BoardWrite = ({ auth, boardApi }) => {
     "맛집-기타": 208,
     일상게시판: 300,
   };
-
-  useEffect(() => {
-    if (user_id) {
-      auth.stayLogin(user_id).then((user) => setUser(user));
-    } else {
-      alert("로그인이 필요합니다.");
-      navigate("/login");
-    }
-  }, [user_id]);
 
   //게시글 수정할 때 발생함
   useEffect(() => {
@@ -84,7 +72,6 @@ const BoardWrite = ({ auth, boardApi }) => {
     boardApi //
       .boardWrite(boardForm) //
       .then((newBoard) => {
-        console.log(newBoard);
         alert(`게시글 작성에 성공했습니다!`);
         navigate("/boarddetail", { state: newBoard });
       });

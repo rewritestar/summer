@@ -4,24 +4,16 @@ import Container from "../container/container";
 import styles from "../user_component.module.css";
 import TitleBar from "../title_bar/title_bar";
 
-const FindPw = ({ onFindPw }) => {
-  const [user, setUser] = useState();
-
+const FindPw = ({ onFindPw, goToLogin, goToSignup }) => {
   const navigate = useNavigate();
-  const goToLogin = () => {
-    navigate("/login");
-  };
-  const goToFindId = () => {
-    navigate("/findId");
-  };
+
   const formRef = useRef();
-  const idRef = useRef();
   const emailRef = useRef();
+
   const onSubmit = (e) => {
     e.preventDefault();
-    const userid = idRef.current.value;
     const useremail = emailRef.current.value;
-    const findPwForm = { userid, useremail };
+    const findPwForm = { useremail };
     onFindPw(findPwForm);
     navigate("/");
   };
@@ -36,16 +28,6 @@ const FindPw = ({ onFindPw }) => {
           id="form"
           onSubmit={onSubmit}
         >
-          <div className={styles.id}>
-            <span className={styles.title}>아이디</span>
-            <input
-              ref={idRef}
-              className={styles.input}
-              type="text"
-              name="id"
-              placeholder="아이디"
-            />
-          </div>
           <div className={styles.email}>
             <span className={styles.title}>이메일</span>
             <input
@@ -62,8 +44,8 @@ const FindPw = ({ onFindPw }) => {
             <button className={styles.button} onClick={goToLogin}>
               로그인
             </button>
-            <button className={styles.button} onClick={goToFindId}>
-              아이디 찾기
+            <button className={styles.button} onClick={goToSignup}>
+              회원가입 하기
             </button>
           </span>
           <button type="submit" form="form" className={styles.submit_btn}>

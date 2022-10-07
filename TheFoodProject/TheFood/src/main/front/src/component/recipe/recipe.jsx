@@ -4,10 +4,7 @@ import Container from "../container/container";
 import Page from "../page/page";
 import styles from "./recipe.module.css";
 
-const Recipe = ({ boardApi, auth }) => {
-  const [user, setUser] = useState();
-  const user_id = localStorage.getItem("id"); //추후에 로그인 토큰으로 대체
-
+const Recipe = ({ auth, boardApi }) => {
   const [type, setType] = useState("전체");
   const [typeBoards, setTypeBoards] = useState([]);
 
@@ -23,11 +20,6 @@ const Recipe = ({ boardApi, auth }) => {
     야식: 108,
     기타: 109,
   };
-
-  useEffect(() => {
-    user_id && auth.stayLogin(user_id).then((user) => setUser(user));
-  }, [user_id]);
-
   useEffect(() => {
     boardApi //
       .getRecipe(TYPE_CODE[type]) //

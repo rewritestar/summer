@@ -4,7 +4,6 @@ import styles from "./app.module.css";
 import AboutUs from "./component/about_us/about_us";
 import BoardDetail from "./component/board_detail/board_detail";
 import BoardWrite from "./component/board_write/board_write";
-import FindId from "./component/findId/findId";
 import FindPw from "./component/findPw/findPw";
 import Free from "./component/free/free";
 import Home from "./component/home/home";
@@ -17,9 +16,34 @@ import Signup from "./component/signup/signup";
 import UserBtn from "./component/user_btn/user_btn";
 function App({ auth, boardApi }) {
   const [user, setUser] = useState();
-  const user_id = localStorage.getItem("id"); //추후에 로그인 토큰으로 대체
+  const [tokenExpiration, setTokenExpiration] = useState();
+  const [token, setToken] = useState();
+  const localToken = JSON.parse(localStorage.getItem("token"));
+  // useEffect(()=>{
+  //   const currentTokenExpiration = JSON.parse(localStorage.getItem("token")).expiration;
+  //   console.log(currentTokenExpiration);
+  //   if(currentTokenExpiration && new Date(currentTokenExpiration) > new Date()){
+
+  //   }
+  // },[onLogin]);
   useEffect(() => {
-    user_id && auth.stayLogin(user_id).then((user) => setUser(user));
+    if (localToken) {
+      const currentTokenExpiration = new Date(localToken.expiration);
+      const tokenForm = { token: localToken.token };
+      console.log(tokenForm);
+      auth
+        .stayLogin(tokenForm) //
+        .then((user) => {
+          console.log(user);
+          setUser(user);
+          setToken(localToken.token);
+          setTokenExpiration(currentTokenExpiration);
+        })
+        .catch((e) => {
+          console.log("token error: there is no token");
+          setUser();
+        });
+    }
   }, []);
 
   const navigate = useNavigate();
@@ -27,11 +51,9 @@ function App({ auth, boardApi }) {
     auth
       .mypageChange(mypageForm) //
       .then((u) => {
-        localStorage.clear();
-        localStorage.setItem("id", u.id);
         setUser(u);
         alert("회원 정보가 성공적으로 수정되었습니다!");
-        window.location.href = "/";
+        navigate("/");
       });
   };
   const onwithDrawal = (id) => {
@@ -42,7 +64,7 @@ function App({ auth, boardApi }) {
           alert("회원 탈퇴가 성공적으로 완료되었습니다!");
           localStorage.clear();
           setUser();
-          window.location.href = "/";
+          navigate("/");
         });
     }
   };
@@ -52,32 +74,35 @@ function App({ auth, boardApi }) {
       .then((u) => {
         alert("회원가입이 성공적으로 완료되었습니다!");
         setUser(u);
-        window.location.href = "/";
+        navigate("/");
       });
   };
   const onLogin = (loginForm) => {
+    const tokenExpireTime = new Date(new Date().getTime() + 1000 * 60 * 30);
     auth
       .login(loginForm)
-      .then((u) => {
-        localStorage.clear();
-        localStorage.setItem("id", u.id);
-        setUser(u);
+      .then((token) => {
+        const tokenLocal = { token, expiration: tokenExpireTime };
+        localStorage.removeItem("token");
+        localStorage.setItem("token", JSON.stringify(tokenLocal));
+        setTokenExpiration(tokenExpireTime);
+        setToken(token);
       })
       .then(() => {
         alert("로그인이 성공적으로 완료 됐습니다.");
-        window.location.href = "/";
+        navigate("/");
       });
   };
+
   const onLogout = () => {
-    localStorage.clear();
-    window.location.href = "/";
+    alert("로그아웃 되었습니다.");
+    localStorage.removeItem("token");
+    setToken(null);
+    setTokenExpiration(null);
+    setUser(null);
+    navigate("/");
   };
 
-  const onFindId = (findIdForm) => {
-    auth
-      .findId(findIdForm)
-      .then((userid) => alert(`회원님의 아이디는 ${userid} 입니다.`));
-  };
   const onFindPw = (findPwForm) => {
     console.log(findPwForm);
   };
@@ -98,6 +123,19 @@ function App({ auth, boardApi }) {
     navigate("/mypage");
   };
 
+  let logoutTimer;
+  useEffect(() => {
+    console.log(`token 있나? ${token}`);
+    console.log(`expiration time: ${tokenExpiration}`);
+    if (token && tokenExpiration) {
+      const remainTime = tokenExpiration.getTime() - new Date().getTime();
+      console.log(`remaintime: ${remainTime}`);
+      logoutTimer = setTimeout(onLogout, remainTime);
+    } else {
+      clearTimeout(logoutTimer);
+    }
+  }, [token, tokenExpiration]);
+
   return (
     <div className={styles.app}>
       <UserBtn
@@ -116,7 +154,7 @@ function App({ auth, boardApi }) {
             <Login
               onLogin={onLogin}
               goToSignup={goToSignup}
-              goToFindId={goToFindId}
+              goToFindPw={goToFindPw}
             />
           }
         />
@@ -127,7 +165,7 @@ function App({ auth, boardApi }) {
             <Signup
               onSignup={onSignup}
               goToLogin={goToLogin}
-              goToFindId={goToFindId}
+              goToFindPw={goToFindPw}
             />
           }
         />
@@ -136,7 +174,7 @@ function App({ auth, boardApi }) {
           exact
           element={
             <Mypage
-              auth={auth}
+              user={user}
               onChange={onMypageChange}
               onwithDrawal={onwithDrawal}
             />
@@ -145,18 +183,7 @@ function App({ auth, boardApi }) {
         <Route
           path="/myboards"
           exact
-          element={<Myboards auth={auth} boardApi={boardApi} />}
-        />
-        <Route
-          path="/findId"
-          exact
-          element={
-            <FindId
-              onFindId={onFindId}
-              goToLogin={goToLogin}
-              goToFindPw={goToFindPw}
-            />
-          }
+          element={<Myboards user={user} boardApi={boardApi} />}
         />
         <Route
           path="/findPw"
@@ -165,34 +192,34 @@ function App({ auth, boardApi }) {
             <FindPw
               onFindPw={onFindPw}
               goToLogin={goToLogin}
-              goToFindId={goToFindId}
+              goToSignup={goToSignup}
             />
           }
         />
         <Route
           path="/boardwrite"
           exact
-          element={<BoardWrite auth={auth} boardApi={boardApi} />}
+          element={<BoardWrite user={user} boardApi={boardApi} />}
         />
         <Route
           path="/boarddetail"
           exact
-          element={<BoardDetail auth={auth} boardApi={boardApi} />}
+          element={<BoardDetail user={user} boardApi={boardApi} />}
         />
         <Route
           path="/recipe"
           exact
-          element={<Recipe auth={auth} boardApi={boardApi} />}
+          element={<Recipe user={user} boardApi={boardApi} />}
         />
         <Route
           path="/restaurant"
           exact
-          element={<Restaurant auth={auth} boardApi={boardApi} />}
+          element={<Restaurant user={user} boardApi={boardApi} />}
         />
         <Route
           path="/free"
           exact
-          element={<Free auth={auth} boardApi={boardApi} />}
+          element={<Free user={user} boardApi={boardApi} />}
         />
         <Route path="/aboutus" exact element={<AboutUs />} />
       </Routes>

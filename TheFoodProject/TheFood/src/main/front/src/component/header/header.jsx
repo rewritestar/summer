@@ -26,7 +26,6 @@ const Header = () => {
     navigate("/aboutus");
   };
   const styles_res = isActive ? styles.active : styles.none;
-  console.log(isActive);
 
   return (
     <div className={styles.container}>

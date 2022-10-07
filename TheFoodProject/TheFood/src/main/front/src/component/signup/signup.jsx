@@ -5,11 +5,10 @@ import Container from "../container/container";
 import styles from "../user_component.module.css";
 import TitleBar from "../title_bar/title_bar";
 
-const Signup = ({ onSignup, goToLogin, goToFindId }) => {
+const Signup = ({ onSignup, goToLogin, goToFindPw }) => {
   const navigate = useNavigate();
 
   const formRef = useRef();
-  const idRef = useRef();
   const passwordRef = useRef();
   const password_checkRef = useRef();
   const emailRef = useRef();
@@ -48,7 +47,6 @@ const Signup = ({ onSignup, goToLogin, goToFindId }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const userid = idRef.current.value;
     const userpassword = passwordRef.current.value;
     const userpassword_check = password_checkRef.current.value;
     const useremail = emailRef.current.value;
@@ -57,7 +55,7 @@ const Signup = ({ onSignup, goToLogin, goToFindId }) => {
       alert("비밀번호가 일치하지 않습니다.");
       return;
     }
-    const signupForm = { userid, userpassword, useremail, username };
+    const signupForm = { userpassword, useremail, username };
 
     onSignup(signupForm);
   };
@@ -71,14 +69,14 @@ const Signup = ({ onSignup, goToLogin, goToFindId }) => {
           id="form"
           onSubmit={onSubmit}
         >
-          <div className={styles.id}>
-            <span className={styles.title}>아이디</span>
+          <div className={styles.email}>
+            <span className={styles.title}>이메일</span>
             <input
-              ref={idRef}
+              ref={emailRef}
               className={styles.input}
-              type="text"
-              name="id"
-              placeholder="아이디"
+              type="email"
+              name="email"
+              placeholder="이메일"
               required
             />
           </div>
@@ -107,17 +105,7 @@ const Signup = ({ onSignup, goToLogin, goToFindId }) => {
             />
           </div>
           <p className={`${styles.password_word} ${style_color}`}>{text}</p>
-          <div className={styles.email}>
-            <span className={styles.title}>이메일</span>
-            <input
-              ref={emailRef}
-              className={styles.input}
-              type="email"
-              name="email"
-              placeholder="이메일"
-              required
-            />
-          </div>
+
           <div className={styles.nickname}>
             <span className={styles.title}>닉네임</span>
             <input
@@ -135,8 +123,8 @@ const Signup = ({ onSignup, goToLogin, goToFindId }) => {
             <button className={styles.button} onClick={goToLogin}>
               로그인
             </button>
-            <button className={styles.button} onClick={goToFindId}>
-              아이디/비밀번호 찾기
+            <button className={styles.button} onClick={goToFindPw}>
+              비밀번호 찾기
             </button>
           </span>
           <button type="submit" form="form" className={styles.submit_btn}>

@@ -5,11 +5,8 @@ import Page from "../page/page";
 import styles from "./restaurant.module.css";
 
 const Restaurant = ({ auth, boardApi }) => {
-  const [user, setUser] = useState();
-
   const [type, setType] = useState("전체");
   const [typeBoards, setTypeBoards] = useState([]);
-  const user_id = localStorage.getItem("id"); //추후에 로그인 토큰으로 대체
 
   const TYPE_CODE = {
     전체: 200,
@@ -22,10 +19,6 @@ const Restaurant = ({ auth, boardApi }) => {
     제주: 207,
     기타: 208,
   };
-
-  useEffect(() => {
-    user_id && auth.stayLogin(user_id).then((user) => setUser(user));
-  }, [user_id]);
 
   useEffect(() => {
     boardApi //

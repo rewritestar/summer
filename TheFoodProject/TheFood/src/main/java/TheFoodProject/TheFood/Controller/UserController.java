@@ -55,17 +55,17 @@ public class UserController {
     }
 //-----------------------------------------------------
     //로그인 유지
-    @PostMapping("/api/staylogin/")
-    public User userStay(@RequestBody Integer id){
-        return userService.stay(id);
-    }
+//    @PostMapping("/api/staylogin/")
+//    public User userStay(@RequestBody Integer id){
+//        return userService.stay(id);
+//    }
 
 
     //토큰을 통해 유저 정보 주는 코드
-//    @PostMapping("/")
-//    public User tokenUser(@RequestBody String token){
-//        return securityService.getUser(token);
-//    }
+    @PostMapping("/api/staylogin/")
+    public User tokenUser(@RequestBody TokenForm tokenForm){
+        return securityService.getUser(tokenForm.getToken());
+    }
 
     //토큰 타당성 확인 코드
 //    @PostMapping("/")

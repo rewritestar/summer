@@ -5,15 +5,7 @@ import Container from "../container/container";
 import MypageButtons from "../buttons/mypage_buttons";
 import TitleBar from "../title_bar/title_bar";
 
-const Mypage = ({ auth, onChange, onwithDrawal }) => {
-  const [user, setUser] = useState();
-  const user_id = localStorage.getItem("id"); //추후에 로그인 토큰으로 대체
-
-  useEffect(() => {
-    console.log(user_id);
-    user_id && auth.stayLogin(user_id).then((user) => setUser(user));
-  }, []);
-
+const Mypage = ({ user, onChange, onwithDrawal }) => {
   const formRef = useRef();
   const nameRef = useRef();
   const passwordRef = useRef();
@@ -51,17 +43,16 @@ const Mypage = ({ auth, onChange, onwithDrawal }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log("onsubmit");
     const id = user.id;
     const username = nameRef.current.value;
     const userpassword = passwordRef.current.value;
     const userpassword_check = password_checkRef.current.value;
+
     if (userpassword !== userpassword_check) {
       alert("비밀번호가 일치하지 않습니다.");
       return;
     }
     const mypageForm = { id, username, userpassword };
-    console.log(mypageForm);
     onChange(mypageForm);
   };
   return (
@@ -116,7 +107,10 @@ const Mypage = ({ auth, onChange, onwithDrawal }) => {
           </button>
         </section>
       </div>
-      <MypageButtons onwithDrawal={onwithDrawal} userid={user_id} />
+      <MypageButtons
+        onwithDrawal={onwithDrawal}
+        userid={user ? user.id : null}
+      />
     </Container>
   );
 };

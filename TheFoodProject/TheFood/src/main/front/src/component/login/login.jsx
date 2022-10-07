@@ -3,20 +3,19 @@ import { useNavigate } from "react-router-dom";
 import Container from "../container/container";
 import styles from "../user_component.module.css";
 import TitleBar from "../title_bar/title_bar";
-const Login = ({ onLogin, goToSignup, goToFindId }) => {
+const Login = ({ onLogin, goToSignup, goToFindPw }) => {
   const navigate = useNavigate();
 
   const formRef = useRef();
-  const idRef = useRef();
+  const emailRef = useRef();
   const passwordRef = useRef();
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const userid = idRef.current.value;
+    const useremail = emailRef.current.value;
     const userpassword = passwordRef.current.value;
-    const loginForm = { userid, userpassword };
+    const loginForm = { useremail, userpassword };
     await onLogin(loginForm);
-    navigate("/");
   };
 
   return (
@@ -29,14 +28,14 @@ const Login = ({ onLogin, goToSignup, goToFindId }) => {
           id="form"
           onSubmit={onSubmit}
         >
-          <div className={styles.id}>
-            <span className={styles.title}>아이디</span>
+          <div className={styles.email}>
+            <span className={styles.title}>이메일</span>
             <input
-              ref={idRef}
+              ref={emailRef}
               className={styles.input}
-              type="text"
-              name="id"
-              placeholder="아이디"
+              type="email"
+              name="email"
+              placeholder="이메일"
               required
             />
           </div>
@@ -57,8 +56,8 @@ const Login = ({ onLogin, goToSignup, goToFindId }) => {
             <button className={styles.button} onClick={goToSignup}>
               회원가입
             </button>
-            <button className={styles.button} onClick={goToFindId}>
-              아이디/비밀번호 찾기
+            <button className={styles.button} onClick={goToFindPw}>
+              비밀번호 찾기
             </button>
           </span>
           <button type="submit" form="form" className={styles.submit_btn}>

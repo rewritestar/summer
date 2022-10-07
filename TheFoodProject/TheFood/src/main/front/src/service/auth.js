@@ -40,11 +40,11 @@ class Auth {
     return response.data;
   }
 
-  async stayLogin(user_id) {
-    const user = await this.auth
-      .post("/api/staylogin/", user_id)
+  async stayLogin(tokenForm) {
+    const token = await this.auth
+      .post("/api/staylogin/", tokenForm)
       .catch(() => console.log("error stayLogin axios"));
-    return user.data;
+    return token.data;
   }
 }
 

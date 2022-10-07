@@ -5,12 +5,7 @@ import Page from "../page/page";
 import TitleBar from "../title_bar/title_bar";
 import styles from "./free.module.css";
 const Free = ({ auth, boardApi }) => {
-  const [user, setUser] = useState();
   const [boards, setBoards] = useState([]);
-  const user_id = localStorage.getItem("id"); //추후에 로그인 토큰으로 대체
-  useEffect(() => {
-    user_id && auth.stayLogin(user_id).then((user) => setUser(user));
-  }, [user_id]);
 
   useEffect(() => {
     boardApi //

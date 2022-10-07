@@ -7,7 +7,6 @@ const MypageButtons = ({ userid, onwithDrawal }) => {
     navigate("/myboards", { state: e.target.innerText });
   };
   const handleWithDraw = () => {
-    console.log(userid);
     onwithDrawal(userid);
   };
   return (

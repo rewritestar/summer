@@ -27,7 +27,7 @@ public class SecurityService {
 
 //    @Value("${jwt.password}")
 //    private String secretKey;
-    private int tokenExpirationMsec = 60000;  // 만료시간 지금은 테스트해보고 싶어서 1분으로 해둠/ 30분 설정 계산은 -> 30분 30*1000*60
+    private int tokenExpirationMsec = 60*1000*30;  // 만료시간 지금은 테스트해보고 싶어서 1분으로 해둠/ 30분 설정 계산은 -> 30분 30*1000*60
 
 //    ------------------------------------------------------------------------------------------------------
     //토큰 생성코드
