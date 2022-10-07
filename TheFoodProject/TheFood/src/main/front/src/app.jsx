@@ -19,13 +19,7 @@ function App({ auth, boardApi }) {
   const [tokenExpiration, setTokenExpiration] = useState();
   const [token, setToken] = useState();
   const localToken = JSON.parse(localStorage.getItem("token"));
-  // useEffect(()=>{
-  //   const currentTokenExpiration = JSON.parse(localStorage.getItem("token")).expiration;
-  //   console.log(currentTokenExpiration);
-  //   if(currentTokenExpiration && new Date(currentTokenExpiration) > new Date()){
 
-  //   }
-  // },[onLogin]);
   useEffect(() => {
     if (localToken) {
       const currentTokenExpiration = new Date(localToken.expiration);
@@ -44,7 +38,7 @@ function App({ auth, boardApi }) {
           setUser();
         });
     }
-  }, []);
+  }, [token]);
 
   const navigate = useNavigate();
   const onMypageChange = (mypageForm) => {
@@ -78,7 +72,7 @@ function App({ auth, boardApi }) {
       });
   };
   const onLogin = (loginForm) => {
-    const tokenExpireTime = new Date(new Date().getTime() + 1000 * 60 * 30);
+    const tokenExpireTime = new Date(new Date().getTime() + 1000 * 15);
     auth
       .login(loginForm)
       .then((token) => {
@@ -104,7 +98,7 @@ function App({ auth, boardApi }) {
   };
 
   const onFindPw = (findPwForm) => {
-    console.log(findPwForm);
+    auth.findPw(findPwForm);
   };
 
   const goToLogin = () => {
@@ -134,7 +128,7 @@ function App({ auth, boardApi }) {
     } else {
       clearTimeout(logoutTimer);
     }
-  }, [token, tokenExpiration]);
+  }, [tokenExpiration]);
 
   return (
     <div className={styles.app}>

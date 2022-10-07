@@ -25,13 +25,13 @@ class Auth {
       .post("/api/withdrawal/", parseInt(id))
       .catch((e) => console.log(`error withDrawal axios ${e}`));
   }
-  async findId(findIdForm) {
-    console.log(`useremail: ${findIdForm} and type ${typeof findIdForm}`);
-    console.log(findIdForm);
+  async findPw(findPwForm) {
+    console.log(`useremail: ${findPwForm} and type ${typeof findPwForm}`);
+    console.log(findPwForm);
     const response = await this.auth
-      .post("/api/findid/", findIdForm)
-      .catch(() => console.log("error findid axios"));
-    return response.data;
+      .post("/api/findpw/", findPwForm)
+      .catch(() => console.log("error findpw axios"));
+    // return response.data;
   }
   async mypageChange(mypageForm) {
     const response = await this.auth
