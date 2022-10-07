@@ -40,7 +40,7 @@ public class UserService {
         User result1 = userRepository.findByUseremail(user.getUseremail());
         if(result1 != null) {
 //            System.out.println("이미 존재하는 회원입니다22");
-            throw new IllegalStateException("이미 존재하는 회원입니다");
+            throw new IllegalStateException();
         };
         //비밀번호 암호화
         String encodedPassword = passwordEncoder.encode(user.getUserpassword());
@@ -81,12 +81,9 @@ public class UserService {
 
 //    @Override
     public void findPw(String useremail) throws Exception{
-        log.info(useremail);
         User result = userRepository.findByUseremail(useremail); //입력한 이메일을 가진 회원찾기
-        log.info("여기는 result");
-        log.info(result.getUsername());
         if(result == null) {
-            throw new IllegalStateException("해당 이메일을 가진 사용자가 존재하지 않습니다.");
+            throw new IllegalStateException();
         };
 
         String tempPw = "";
@@ -109,7 +106,7 @@ public class UserService {
 
         if(people == null){
 //            System.out.println("해당하는 회원이 존재하지 않습니다.22");
-            throw new IllegalStateException("해당 이메일을 가진 회원이 존재하지 않습니다.");
+            throw new IllegalStateException();
         }
 //        입력한 아이디, 비번을 가진 회원인지 확인
         if(passwordEncoder.matches(userpassword, people.getUserpassword()))
@@ -122,7 +119,7 @@ public class UserService {
             return token;
         }
         else{
-            throw new IllegalStateException("비밀번호가 일치하지 않습니다.");
+            throw new IllegalStateException();
         }
     }
     //--------------------------------------------------------------------------------------------------
