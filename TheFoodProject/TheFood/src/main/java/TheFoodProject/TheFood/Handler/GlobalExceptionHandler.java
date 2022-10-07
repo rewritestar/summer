@@ -11,12 +11,12 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value=IllegalStateException.class)
     public String handleArgumentException(IllegalStateException e){
-        return "<h1>" + e.getMessage() + "</h1>";
+        return e.getMessage();
     }
 
 
     @ExceptionHandler(value=JwtException.class)
     public String jwtException(JwtException e){
-        return "<h1>" + e.getMessage() + "</h1>";
+        return e.getMessage();
     }
 }
