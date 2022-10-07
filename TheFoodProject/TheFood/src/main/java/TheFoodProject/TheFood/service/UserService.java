@@ -81,10 +81,14 @@ public class UserService {
 
 //    @Override
     public void findPw(String useremail) throws Exception{
+        log.info(useremail);
         User result = userRepository.findByUseremail(useremail); //입력한 이메일을 가진 회원찾기
-        if(result != null) {
+        log.info("여기는 result");
+        log.info(result.getUsername());
+        if(result == null) {
             throw new IllegalStateException("해당 이메일을 가진 사용자가 존재하지 않습니다.");
         };
+
         String tempPw = "";
         for (int i =0; i<12; i++){
             tempPw += (char)((Math.random() *26) + 97);

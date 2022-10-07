@@ -3,12 +3,14 @@ package TheFoodProject.TheFood.Controller;
 import TheFoodProject.TheFood.entity.*;
 import TheFoodProject.TheFood.service.SecurityService;
 import TheFoodProject.TheFood.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
+@Slf4j
 @RestController
 public class UserController {
 
@@ -36,6 +38,8 @@ public class UserController {
 
     @PostMapping("api/findpw")
     public void userFindPw(@RequestBody FindPwForm findPwForm) throws Exception {
+        log.info("findpw java");
+        log.info(findPwForm.getUseremail());
         userService.findPw(findPwForm.getUseremail());
     }
 //--------------------------------------------------------------------------------------------------
