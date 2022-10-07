@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import styles from "./app.module.css";
@@ -22,8 +23,6 @@ function App({ auth, boardApi }) {
   //재접속 자동 로그인
   useEffect(() => {
     const localToken = JSON.parse(localStorage.getItem("token"));
-    console.log("재접속");
-    console.log(localToken);
     if (localToken) {
       const currentTokenExpiration = new Date(localToken.expiration);
       onStayLogin(localToken.token, currentTokenExpiration);
@@ -65,11 +64,9 @@ function App({ auth, boardApi }) {
   //로그인 유지
   const onStayLogin = (t, tokenExpireTime) => {
     const tokenForm = { token: t };
-    console.log(tokenForm);
     auth
       .stayLogin(tokenForm) //
       .then((u) => {
-        console.log(u);
         setUser(u);
         setToken(t);
         setTokenExpiration(tokenExpireTime);
@@ -127,16 +124,14 @@ function App({ auth, boardApi }) {
   };
 
   //자동 로그아웃
-  let logoutTimer;
+  const logoutTimer = useRef();
+
   useEffect(() => {
-    console.log(`token 있나? ${token}`);
-    console.log(`expiration time: ${tokenExpiration}`);
     if (token && tokenExpiration) {
       const remainTime = tokenExpiration.getTime() - new Date().getTime();
-      console.log(`remaintime: ${remainTime}`);
-      logoutTimer = setTimeout(onLogout, remainTime);
+      logoutTimer.current = setTimeout(onLogout, remainTime);
     } else {
-      clearTimeout(logoutTimer);
+      clearTimeout(logoutTimer.current);
     }
   }, [tokenExpiration]);
 
