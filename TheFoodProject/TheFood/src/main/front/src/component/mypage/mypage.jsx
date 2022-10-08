@@ -4,8 +4,18 @@ import styles from "../user_component.module.css";
 import Container from "../container/container";
 import MypageButtons from "../buttons/mypage_buttons";
 import TitleBar from "../title_bar/title_bar";
+import { useNavigate } from "react-router-dom";
 
 const Mypage = ({ user, onChange, onwithDrawal }) => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!user) {
+      alert(
+        "로그인 유효기한이 만료되어 로그아웃 되었습니다. 다시 한번 로그인해주세요."
+      );
+      navigate("/login");
+    }
+  }, [user]);
   const formRef = useRef();
   const nameRef = useRef();
   const passwordRef = useRef();
@@ -107,10 +117,7 @@ const Mypage = ({ user, onChange, onwithDrawal }) => {
           </button>
         </section>
       </div>
-      <MypageButtons
-        onwithDrawal={onwithDrawal}
-        userid={user ? user.id : null}
-      />
+      <MypageButtons onwithDrawal={onwithDrawal} userid={user.id} />
     </Container>
   );
 };

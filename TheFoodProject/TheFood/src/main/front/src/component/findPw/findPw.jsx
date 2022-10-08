@@ -15,7 +15,6 @@ const FindPw = ({ onFindPw, goToLogin, goToSignup }) => {
     const useremail = emailRef.current.value;
     const findPwForm = { useremail };
     onFindPw(findPwForm);
-    navigate("/");
   };
 
   return (

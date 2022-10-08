@@ -20,15 +20,6 @@ function App({ auth, boardApi }) {
   const [tokenExpiration, setTokenExpiration] = useState();
   const [token, setToken] = useState();
 
-  //재접속 자동 로그인
-  useEffect(() => {
-    const localToken = JSON.parse(localStorage.getItem("token"));
-    if (localToken) {
-      const currentTokenExpiration = new Date(localToken.expiration);
-      onStayLogin(localToken.token, currentTokenExpiration);
-    }
-  }, []);
-
   const navigate = useNavigate();
   const onMypageChange = (mypageForm) => {
     auth
@@ -55,9 +46,13 @@ function App({ auth, boardApi }) {
     auth
       .signup(signupForm) //
       .then((u) => {
-        alert("회원가입이 성공적으로 완료되었습니다!");
-        setUser(u);
-        navigate("/");
+        if (!u) {
+          alert("이미 존재하는 회원입니다.");
+        } else {
+          alert("회원가입이 성공적으로 완료되었습니다!");
+          setUser(u);
+          navigate("/");
+        }
       });
   };
 
@@ -79,21 +74,21 @@ function App({ auth, boardApi }) {
 
   //첫 로그인
   const onLogin = (loginForm) => {
-    const tokenExpireTime = new Date(new Date().getTime() + 1000 * 15);
-    auth.login(loginForm).then((t) => {
-      console.log("onlogin res");
-      console.log(t);
-      if (!t) {
-        alert("이메일 혹은 비밀번호를 다시 확인해주세요.");
-      } else {
-        const tokenLocal = { token: t, expiration: tokenExpireTime };
-        localStorage.removeItem("token");
-        localStorage.setItem("token", JSON.stringify(tokenLocal));
-        onStayLogin(t, tokenExpireTime);
-        alert("로그인이 성공적으로 완료 됐습니다.");
-        navigate("/");
-      }
-    });
+    const tokenExpireTime = new Date(new Date().getTime() + 1000 * 60 * 30);
+    auth
+      .login(loginForm) //
+      .then((t) => {
+        if (!t) {
+          alert("이메일 혹은 비밀번호를 다시 확인해주세요.");
+        } else {
+          const tokenLocal = { token: t, expiration: tokenExpireTime };
+          localStorage.removeItem("token");
+          localStorage.setItem("token", JSON.stringify(tokenLocal));
+          onStayLogin(t, tokenExpireTime);
+          alert("로그인이 성공적으로 완료 됐습니다.");
+          navigate("/");
+        }
+      });
   };
 
   const onLogout = () => {
@@ -106,7 +101,21 @@ function App({ auth, boardApi }) {
   };
 
   const onFindPw = (findPwForm) => {
-    auth.findPw(findPwForm);
+    auth
+      .findPw(findPwForm) //
+      .then((res) => {
+        if (!res) {
+          alert(
+            "해당하는 이메일의 회원이 없습니다! 이메일을 다시 한번 확인해주세요."
+          );
+        } else {
+          //새로운 페이지로 이동시키는 게 좋을 듯
+          alert(
+            "고객님의 이메일로 임의로 발급된 비밀번호를 전송하였습니다! 확인해주시고, 해당 비밀번호로 로그인하신 후, 비밀번호를 변경해주세요!"
+          );
+          navigate("/login");
+        }
+      });
   };
 
   const goToLogin = () => {
@@ -124,6 +133,17 @@ function App({ auth, boardApi }) {
   const goToMypage = () => {
     navigate("/mypage");
   };
+  //재접속 자동 로그인
+  useEffect(() => {
+    const localToken = JSON.parse(localStorage.getItem("token"));
+    if (localToken) {
+      const currentTokenExpiration = new Date(localToken.expiration);
+      //유효 만료시간이 아직 남은 경우에만 로그인
+      if (currentTokenExpiration > new Date()) {
+        onStayLogin(localToken.token, currentTokenExpiration);
+      }
+    }
+  }, []);
 
   //자동 로그아웃
   const logoutTimer = useRef();
@@ -147,7 +167,7 @@ function App({ auth, boardApi }) {
         onLogout={onLogout}
       />
       <Routes>
-        <Route path="/" exact element={<Home auth={auth} />} />
+        <Route path="/" exact element={<Home user={user} />} />
         <Route
           path="/login"
           exact

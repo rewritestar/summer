@@ -3,7 +3,7 @@ import Header from "../header/header";
 import MainPage from "../main_page/main_page";
 import styles from "./home.module.css";
 
-const Home = ({ auth }) => {
+const Home = ({ user }) => {
   return (
     <div className={styles.container}>
       <Header />

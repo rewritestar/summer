@@ -80,7 +80,7 @@ public class UserService {
 //    }
 
 //    @Override
-    public void findPw(String useremail) throws Exception{
+    public boolean findPw(String useremail) throws Exception{
         User result = userRepository.findByUseremail(useremail); //입력한 이메일을 가진 회원찾기
         if(result == null) {
             throw new IllegalStateException();
@@ -96,7 +96,7 @@ public class UserService {
         //임시 비번 저장
         String encodedPassword = passwordEncoder.encode(tempPw);
         result.setUserpassword(encodedPassword);
-
+        return true;
 //        throw new Exception("에러가 발생하였습니다");
     }
 //--------------------------------------------------------------------------------------------------

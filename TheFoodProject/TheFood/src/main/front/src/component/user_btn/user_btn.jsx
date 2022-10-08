@@ -1,25 +1,7 @@
 import Button from "../button/button";
 import styles from "./user_btn.module.css";
 import { BiUserCircle } from "react-icons/bi";
-import { useEffect, useState } from "react";
 const UserBtn = ({ user, goToLogin, goToSignup, goToMypage, onLogout }) => {
-  // const [user, setUser] = useState();
-  // const token = localStorage.getItem("token");
-  // useEffect(() => {
-  //   const tokenForm = { token };
-  //   console.log(tokenForm);
-  //   token &&
-  //     auth
-  //       .stayLogin(tokenForm) //
-  //       .then((user) => {
-  //         console.log(user);
-  //         setUser(user);
-  //       })
-  //       .catch((e) => {
-  //         console.log("token error");
-  //         setUser();
-  //       });
-  // }, []);
   return (
     <div className={styles.container}>
       <div className={styles.show}>

@@ -35,7 +35,12 @@ const BoardWrite = ({ user, boardApi }) => {
     "맛집-기타": 208,
     일상게시판: 300,
   };
-
+  useEffect(() => {
+    if (!user) {
+      alert("로그인이 필요한 서비스입니다.");
+      navigate("/login");
+    }
+  }, [user]);
   //게시글 수정할 때 발생함
   useEffect(() => {
     wroteBoard && setBoard(wroteBoard);

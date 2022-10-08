@@ -37,10 +37,10 @@ public class UserController {
 //    }
 
     @PostMapping("api/findpw")
-    public void userFindPw(@RequestBody FindPwForm findPwForm) throws Exception {
+    public boolean userFindPw(@RequestBody FindPwForm findPwForm) throws Exception {
         log.info("findpw java");
         log.info(findPwForm.getUseremail());
-        userService.findPw(findPwForm.getUseremail());
+        return userService.findPw(findPwForm.getUseremail());
     }
 //--------------------------------------------------------------------------------------------------
     //로그인

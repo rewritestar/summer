@@ -12,9 +12,6 @@ class Auth {
     const response = await this.auth
       .post("/api/login/", loginForm)
       .catch(() => console.log("error login axios"));
-    console.log("login auth.js");
-    console.log(response);
-
     return response.data;
   }
   async signup(signupForm) {
@@ -29,11 +26,10 @@ class Auth {
       .catch((e) => console.log(`error withDrawal axios ${e}`));
   }
   async findPw(findPwForm) {
-    console.log(`useremail: ${findPwForm} and type ${typeof findPwForm}`);
-    console.log(findPwForm);
-    this.auth
+    const response = await this.auth
       .post("/api/findpw/", findPwForm)
       .catch(() => console.log("error findpw axios"));
+    return response.data;
   }
   async mypageChange(mypageForm) {
     const response = await this.auth
