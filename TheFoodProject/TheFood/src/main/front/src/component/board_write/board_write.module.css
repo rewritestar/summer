@@ -90,6 +90,9 @@
   outline: 0;
   border: 0;
 }
+.category option[disabled] {
+  display: none;
+}
 .file {
   border-left: 2px solid colorFourth;
   padding: 0 1em;

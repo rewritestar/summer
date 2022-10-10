@@ -6,7 +6,8 @@ import MypageButtons from "../buttons/mypage_buttons";
 import TitleBar from "../title_bar/title_bar";
 import { useNavigate } from "react-router-dom";
 
-const Mypage = ({ user, onChange, onwithDrawal }) => {
+const Mypage = ({ onChange, onwithDrawal }) => {
+  const user = { id: 1 };
   const navigate = useNavigate();
   useEffect(() => {
     if (!user) {

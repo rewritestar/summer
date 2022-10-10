@@ -119,10 +119,23 @@ const BoardWrite = ({ user, boardApi }) => {
               ref={categoryRef}
               className={styles.category}
               name="category"
-              defaultValue={board ? board.category : ""}
             >
-              <option value="none" disabled>
-                -카테고리 선택-
+              <option
+                value={
+                  board
+                    ? Object.keys(TYPE_CODE).find(
+                        (key) => TYPE_CODE[key] === board.category
+                      )
+                    : "none"
+                }
+                disabled
+                selected
+              >
+                {board
+                  ? Object.keys(TYPE_CODE).find(
+                      (key) => TYPE_CODE[key] === board.category
+                    )
+                  : "-카테고리 선택-"}
               </option>
               <option value="레시피-한식">레시피-한식</option>
               <option value="레시피-양식">레시피-양식</option>

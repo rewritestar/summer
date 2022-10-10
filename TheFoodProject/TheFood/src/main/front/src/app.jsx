@@ -50,7 +50,6 @@ function App({ auth, boardApi }) {
           alert("이미 존재하는 회원입니다.");
         } else {
           alert("회원가입이 성공적으로 완료되었습니다!");
-          setUser(u);
           navigate("/");
         }
       });

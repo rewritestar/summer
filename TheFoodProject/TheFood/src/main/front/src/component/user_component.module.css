@@ -2,7 +2,7 @@
 @value fontKR from '../common/fonts.css';
 .form_container {
   width: 38%;
-  height: 87vh;
+  height: 74vh;
   margin: auto;
   display: flex;
   flex-direction: column;
