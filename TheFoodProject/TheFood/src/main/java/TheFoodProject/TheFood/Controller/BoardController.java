@@ -22,13 +22,6 @@ public class BoardController {
     @Autowired
     private SecurityService securityService;
 
-//    @PostMapping("/api/boardwrite")
-//    public String boardWritePro(Board board, MultipartFile file, Authentication authentication) throws Exception{
-//        String userid = authentication.getName();
-//        boardService.write(userid, board, file);
-//        return "redirect:/board/list";
-//    }
-
     //보드 작성
     @PostMapping("/api/boardwrite")
     public Board boardWritePro(@RequestBody BoardForm boardForm) throws Exception {
@@ -42,14 +35,10 @@ public class BoardController {
         newBoard.setUserid(boardForm.getUserid());
 
         if (boardForm.getId() != 0){
-
             return boardService.update(boardForm.getId(), newBoard);
-
         }
         else{
         return boardService.write(newBoard);}
-
-
     }
 
     //카테고리별 게시판 분류
@@ -57,7 +46,6 @@ public class BoardController {
     public List<Board> recipeBoardList(@RequestBody Integer category){
         return boardService.boardList1(category);
     }
-
     @GetMapping("/api/recipe/all")
     public List<Board> recipeBoardList1(){
         return boardService.RecipeCategory();
@@ -67,9 +55,7 @@ public class BoardController {
         return boardService.boardList1(category);
     }
     @GetMapping("/api/restaurant/all")
-    public List<Board> restaurantBoardList1(){
-        return boardService.RestautantCategory();}
-
+    public List<Board> restaurantBoardList1(){ return boardService.RestautantCategory();}
     @GetMapping("/api/free")
     public List<Board> freeBoardList(){
         return boardService.boardList1(300);

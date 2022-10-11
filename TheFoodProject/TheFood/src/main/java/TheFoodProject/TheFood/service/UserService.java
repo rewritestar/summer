@@ -1,14 +1,18 @@
 package TheFoodProject.TheFood.service;
 
-import TheFoodProject.TheFood.Controller.MailUtil;
 import TheFoodProject.TheFood.entity.Board;
 import TheFoodProject.TheFood.entity.Comment;
+import TheFoodProject.TheFood.entity.StartTokenForm;
 import TheFoodProject.TheFood.entity.User;
 import TheFoodProject.TheFood.repository.BoardRepository;
 import TheFoodProject.TheFood.repository.CommentRepository;
 import TheFoodProject.TheFood.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +23,7 @@ import java.util.Optional;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class UserService {
     @Autowired
     private UserRepository userRepository;
@@ -33,13 +38,17 @@ public class UserService {
     private SecurityService securityService;
 
 
+    private final JavaMailSender mailSender;
+    @Value("${spring.mail.username}")
+    private String sender;
+
+
     //회원가입
     public User save(User user) {
 
         //중복회원가입 불가
         User result1 = userRepository.findByUseremail(user.getUseremail());
         if(result1 != null) {
-//            System.out.println("이미 존재하는 회원입니다22");
             throw new IllegalStateException();
         };
         //비밀번호 암호화
@@ -49,74 +58,48 @@ public class UserService {
         return userRepository.save(user);
     }
 //--------------------------------------------------------------------------------------------------
-    //아이디,비밀번호 찾기
-//    public String findid(String useremail){
-//        User result = userRepository.findByUseremail(useremail); //입력한 이메일을 가진 회원찾기
-//        log.info(useremail + "useremail");
-//        if(result != null){
-//            log.info(result.getUserid() + "userid 찾음!");
-//            return result.getUserid();
-//        }else{
-//            log.info("userid 못찾음");
-//            return null;
-//        }
-//
-//    }
-
-//    public String findpassword(String useremail, String userid){
-//        Optional<User> person1 = userRepository.findByuseremail(useremail);
-//        Optional<User> person2 = userRepository.findByuserid(userid);
-//        //만약 일치하는 회원이 없다면
-//        if(person1.isEmpty() || person2.isEmpty()){
-//            throw new IllegalStateException("해당하는 회원이 존재하지 않습니다.");
-//        }
-//        //입력한 이메일, 아이디 두개 다 일치하는 회원인지 확인
-//        if (person2.equals(person1)) {
-//            System.out.println(person2.get().getUserpassword());
-//        }
-//        else {System.out.println("해당하는 회원이 존재하지 않습니다");}
-//
-//        return person2.get().getUserpassword();
-//    }
-
-//    @Override
+    //비밀번호 찾기
     public boolean findPw(String useremail) throws Exception{
         User result = userRepository.findByUseremail(useremail); //입력한 이메일을 가진 회원찾기
         if(result == null) {
             throw new IllegalStateException();
         };
 
+        //임시 비번 생성
         String tempPw = "";
         for (int i =0; i<12; i++){
             tempPw += (char)((Math.random() *26) + 97);
         }
-        MailUtil mailUtil = new MailUtil();
-        mailUtil.sendMail(useremail, tempPw);
 
-        //임시 비번 저장
+        //메일 발송
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(useremail);
+        message.setFrom(sender);
+        message.setSubject("[The Food]" + result.getUsername() + "님의 임시 비밀번호 발급");
+        message.setText("안녕하세요. \n" + result.getUsername() + "님의 [The Food] 임시비밀번호를 발급해드립니다. \n" + tempPw +
+                "\n위 비밀번호로 로그인 후 마이페이지에서 새로운 비밀번호로 변경해주시길 바랍니다. 감사합니다.");
+        mailSender.send(message);
+
+        //임시 비번으로 저장
         String encodedPassword = passwordEncoder.encode(tempPw);
         result.setUserpassword(encodedPassword);
+        userRepository.save(result);
         return true;
 //        throw new Exception("에러가 발생하였습니다");
     }
 //--------------------------------------------------------------------------------------------------
     //로그인
-    public String login(String useremail, String userpassword){
+    public StartTokenForm login(String useremail, String userpassword){
         User people = userRepository.findByUseremail(useremail);
 
         if(people == null){
-//            System.out.println("해당하는 회원이 존재하지 않습니다.22");
             throw new IllegalStateException();
         }
+
 //        입력한 아이디, 비번을 가진 회원인지 확인
         if(passwordEncoder.matches(userpassword, people.getUserpassword()))
         {
-            String token = securityService.createToken(useremail) ;
-            System.out.println("토큰은 " + token);
-//            System.out.println("토큰이 유효한가요?" + securityService.validateToken(token));
-//            System.out.println("user : " + securityService.getUser(token));
-
-            return token;
+            return securityService.createToken(useremail);
         }
         else{
             throw new IllegalStateException();
@@ -142,7 +125,7 @@ public class UserService {
     }
 
     //마이페이지/회원정보수정
-    public User mypage(Integer id, String username, String userpassword){
+    public Optional<User> mypage(Integer id, String username, String userpassword){
         Optional<User> people = userRepository.findById(id);
        people.ifPresent((u)->{
            u.setUsername(username);
@@ -165,13 +148,8 @@ public class UserService {
             commentRepository.save(newcomment.get(i));
         }
 
-        return people.get();
+        return people;
     }
 
-    //로그인 유지
-//    public User stay(Integer id){
-//        Optional<User> user = userRepository.findById(id);
-//        return user.get();
-//    }
 }
 
