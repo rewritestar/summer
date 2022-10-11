@@ -37,17 +37,6 @@ public class BoardService {
 //        board.setFilename(fileName);
 //        board.setFilepath("/files/" + fileName);
 
-        //카테고리 나눌때 참고하려고 둔 코드
-//        Role role = new Role();
-//        role.setId(1l);
-//        user.getRoles().add(role);
-//        Recipeboard recipeboard = new Recipeboard();
-//        recipeboard.setRecipeid(1);
-//        board.getRecipeboards().add(recipeboard);
-
-//        if (100 <= board.getCategory() && board.getCategory() < 200) {
-//            sort(board, new Recipeboard() );
-//        }
 
         boardRepository.save(board);
 
@@ -77,19 +66,16 @@ public class BoardService {
         return boardRepository.findBycategory(category);
     }
 
-    public List<Board> RecipeCategory(){
+    public List<Board> RecipeCategory(){ //레시피 게시판 전체
         Stream<Board> newBoards = boardRepository.findAll().stream().filter(board ->
-                100 < board.getCategory()  && board.getCategory()< 200
-        );
+                100 < board.getCategory()  && board.getCategory()< 200);
         return newBoards.collect(Collectors.toList());
 }
 
-    public List<Board> RestautantCategory(){
+    public List<Board> RestautantCategory(){ //맛집 게시판 전체
         Stream<Board> newBoards = boardRepository.findAll().stream().filter(board ->
-                200 < board.getCategory()  && board.getCategory()< 300
-        );
+                200 < board.getCategory()  && board.getCategory()< 300);
         return newBoards.collect(Collectors.toList());}
-
 
     //보드 삭제
     public void boardDelete(Integer id){

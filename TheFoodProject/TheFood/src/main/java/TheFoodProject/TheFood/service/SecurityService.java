@@ -1,5 +1,6 @@
 package TheFoodProject.TheFood.service;
 
+import TheFoodProject.TheFood.entity.StartTokenForm;
 import TheFoodProject.TheFood.entity.User;
 import TheFoodProject.TheFood.repository.UserRepository;
 import io.jsonwebtoken.Claims;
@@ -7,16 +8,15 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
-import lombok.Value;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
-import javax.xml.bind.DatatypeConverter;
-import java.security.Key;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-
+@Slf4j
 @Service
 public class SecurityService {
     @Autowired
@@ -29,20 +29,35 @@ public class SecurityService {
 //    private String secretKey;
     private int tokenExpirationMsec = 60*1000*30;  // 만료시간 지금은 테스트해보고 싶어서 1분으로 해둠/ 30분 설정 계산은 -> 30분 30*1000*60
 
+
+
 //    ------------------------------------------------------------------------------------------------------
     //토큰 생성코드
-    public String createToken(String useremail) {
+    public StartTokenForm createToken(String useremail) {
+
+        StartTokenForm tokenForm = new StartTokenForm();
+
+        Date date = new Date();
+        String dateToStr = String.format(String.valueOf(new Date(System.currentTimeMillis() + tokenExpirationMsec)), date);
+
+
         ////비번으로 암호화할거면 이 코드 필요
 //        SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256; //토큰 암호화 방법?함수?
 //        byte[] secretKeyBytes = DatatypeConverter.parseBase64Binary(key); //64비트
 //        Key signingkey = new SecretKeySpec(secretKeyBytes, signatureAlgorithm.getJcaName());
 
-        return Jwts.builder()
+        String token =  Jwts.builder()
                 .setSubject(useremail) //토큰 정보 중 하나에 들어감/ 토큰 제목?
                 .signWith(key, SignatureAlgorithm.HS256)
 //                .signWith(signingkey, signatureAlgorithm) //비밀번호로 암호화할거면 윗줄 대신 이거 사용
                 .setExpiration(new Date(System.currentTimeMillis() + tokenExpirationMsec))  //만료시간
-                .compact(); //토큰 생성 완료
+                .compact();//토큰 생성 완료
+
+        tokenForm.setToken(token);
+        tokenForm.setExpiration(dateToStr);
+
+        return tokenForm;
+
     }
 
 //        ------------------------------------------------------------------------------------------------------

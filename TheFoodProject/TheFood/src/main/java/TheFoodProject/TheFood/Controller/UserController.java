@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
+
 
 @Slf4j
 @RestController
 public class UserController {
-
     @Autowired
     private UserService userService;
 
@@ -30,24 +31,16 @@ public class UserController {
         return userService.save(newUser);
     }
 //--------------------------------------------------------------------------------------------------
-    //아이디,비밀번호 찾기
-//    @PostMapping("api/findid")
-//    public String userFindId(@RequestBody FindIdForm findIdForm){
-//        return userService.findid(findIdForm.getUseremail());
-//    }
-
+    //비밀번호 찾기
     @PostMapping("api/findpw")
     public boolean userFindPw(@RequestBody FindPwForm findPwForm) throws Exception {
-        log.info("findpw java");
-        log.info(findPwForm.getUseremail());
         return userService.findPw(findPwForm.getUseremail());
     }
 //--------------------------------------------------------------------------------------------------
     //로그인
     @PostMapping("api/login")
-    public String userLogin(@RequestBody LoginForm loginForm) throws Exception {
+    public StartTokenForm userLogin(@RequestBody LoginForm loginForm) throws Exception {
         return userService.login(loginForm.getUseremail(), loginForm.getUserpassword());
-
     }
 //--------------------------------------------------------------------------------------------------
 //탈퇴
@@ -59,17 +52,10 @@ public class UserController {
 //--------------------------------------------------------------------------------------------------
     //마이페이지
     @PostMapping("/api/mypage")
-    public User mypage(@RequestBody MypageForm mypageForm){
+    public Optional<User>mypage(@RequestBody MypageForm mypageForm){
         return userService.mypage(mypageForm.getId(), mypageForm.getUsername(), mypageForm.getUserpassword());
     }
 //-----------------------------------------------------
-    //로그인 유지
-//    @PostMapping("/api/staylogin/")
-//    public User userStay(@RequestBody Integer id){
-//        return userService.stay(id);
-//    }
-
-
     //토큰을 통해 유저 정보 주는 코드
     @PostMapping("/api/staylogin/")
     public User tokenUser(@RequestBody TokenForm tokenForm){
