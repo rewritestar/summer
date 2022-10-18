@@ -1,12 +1,8 @@
 # TheFood Website(맛집-레시피 게시글 웹사이트)
 
-**Summer 동아리 활동 2022 07 05 ~ (진행중) **<br>
-*User can handle like button to collect book and can see that in like page.*<br>
-*User can handle cart button to collect book and can see that in cart page.*<br>
-*Their like's, cart's info are saved in localstrage. Not volatillity but User can remove all data.*
+**Summer 동아리 활동 2022 07 05 ~ (진행중)**<br>
 
 ## Summer 동아리원
-
 ### front-end
 상명대학교 조인미
 
