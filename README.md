@@ -2,6 +2,8 @@
 
 **Summer 동아리 활동 2022 07 05 ~ (진행중)**<br>
 
+
+
 ## Summer 동아리원
 ### front-end
 상명대학교 조인미
@@ -16,6 +18,8 @@
 - Email | 20211398@sungshin.ac.kr
 - Instargram | https://www.instagram.com/su_record21/
 
+
+
 ## Environment(개발환경)
 ### front-end(프론트앤드)
 - React.js
@@ -29,6 +33,8 @@
 - Maria database
 ### API
 - Axios
+
+
 
 
 ## Service(제공 기능)
