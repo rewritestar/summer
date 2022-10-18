@@ -10,8 +10,15 @@
 ### front-end
 상명대학교 조인미
 
+- Github | https://github.com/rewritestar
+- Email | rewritestar@naver.com
+- blog | https://rewritestar.tistory.com/
+
 ### back-end
 성신여자대학교 전수진
+- Github | https://github.com/su-jin02
+- Email | 20211398@sungshin.ac.kr
+- Instargram | https://www.instagram.com/su_record21/
 
 ## Environment(개발환경)
 ### front-end(프론트앤드)
