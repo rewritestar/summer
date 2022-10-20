@@ -58,7 +58,7 @@ public class UserController {
 //-----------------------------------------------------
     //토큰을 통해 유저 정보 주는 코드
     @PostMapping("/api/staylogin/")
-    public User tokenUser(@RequestBody TokenForm tokenForm){
+    public TokenUser tokenUser(@RequestBody TokenForm tokenForm){
         return securityService.getUser(tokenForm.getToken());
     }
 
