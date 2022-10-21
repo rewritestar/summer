@@ -1,6 +1,7 @@
 package TheFoodProject.TheFood.service;
 
 import TheFoodProject.TheFood.entity.StartTokenForm;
+import TheFoodProject.TheFood.entity.TokenUser;
 import TheFoodProject.TheFood.entity.User;
 import TheFoodProject.TheFood.repository.UserRepository;
 import io.jsonwebtoken.Claims;
@@ -62,7 +63,7 @@ public class SecurityService {
 
 //        ------------------------------------------------------------------------------------------------------
     //토큰에서 유저 이메일 추출하고 이를 통해 유저 알아내기
-    public User getUser(String token){
+    public TokenUser getUser(String token){
         Claims claims = Jwts.parserBuilder()
 //                .setSigningKey(DatatypeConverter.parseBase64Binary(key))
                 .setSigningKey(key)
@@ -72,7 +73,11 @@ public class SecurityService {
         String tokenUseremail =  claims.getSubject();
         //유저 찾기
         User people = userRepository.findByUseremail(tokenUseremail);
-        return  people;
+        TokenUser tokenUser = new TokenUser();
+        tokenUser.setUsername(people.getUsername());
+        tokenUser.setId(people.getId());
+        tokenUser.setUsername(people.getUsername());
+        return  tokenUser;
 
     }
 
