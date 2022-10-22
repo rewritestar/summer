@@ -47,29 +47,29 @@
 
 ## 실제 웹사이트 화면
 
-### 메인화면
+### 메인화면 <br>
 ![image](https://user-images.githubusercontent.com/60992593/197318705-ebb15410-2bda-44d8-91e0-e0f5c346005f.png)
 
-### 회원가입
+### 회원가입 <br>
 ![image](https://user-images.githubusercontent.com/60992593/197318741-3d790948-dd84-474b-8d6f-92ad33be22d8.png)
 
-### 비밀번호 찾기
+### 비밀번호 찾기<br>
 
-- 찾기
+- 찾기<br>
 ![image](https://user-images.githubusercontent.com/60992593/197318836-30d788b3-5851-4a58-a6fb-2a164935dbd7.png)
 
-- 이메일 전송
+- 이메일 전송<br>
 ![image](https://user-images.githubusercontent.com/60992593/197318797-fc3da6f9-2da4-46d5-82cd-31a8862e3897.png)
 
-### 카테고리
+### 카테고리<br>
 
 ![image](https://user-images.githubusercontent.com/60992593/197318930-eb9bbf2b-a07e-4df0-82f6-5f18df8994e4.png)
 
-### 게시글 조회
+### 게시글 조회<br>
 
 ![image](https://user-images.githubusercontent.com/60992593/197318954-0d1bf75f-4ab2-43cf-89e3-18eeae3762fa.png)
 
-### 댓글
+### 댓글<br>
 
 ![image](https://user-images.githubusercontent.com/60992593/197318989-bfa04e8a-41d9-4c59-b78c-e494efbebac9.png)
 
