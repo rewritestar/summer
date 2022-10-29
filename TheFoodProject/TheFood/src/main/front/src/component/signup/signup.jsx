@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Container from "../container/container";
-import styles from "../user_component.module.css";
+import styles from "./signup.module.css";
 import TitleBar from "../title_bar/title_bar";
 
 const Signup = ({ onSignup, goToLogin, goToFindPw }) => {
@@ -11,9 +11,11 @@ const Signup = ({ onSignup, goToLogin, goToFindPw }) => {
   const formRef = useRef();
   const passwordRef = useRef();
   const password_checkRef = useRef();
-  const emailRef = useRef();
+  const email1Ref = useRef();
+  const email2Ref = useRef();
   const nameRef = useRef();
 
+  const [inputEdit, setInputEdit] = useState(false);
   const [check, setCheck] = useState({
     password: "",
     password_check: "",
@@ -49,7 +51,7 @@ const Signup = ({ onSignup, goToLogin, goToFindPw }) => {
     e.preventDefault();
     const userpassword = passwordRef.current.value;
     const userpassword_check = password_checkRef.current.value;
-    const useremail = emailRef.current.value;
+    const useremail = `${email1Ref.current.value}@${email2Ref.current.value}`;
     const username = nameRef.current.value;
     if (userpassword !== userpassword_check) {
       alert("비밀번호가 일치하지 않습니다.");
@@ -58,6 +60,17 @@ const Signup = ({ onSignup, goToLogin, goToFindPw }) => {
     const signupForm = { userpassword, useremail, username };
 
     onSignup(signupForm);
+  };
+
+  const handleSelect = (e) => {
+    const value = e.target.value;
+    if (value === "none") {
+      setInputEdit(true);
+      email2Ref.current.value = "";
+    } else {
+      setInputEdit(false);
+      email2Ref.current.value = value;
+    }
   };
   return (
     <Container>
@@ -71,14 +84,36 @@ const Signup = ({ onSignup, goToLogin, goToFindPw }) => {
         >
           <div className={styles.email}>
             <span className={styles.title}>이메일</span>
-            <input
-              ref={emailRef}
-              className={styles.input}
-              type="email"
-              name="email"
-              placeholder="이메일"
-              required
-            />
+            <div className={styles.inputContainer}>
+              <input
+                ref={email1Ref}
+                className={styles.input}
+                type="text"
+                name="email1"
+                placeholder="이메일"
+                required
+              />
+              <p className={styles.at}>@</p>
+              <input
+                ref={email2Ref}
+                className={styles.input}
+                type="text"
+                name="email2"
+                placeholder="이메일"
+                readOnly={inputEdit ? false : true}
+                required
+              />
+              <select onChange={handleSelect}>
+                <option value="">선택하세요</option>
+                <option value="naver.com">naver.com</option>
+                <option value="nate.com">nate.com</option>
+                <option value="gmail.com">gmail.com</option>
+                <option value="yahoo.com">yahoo.com</option>
+                <option value="hotmail.com">hanmail.net</option>
+                <option value="hanmail.net">hanmail.net</option>
+                <option value="none">직접입력</option>
+              </select>
+            </div>
           </div>
           <div className={styles.password}>
             <span className={styles.title}>비밀번호</span>

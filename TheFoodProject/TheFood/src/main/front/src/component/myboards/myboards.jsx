@@ -4,21 +4,29 @@ import Container from "../container/container";
 import Page from "../page/page";
 import TitleBar from "../title_bar/title_bar";
 import styles from "./myboards.module.css";
-const Myboards = ({ user, boardApi }) => {
+const Myboards = ({ auth, boardApi }) => {
   const navigate = useNavigate();
   const [boards, setBoards] = useState([]);
 
   const location = useLocation();
   const type = location.state;
 
+  const [user, setUser] = useState();
   useEffect(() => {
-    if (!user) {
+    const tokenForm = localStorage.getItem("token");
+    if (tokenForm.expiration < new Date()) {
       alert(
         "로그인 유효기한이 만료되어 로그아웃 되었습니다. 다시 한번 로그인해주세요."
       );
       navigate("/login");
+    } else {
+      auth
+        .stayLogin(tokenForm) //
+        .then((u) => {
+          setUser(u);
+        });
     }
-  }, [user]);
+  }, []);
 
   useEffect(() => {
     type === "내 댓글 조회" &&

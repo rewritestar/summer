@@ -6,7 +6,7 @@ import CommentList from "../comment_list/comment_list";
 import Container from "../container/container";
 import styles from "./board_detail.module.css";
 import TitleBar from "../title_bar/title_bar";
-const BoardDetail = ({ user, boardApi }) => {
+const BoardDetail = ({ auth, boardApi }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -49,6 +49,24 @@ const BoardDetail = ({ user, boardApi }) => {
         window.location.href = "/";
       });
   };
+
+  //자동 로그인
+  const [user, setUser] = useState();
+  useEffect(() => {
+    const tokenForm = localStorage.getItem("token");
+    if (tokenForm.expiration < new Date()) {
+      alert(
+        "로그인 유효기한이 만료되어 로그아웃 되었습니다. 다시 한번 로그인해주세요."
+      );
+      navigate("/login");
+    } else {
+      auth
+        .stayLogin(tokenForm) //
+        .then((u) => {
+          setUser(u);
+        });
+    }
+  }, []);
   return (
     <Container>
       <TitleBar title={TYPE_CODE[board.category]} />

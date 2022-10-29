@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./board_write.module.css";
-const BoardWrite = ({ user, boardApi }) => {
+const BoardWrite = ({ auth, boardApi }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -35,12 +35,22 @@ const BoardWrite = ({ user, boardApi }) => {
     "맛집-기타": 208,
     일상게시판: 300,
   };
+  const [user, setUser] = useState();
   useEffect(() => {
-    if (!user) {
-      alert("로그인이 필요한 서비스입니다.");
+    const tokenForm = localStorage.getItem("token");
+    if (tokenForm.expiration < new Date()) {
+      alert(
+        "로그인 유효기한이 만료되어 로그아웃 되었습니다. 다시 한번 로그인해주세요."
+      );
       navigate("/login");
+    } else {
+      auth
+        .stayLogin(tokenForm) //
+        .then((u) => {
+          setUser(u);
+        });
     }
-  }, [user]);
+  }, []);
   //게시글 수정할 때 발생함
   useEffect(() => {
     wroteBoard && setBoard(wroteBoard);

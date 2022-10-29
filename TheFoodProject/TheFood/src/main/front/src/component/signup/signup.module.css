@@ -1,0 +1,128 @@
+@value colorFirst, colorSecond, colorThird, colorFourth, colorWhite, colorBlack, colorGrey, colorPink, colorGreen from '../../common/colors.css';
+@value fontKR from '../../common/fonts.css';
+.form_container {
+  width: 38%;
+  height: 87vh;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.form {
+  width: 100%;
+  margin-bottom: 1em;
+}
+.id,
+.password,
+.password_check,
+.email,
+.nickname {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 1em;
+}
+.inputContainer {
+  display: flex;
+  align-items: center;
+}
+.inputContainer > * {
+  margin-right: 0.5em;
+}
+
+.title {
+  font-family: fontKR;
+  font-weight: bold;
+  color: colorBlack;
+  margin-bottom: 1em;
+}
+.input {
+  width: 22em;
+  border: 2px solid colorFourth;
+  border-radius: 20px;
+  padding: 0.7em 1em;
+  background-color: colorWhite;
+  color: colorBlack;
+  cursor: pointer;
+}
+.input:focus {
+  outline: 0;
+  transition: 0.5s ease-out;
+  background-color: colorWhite;
+}
+.input::placeholder {
+  color: colorGrey;
+  border: 0;
+  font-size: 12px;
+}
+
+.email .input {
+  width: 15em;
+}
+.buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.link {
+  display: flex;
+  flex-direction: column;
+}
+
+.button {
+  background-color: transparent;
+  border: 0;
+  color: #0058d3;
+  text-align: left;
+  cursor: pointer;
+}
+.button:hover {
+  opacity: 70%;
+  transition: 0.3s ease-out;
+}
+
+.submit_btn {
+  background-color: colorFourth;
+  border: 0;
+  padding: 0.5em 1.5em;
+  color: colorBlack;
+  font-family: fontKR;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.submit_btn:hover {
+  background-color: colorSecond;
+  transition: 0.3s ease-out;
+}
+
+.password_check {
+  margin-bottom: 0;
+}
+.password_word {
+  font-size: 14px;
+  margin: 1em 0;
+}
+.password_word.pink {
+  color: colorPink;
+}
+.password_word.green {
+  color: colorGreen;
+}
+
+@media screen and (max-width: 850px) {
+  .form_container {
+    width: 65%;
+  }
+}
+@media screen and (max-width: 650px) {
+  .form_container {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .form_container {
+    width: 90%;
+  }
+}

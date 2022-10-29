@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import RecipeButtons from "../buttons/recipe_buttons";
 import Container from "../container/container";
 import Page from "../page/page";
 import styles from "./recipe.module.css";
 
 const Recipe = ({ auth, boardApi }) => {
+  const navigate = useNavigate();
   const [type, setType] = useState("전체");
   const [typeBoards, setTypeBoards] = useState([]);
 
@@ -30,6 +32,24 @@ const Recipe = ({ auth, boardApi }) => {
     const currentType = e.currentTarget.innerText;
     setType(currentType);
   };
+
+  //자동 로그인
+  const [user, setUser] = useState();
+  useEffect(() => {
+    const tokenForm = localStorage.getItem("token");
+    if (tokenForm.expiration < new Date()) {
+      alert(
+        "로그인 유효기한이 만료되어 로그아웃 되었습니다. 다시 한번 로그인해주세요."
+      );
+      navigate("/login");
+    } else {
+      auth
+        .stayLogin(tokenForm) //
+        .then((u) => {
+          setUser(u);
+        });
+    }
+  }, []);
 
   return (
     <Container>

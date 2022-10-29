@@ -6,17 +6,24 @@ import MypageButtons from "../buttons/mypage_buttons";
 import TitleBar from "../title_bar/title_bar";
 import { useNavigate } from "react-router-dom";
 
-const Mypage = ({ onChange, onwithDrawal }) => {
-  const user = { id: 1 };
+const Mypage = ({ auth, onChange, onwithDrawal }) => {
   const navigate = useNavigate();
+  const [user, setUser] = useState();
   useEffect(() => {
-    if (!user) {
+    const tokenForm = localStorage.getItem("token");
+    if (tokenForm.expiration < new Date()) {
       alert(
         "로그인 유효기한이 만료되어 로그아웃 되었습니다. 다시 한번 로그인해주세요."
       );
       navigate("/login");
+    } else {
+      auth
+        .stayLogin(tokenForm) //
+        .then((u) => {
+          setUser(u);
+        });
     }
-  }, [user]);
+  }, []);
   const formRef = useRef();
   const nameRef = useRef();
   const passwordRef = useRef();
@@ -118,7 +125,7 @@ const Mypage = ({ onChange, onwithDrawal }) => {
           </button>
         </section>
       </div>
-      <MypageButtons onwithDrawal={onwithDrawal} userid={user.id} />
+      <MypageButtons onwithDrawal={onwithDrawal} userid={user && user.id} />
     </Container>
   );
 };

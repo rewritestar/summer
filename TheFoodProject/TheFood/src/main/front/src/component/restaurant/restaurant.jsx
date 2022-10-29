@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import RestaurantButtons from "../buttons/restuarant_buttons";
 import Container from "../container/container";
 import Page from "../page/page";
 import styles from "./restaurant.module.css";
 
 const Restaurant = ({ auth, boardApi }) => {
+  const navigate = useNavigate();
   const [type, setType] = useState("전체");
   const [typeBoards, setTypeBoards] = useState([]);
 
@@ -30,6 +32,24 @@ const Restaurant = ({ auth, boardApi }) => {
     const currentType = e.currentTarget.innerText;
     setType(currentType);
   };
+
+  //자동로그인
+  const [user, setUser] = useState();
+  useEffect(() => {
+    const tokenForm = localStorage.getItem("token");
+    if (tokenForm.expiration < new Date()) {
+      alert(
+        "로그인 유효기한이 만료되어 로그아웃 되었습니다. 다시 한번 로그인해주세요."
+      );
+      navigate("/login");
+    } else {
+      auth
+        .stayLogin(tokenForm) //
+        .then((u) => {
+          setUser(u);
+        });
+    }
+  }, []);
   return (
     <Container title="맛집 카테고리">
       <RestaurantButtons handleTypeBtn={handleTypeBtn} />

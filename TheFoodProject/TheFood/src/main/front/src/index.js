@@ -6,9 +6,11 @@ import reportWebVitals from "./reportWebVitals";
 import Auth from "./service/auth";
 import BoardApi from "./service/board_api";
 import { BrowserRouter } from "react-router-dom";
+import AuthTest from "./service/auth-test";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-const auth = new Auth();
+//const auth = new Auth();
+const auth = new AuthTest();
 const boardApi = new BoardApi();
 root.render(
   <React.StrictMode>

@@ -12,7 +12,13 @@ class Auth {
     const response = await this.auth
       .post("/api/login/", loginForm)
       .catch(() => console.log("error login axios"));
-    return response.data;
+    const tokenForm = response.data;
+    const newExpiration = new Date(
+      new Date().getTime() + parseInt(tokenForm.expiration)
+    );
+    tokenForm.expiration = newExpiration;
+
+    return tokenForm;
   }
   async signup(signupForm) {
     const response = await this.auth
