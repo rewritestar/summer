@@ -39,7 +39,6 @@ public class SecurityService {
         StartTokenForm tokenForm = new StartTokenForm();
 
         Date date = new Date();
-        String dateToStr = String.format(String.valueOf(new Date(System.currentTimeMillis() + tokenExpirationMsec)), date);
 
 
         ////비번으로 암호화할거면 이 코드 필요
