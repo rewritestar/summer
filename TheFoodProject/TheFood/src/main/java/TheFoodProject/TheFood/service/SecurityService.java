@@ -74,10 +74,12 @@ public class SecurityService {
         //유저 찾기
         User people = userRepository.findByUseremail(tokenUseremail);
         TokenUser tokenUser = new TokenUser();
-        tokenUser.setUsername(people.getUsername());
+        tokenUser.setUseremail(people.getUseremail());
         tokenUser.setId(people.getId());
         tokenUser.setUsername(people.getUsername());
-        return  tokenUser;
+//        log.info(tokenUser.getUseremail());
+//        log.info(tokenUser.getUsername());
+        return tokenUser;
 
     }
 
