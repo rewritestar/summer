@@ -5,7 +5,7 @@ import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
+//application.properties 암호화
 @Configuration
 public class JasyptConfig {
     @Bean(name = "encryptorBean")

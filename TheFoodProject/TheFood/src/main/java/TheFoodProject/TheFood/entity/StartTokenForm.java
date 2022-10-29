@@ -10,5 +10,5 @@ import javax.persistence.Entity;
 @Getter
 public class StartTokenForm {
     private String token;
-    private String expiration;
+    private Integer expiration;
 }
