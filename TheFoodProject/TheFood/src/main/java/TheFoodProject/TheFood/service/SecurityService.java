@@ -55,7 +55,7 @@ public class SecurityService {
                 .compact();//토큰 생성 완료
 
         tokenForm.setToken(token);
-        tokenForm.setExpiration(dateToStr);
+        tokenForm.setExpiration(tokenExpirationMsec);
 
         return tokenForm;
 

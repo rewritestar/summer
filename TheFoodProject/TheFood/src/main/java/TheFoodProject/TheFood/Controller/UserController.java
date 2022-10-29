@@ -63,10 +63,10 @@ public class UserController {
     }
 
     //토큰 유효성 확인 코드
-//    @PostMapping("/")
-//    public boolean validtoken(@RequestBody String token){
-//        return securityService.validateToken(token);
-//    }
+    @PostMapping("/")
+    public boolean validtoken(@RequestBody String token){
+        return securityService.validateToken(token);
+    }
 }
 
 
