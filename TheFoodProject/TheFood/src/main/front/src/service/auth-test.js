@@ -48,6 +48,7 @@ class AuthTest {
   }
 
   async stayLogin(tokenForm) {
+    console.log(tokenForm);
     const tokenUser = {
       id: "3",
       useremail: "rewritestar@naver.com",

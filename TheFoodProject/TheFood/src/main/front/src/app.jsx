@@ -56,8 +56,8 @@ function App({ auth, boardApi }) {
   };
 
   //로그인 유지
-  const onStayLogin = (t, expiration) => {
-    const tokenForm = { token: t };
+  const onStayLogin = (token, expiration) => {
+    const tokenForm = { token };
     if (expiration < new Date()) {
       return;
     }
@@ -66,7 +66,7 @@ function App({ auth, boardApi }) {
       .then((u) => {
         setUser(u);
         //로그아웃을 위한 세팅
-        setToken(t);
+        setToken(token);
         //만료시간 세팅되면 로그아웃 타이머 작동함
         setTokenExpiration(expiration);
       })
