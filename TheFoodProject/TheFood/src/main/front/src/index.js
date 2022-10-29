@@ -9,8 +9,8 @@ import { BrowserRouter } from "react-router-dom";
 import AuthTest from "./service/auth-test";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-//const auth = new Auth();
-const auth = new AuthTest();
+const auth = new Auth();
+//const auth = new AuthTest();
 const boardApi = new BoardApi();
 root.render(
   <React.StrictMode>

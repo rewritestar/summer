@@ -63,10 +63,11 @@ public class UserController {
     }
 
     //토큰 유효성 확인 코드
-    @PostMapping("/")
-    public boolean validtoken(@RequestBody String token){
-        return securityService.validateToken(token);
-    }
+//    @PostMapping("/") => 이거 포스트매핑 잘못된 상태에서 주석처리 안하면 오류나네 나 한참 헤맸어...
+//    public boolean validtoken(@RequestBody String token){
+//        return securityService.validateToken(token);
+//    }
+    //
 }
 
 

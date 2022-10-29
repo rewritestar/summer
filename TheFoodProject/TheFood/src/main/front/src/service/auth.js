@@ -13,9 +13,8 @@ class Auth {
       .post("/api/login/", loginForm)
       .catch(() => console.log("error login axios"));
     const tokenForm = response.data;
-    const newExpiration = new Date(
-      new Date().getTime() + parseInt(tokenForm.expiration)
-    );
+    console.log(typeof tokenForm.expiration);
+    const newExpiration = new Date(new Date().getTime() + tokenForm.expiration);
     tokenForm.expiration = newExpiration;
 
     return tokenForm;
