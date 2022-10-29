@@ -99,6 +99,7 @@ public class UserService {
 //        입력한 아이디, 비번을 가진 회원인지 확인
         if(passwordEncoder.matches(userpassword, people.getUserpassword()))
         {
+            log.info("시큐리티 갔니");
             return securityService.createToken(useremail);
         }
         else{

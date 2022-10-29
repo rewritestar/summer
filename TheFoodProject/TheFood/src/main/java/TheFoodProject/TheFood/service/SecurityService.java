@@ -39,7 +39,6 @@ public class SecurityService {
         StartTokenForm tokenForm = new StartTokenForm();
 
         Date date = new Date();
-        String dateToStr = String.format(String.valueOf(new Date(System.currentTimeMillis() + tokenExpirationMsec)), date);
 
 
         ////비번으로 암호화할거면 이 코드 필요
@@ -74,10 +73,12 @@ public class SecurityService {
         //유저 찾기
         User people = userRepository.findByUseremail(tokenUseremail);
         TokenUser tokenUser = new TokenUser();
-        tokenUser.setUsername(people.getUsername());
+        tokenUser.setUseremail(people.getUseremail());
         tokenUser.setId(people.getId());
         tokenUser.setUsername(people.getUsername());
-        return  tokenUser;
+//        log.info(tokenUser.getUseremail());
+//        log.info(tokenUser.getUsername());
+        return tokenUser;
 
     }
 
