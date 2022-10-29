@@ -125,7 +125,7 @@ const Mypage = ({ auth, onChange, onwithDrawal }) => {
           </button>
         </section>
       </div>
-      <MypageButtons onwithDrawal={onwithDrawal} userid={user && user.id} />
+      {user && <MypageButtons onwithDrawal={onwithDrawal} userid={user.id} />}
     </Container>
   );
 };

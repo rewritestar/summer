@@ -29,18 +29,20 @@ const Myboards = ({ auth, boardApi }) => {
   }, []);
 
   useEffect(() => {
-    type === "내 댓글 조회" &&
-      boardApi //
-        .getMyCommentBoards(user.id)
-        .then((getboards) => {
-          console.log(getboards);
-          setBoards(getboards);
-        });
-    type === "내 게시글 조회" &&
-      boardApi //
-        .getMyBoards(user.id)
-        .then((getboards) => setBoards(getboards));
-  }, []);
+    if (user) {
+      type === "내 댓글 조회" &&
+        boardApi //
+          .getMyCommentBoards(user.id)
+          .then((getboards) => {
+            console.log(getboards);
+            setBoards(getboards);
+          });
+      type === "내 게시글 조회" &&
+        boardApi //
+          .getMyBoards(user.id)
+          .then((getboards) => setBoards(getboards));
+    }
+  }, [user]);
 
   return (
     <Container>

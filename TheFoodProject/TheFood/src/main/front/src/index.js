@@ -7,11 +7,13 @@ import Auth from "./service/auth";
 import BoardApi from "./service/board_api";
 import { BrowserRouter } from "react-router-dom";
 import AuthTest from "./service/auth-test";
+import BoardApiTest from "./service/board_api-test";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const auth = new Auth();
-//const auth = new AuthTest();
 const boardApi = new BoardApi();
+// const auth = new AuthTest();
+// const boardApi = new BoardApiTest();
 root.render(
   <React.StrictMode>
     <BrowserRouter>
