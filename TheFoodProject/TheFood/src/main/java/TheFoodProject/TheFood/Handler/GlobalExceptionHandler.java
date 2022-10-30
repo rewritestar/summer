@@ -1,16 +1,19 @@
 package TheFoodProject.TheFood.Handler;
 
 import io.jsonwebtoken.JwtException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
 @ControllerAdvice
+@Slf4j
 @RestController
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(value=IllegalStateException.class)
     public String handleArgumentException(IllegalStateException e){
+        log.info("exception처리 왔나");
         return e.getMessage();
     }
 
