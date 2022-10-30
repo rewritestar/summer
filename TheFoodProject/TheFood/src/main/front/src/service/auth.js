@@ -12,11 +12,12 @@ class Auth {
     const response = await this.auth
       .post("/api/login/", loginForm)
       .catch(() => console.log("error login axios"));
+    if (!response.data) {
+      return false;
+    }
     const tokenForm = response.data;
-    console.log(typeof tokenForm.expiration);
     const newExpiration = new Date(new Date().getTime() + tokenForm.expiration);
     tokenForm.expiration = newExpiration;
-
     return tokenForm;
   }
   async signup(signupForm) {
