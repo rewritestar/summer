@@ -21,6 +21,9 @@ public class BoardService {
     @Autowired
     private CommentRepository commentRepository;
 
+    @Autowired
+    private  SecurityService securityService;
+
     //보드 작성
     public Board write(Board board) throws Exception {
 
@@ -67,6 +70,7 @@ public class BoardService {
     }
 
     public List<Board> RecipeCategory(){ //레시피 게시판 전체
+
         Stream<Board> newBoards = boardRepository.findAll().stream().filter(board ->
                 100 < board.getCategory()  && board.getCategory()< 200);
         return newBoards.collect(Collectors.toList());

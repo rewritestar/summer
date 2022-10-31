@@ -102,7 +102,6 @@ public class UserService {
             return securityService.createToken(useremail);
         }
         else{
-            log.info("비번 틀림");
             throw new IllegalStateException();
         }
     }

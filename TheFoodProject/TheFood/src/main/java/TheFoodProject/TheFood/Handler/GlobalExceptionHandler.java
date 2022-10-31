@@ -13,7 +13,6 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value=IllegalStateException.class)
     public String handleArgumentException(IllegalStateException e){
-        log.info("exception처리 왔나");
         return e.getMessage();
     }
 

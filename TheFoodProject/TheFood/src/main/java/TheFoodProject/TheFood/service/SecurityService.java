@@ -76,8 +76,6 @@ public class SecurityService {
         tokenUser.setUseremail(people.getUseremail());
         tokenUser.setId(people.getId());
         tokenUser.setUsername(people.getUsername());
-//        log.info(tokenUser.getUseremail());
-//        log.info(tokenUser.getUsername());
         return tokenUser;
 
     }
@@ -96,21 +94,8 @@ public class SecurityService {
         }
         catch (JwtException e){
             e.printStackTrace();
+            return false;
         }
-//        catch (JwtException e){
-//            throw new JwtException("토큰 유효기간이 만료 되었습니다.");
-//
-//        }
-        return false;
-//        Jwts.parserBuilder()
-//                .setSigningKey(key)
-//                .build()
-//                .parseClaimsJws(token);
-//        return true;
-//
-//        throw new JwtException("토큰 유효기간이 만료 되었습니다.");
-
-
     }
 
 
