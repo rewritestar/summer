@@ -1,7 +1,7 @@
 import { React, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Container from "../container/container";
-import styles from "../user_component.module.css";
+import styles from "./login.module.css";
 import TitleBar from "../title_bar/title_bar";
 const Login = ({ onLogin, goToSignup, goToFindPw }) => {
   const navigate = useNavigate();
@@ -50,20 +50,20 @@ const Login = ({ onLogin, goToSignup, goToFindPw }) => {
               required
             />
           </div>
+          <section className={styles.buttons}>
+            <span className={styles.link}>
+              <button className={styles.button} onClick={goToSignup}>
+                회원가입
+              </button>
+              <button className={styles.button} onClick={goToFindPw}>
+                비밀번호 찾기
+              </button>
+            </span>
+            <button type="submit" form="form" className={styles.submit_btn}>
+              등록
+            </button>
+          </section>
         </form>
-        <section className={styles.buttons}>
-          <span className={styles.link}>
-            <button className={styles.button} onClick={goToSignup}>
-              회원가입
-            </button>
-            <button className={styles.button} onClick={goToFindPw}>
-              비밀번호 찾기
-            </button>
-          </span>
-          <button type="submit" form="form" className={styles.submit_btn}>
-            등록
-          </button>
-        </section>
       </div>
     </Container>
   );

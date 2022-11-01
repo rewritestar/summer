@@ -54,6 +54,9 @@ const BoardDetail = ({ auth, boardApi }) => {
   const [user, setUser] = useState();
   useEffect(() => {
     const tokenForm = localStorage.getItem("token");
+    if (!tokenForm) {
+      return;
+    }
     if (tokenForm.expiration < new Date()) {
       alert(
         "로그인 유효기한이 만료되어 로그아웃 되었습니다. 다시 한번 로그인해주세요."

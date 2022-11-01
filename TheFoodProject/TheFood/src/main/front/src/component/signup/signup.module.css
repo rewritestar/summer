@@ -10,7 +10,6 @@
   align-items: center;
 }
 .form {
-  width: 100%;
   margin-bottom: 1em;
 }
 .id,
@@ -108,21 +107,4 @@
 }
 .password_word.green {
   color: colorGreen;
-}
-
-@media screen and (max-width: 850px) {
-  .form_container {
-    width: 65%;
-  }
-}
-@media screen and (max-width: 650px) {
-  .form_container {
-    width: 80%;
-  }
-}
-
-@media screen and (max-width: 540px) {
-  .form_container {
-    width: 90%;
-  }
 }

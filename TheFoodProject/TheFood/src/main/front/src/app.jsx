@@ -149,13 +149,23 @@ function App({ auth, boardApi }) {
 
   //자동 로그아웃
   const logoutTimer = useRef();
+  const alertTimer = useRef();
 
   useEffect(() => {
     if (token && tokenExpiration) {
       const remainTime = tokenExpiration.getTime() - new Date().getTime();
+      const alertTime = remainTime - 1000 * 60;
       logoutTimer.current = setTimeout(onLogout, remainTime);
+      alertTimer.current = setTimeout(
+        () =>
+          alert(
+            "로그인 유지되는 시간이 곧 끝납니다. 1분 뒤에 자동으로 로그아웃 됩니다."
+          ),
+        alertTime
+      );
     } else {
       clearTimeout(logoutTimer.current);
+      clearTimeout(alertTimer.current);
     }
   }, [tokenExpiration]);
 
@@ -198,6 +208,7 @@ function App({ auth, boardApi }) {
           element={
             <Mypage
               auth={auth}
+              userProps={user}
               onChange={onMypageChange}
               onwithDrawal={onwithDrawal}
             />

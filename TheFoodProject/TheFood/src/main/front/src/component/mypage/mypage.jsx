@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import styles from "../user_component.module.css";
+import styles from "./mypage.module.css";
 import Container from "../container/container";
 import MypageButtons from "../buttons/mypage_buttons";
 import TitleBar from "../title_bar/title_bar";
 import { useNavigate } from "react-router-dom";
 
-const Mypage = ({ auth, onChange, onwithDrawal }) => {
+const Mypage = ({ auth, userProps, onChange, onwithDrawal }) => {
   const navigate = useNavigate();
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(userProps);
   useEffect(() => {
     const tokenForm = localStorage.getItem("token");
     if (tokenForm.expiration < new Date()) {
@@ -43,7 +43,6 @@ const Mypage = ({ auth, onChange, onwithDrawal }) => {
   useEffect(() => {
     checkPw();
   }, [check]);
-  useEffect(() => {});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -70,6 +69,9 @@ const Mypage = ({ auth, onChange, onwithDrawal }) => {
       alert("비밀번호가 일치하지 않습니다.");
       return;
     }
+    if (!window.confirm("회원정보를 정말로 바꾸시겠습니까?")) {
+      return;
+    }
     const mypageForm = { id, username, userpassword };
     onChange(mypageForm);
   };
@@ -92,10 +94,17 @@ const Mypage = ({ auth, onChange, onwithDrawal }) => {
               type="text"
               name="nickname"
               placeholder="닉네임"
+              defaultValue={user && user.username}
             />
           </div>
           <div className={styles.password}>
-            <span className={styles.title}>비밀번호</span>
+            <span className={styles.title}>
+              비밀번호
+              <div className={styles.pw_info}>
+                새로 바꿀 비밀번호, 혹은 원래 비밀번호를 입력해주세요.{" "}
+              </div>
+            </span>
+
             <input
               ref={passwordRef}
               className={styles.input}
@@ -103,6 +112,7 @@ const Mypage = ({ auth, onChange, onwithDrawal }) => {
               name="password"
               placeholder="비밀번호"
               onChange={handleChange}
+              required
             />
           </div>
           <div className={styles.password_check}>
@@ -114,16 +124,17 @@ const Mypage = ({ auth, onChange, onwithDrawal }) => {
               name="password_check"
               placeholder="비밀번호 확인"
               onChange={handleChange}
+              required
             />
           </div>
           <p className={`${styles.password_word} ${style_color}`}>{text}</p>
+          <section className={styles.buttons}>
+            <div></div>
+            <button type="submit" form="form" className={styles.submit_btn}>
+              등록
+            </button>
+          </section>
         </form>
-        <section className={styles.buttons}>
-          <div></div>
-          <button type="submit" form="form" className={styles.submit_btn}>
-            등록
-          </button>
-        </section>
       </div>
       {user && <MypageButtons onwithDrawal={onwithDrawal} userid={user.id} />}
     </Container>

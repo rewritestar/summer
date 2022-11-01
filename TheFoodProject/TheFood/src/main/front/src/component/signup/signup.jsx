@@ -152,20 +152,20 @@ const Signup = ({ onSignup, goToLogin, goToFindPw }) => {
               required
             />
           </div>
+          <section className={styles.buttons}>
+            <span className={styles.link}>
+              <button className={styles.button} onClick={goToLogin}>
+                로그인
+              </button>
+              <button className={styles.button} onClick={goToFindPw}>
+                비밀번호 찾기
+              </button>
+            </span>
+            <button type="submit" form="form" className={styles.submit_btn}>
+              등록
+            </button>
+          </section>
         </form>
-        <section className={styles.buttons}>
-          <span className={styles.link}>
-            <button className={styles.button} onClick={goToLogin}>
-              로그인
-            </button>
-            <button className={styles.button} onClick={goToFindPw}>
-              비밀번호 찾기
-            </button>
-          </span>
-          <button type="submit" form="form" className={styles.submit_btn}>
-            등록
-          </button>
-        </section>
       </div>
     </Container>
   );
