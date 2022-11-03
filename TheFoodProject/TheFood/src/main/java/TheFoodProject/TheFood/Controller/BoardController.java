@@ -33,6 +33,7 @@ public class BoardController {
         newBoard.setFilename(boardForm.getFilename());
         newBoard.setUsername(boardForm.getUsername());
         newBoard.setUserid(boardForm.getUserid());
+        newBoard.setDate(boardForm.getDate());
 
         if (boardForm.getId() != 0){
             return boardService.update(boardForm.getId(), newBoard);

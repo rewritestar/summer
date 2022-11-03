@@ -23,6 +23,7 @@ public class Board {
     private String filepath;
     private String username;
     private Integer userid;
+    private String date;
 
 
     //recipe 부분
