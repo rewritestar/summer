@@ -59,6 +59,18 @@
 .email .input {
   width: 15em;
 }
+.email_info {
+  display: flex;
+  margin-top: 1em;
+}
+.email_info input {
+  margin-right: 1em;
+}
+.email_info label {
+  font-size: 0.8em;
+  font-weight: 900;
+  color: colorGrey;
+}
 .buttons {
   width: 100%;
   display: flex;
@@ -101,6 +113,7 @@
 .password_word {
   font-size: 14px;
   margin: 1em 0;
+  margin-left: 1em;
 }
 .password_word.pink {
   color: colorPink;

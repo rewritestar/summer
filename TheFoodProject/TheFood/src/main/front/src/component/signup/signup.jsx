@@ -114,6 +114,18 @@ const Signup = ({ onSignup, goToLogin, goToFindPw }) => {
                 <option value="none">직접입력</option>
               </select>
             </div>
+            <div className={styles.email_info}>
+              <input
+                type="checkbox"
+                id="email_info"
+                name="email_info"
+                required
+              ></input>
+              <label htmlFor="email_info">
+                추후에 이메일은 비밀번호 찾기에 이용됩니다. <br></br>이메일을
+                정확히 입력하셨는지 확인해주세요.
+              </label>
+            </div>
           </div>
           <div className={styles.password}>
             <span className={styles.title}>비밀번호</span>
