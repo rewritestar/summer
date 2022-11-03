@@ -56,6 +56,7 @@ public class BoardService {
         updateboard.setFilename(board.getFilename());
         updateboard.setFilepath(board.getFilepath());
         updateboard.setCategory(board.getCategory());
+        updateboard.setDate(board.getDate());
 
         boardRepository.save(updateboard);
         return updateboard;

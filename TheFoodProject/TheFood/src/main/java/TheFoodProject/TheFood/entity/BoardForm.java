@@ -15,4 +15,5 @@ public class BoardForm {
     private String filepath;
     private Integer userid;
     private String username;
+    private String date;
 }
