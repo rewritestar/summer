@@ -1,0 +1,106 @@
+@value colorFirst, colorSecond, colorThird, colorFourth, colorWhite, colorBlack, colorGrey, colorPink, colorGreen from '../../common/colors.css';
+@value fontKR from '../../common/fonts.css';
+.form_container {
+  width: 30%;
+  height: 74vh;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.form {
+  margin-bottom: 1em;
+}
+.id,
+.password,
+.password_check,
+.email,
+.nickname {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 1em;
+}
+
+.title {
+  font-family: fontKR;
+  font-weight: bold;
+  color: colorBlack;
+  margin-bottom: 1em;
+}
+.input {
+  width: 22em;
+  border: 2px solid colorFourth;
+  border-radius: 20px;
+  padding: 0.7em 1em;
+  background-color: colorWhite;
+  color: colorBlack;
+  cursor: pointer;
+}
+.input:focus {
+  outline: 0;
+  transition: 0.5s ease-out;
+  background-color: colorWhite;
+}
+.input::placeholder {
+  color: colorGrey;
+  border: 0;
+  font-size: 12px;
+}
+
+.buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.link {
+  display: flex;
+  flex-direction: column;
+}
+
+.button {
+  background-color: transparent;
+  border: 0;
+  color: #0058d3;
+  text-align: left;
+  cursor: pointer;
+}
+.button:hover {
+  opacity: 70%;
+  transition: 0.3s ease-out;
+}
+
+.loading {
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  border: 3px solid colorSecond;
+  border-top: 3px solid colorFourth;
+  animation: spin 2s linear infinite;
+  margin: auto;
+  margin-right: 1em;
+}
+
+.submit_btn {
+  background-color: colorFourth;
+  border: 0;
+  padding: 0.5em 1.5em;
+  color: colorBlack;
+  font-family: fontKR;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.submit_btn:hover {
+  background-color: colorSecond;
+  transition: 0.3s ease-out;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

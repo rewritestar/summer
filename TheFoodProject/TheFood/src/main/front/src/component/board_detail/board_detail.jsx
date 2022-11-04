@@ -35,6 +35,20 @@ const BoardDetail = ({ auth, boardApi }) => {
 
   const [board, setBoard] = useState(locationBoard);
 
+  const makeDate = (board) => {
+    let date = new Date(2001, 1, 1);
+    if (board.date) {
+      date = new Date(board.date);
+    }
+    const WEEK = ["일", "월", "화", "수", "목", "금", "토"];
+    const HOURS = date.getHours() > 9 ? date.getHours() : `0${date.getHours()}`;
+    const MINUTES =
+      date.getMinutes() > 9 ? date.getMinutes() : `0${date.getMinutes()}`;
+    const result = `${date.getFullYear()}-${
+      date.getMonth() + 1
+    }-${date.getDate()} ${HOURS}:${MINUTES}(${WEEK[date.getDate()]})`;
+    return result;
+  };
   //게시물 수정버튼
   const onBoardChange = (e) => {
     navigate("/boardwrite", { state: board });
@@ -45,8 +59,8 @@ const BoardDetail = ({ auth, boardApi }) => {
       .boardDelete(board.id) //
       .then((_) => {
         alert("게시물이 성공적으로 삭제되었습니다.");
+        navigate("/myboards", { state: "내 게시글 조회" });
         setBoard({});
-        window.location.href = "/";
       });
   };
 
@@ -57,7 +71,7 @@ const BoardDetail = ({ auth, boardApi }) => {
     if (!tokenForm) {
       return;
     }
-    if (tokenForm.expiration < new Date()) {
+    if (new Date(tokenForm.expiration) < new Date()) {
       alert(
         "로그인 유효기한이 만료되어 로그아웃 되었습니다. 다시 한번 로그인해주세요."
       );
@@ -77,6 +91,7 @@ const BoardDetail = ({ auth, boardApi }) => {
         <section className={styles.title_bar}>
           <p className={styles.title}>{board.title}</p>
           <p className={styles.user_name}>{board.username}</p>
+          <p className={styles.date}>{makeDate(board)}</p>
         </section>
         <section className={styles.content_bar}>
           {user && user.id === board.userid && (

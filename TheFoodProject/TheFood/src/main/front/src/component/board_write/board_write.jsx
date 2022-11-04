@@ -7,6 +7,7 @@ const BoardWrite = ({ auth, boardApi }) => {
 
   const [imgsrc, setImgsrc] = useState("");
   const [board, setBoard] = useState();
+  const [countContent, setCountContent] = useState(0);
 
   const wroteBoard = location.state || "";
 
@@ -43,7 +44,7 @@ const BoardWrite = ({ auth, boardApi }) => {
       navigate("/login");
       return;
     }
-    if (tokenForm.expiration < new Date()) {
+    if (new Date(tokenForm.expiration) < new Date()) {
       alert(
         "로그인 유효기한이 만료되어 로그아웃 되었습니다. 다시 한번 로그인해주세요."
       );
@@ -77,6 +78,7 @@ const BoardWrite = ({ auth, boardApi }) => {
     const content = contentRef.current.value || "no content";
     const userid = user.id;
     const username = user.username;
+    const date = board ? board.date : new Date();
     const boardForm = {
       id,
       title,
@@ -86,6 +88,7 @@ const BoardWrite = ({ auth, boardApi }) => {
       content,
       userid,
       username,
+      date,
     };
     // const formdata = new FormData();
     // formdata.append("file", fileRef.current.files[0]);
@@ -107,6 +110,16 @@ const BoardWrite = ({ auth, boardApi }) => {
     };
   };
 
+  const handleContent = (e) => {
+    const count = contentRef.current.value.length;
+    const content = contentRef.current.value;
+    if (count > 1000) {
+      alert("글자수를 초과했습니다!");
+      contentRef.current.value = content.substring(0, 1000);
+    } else {
+      setCountContent(count);
+    }
+  };
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -188,7 +201,9 @@ const BoardWrite = ({ auth, boardApi }) => {
               className={styles.textarea}
               placeholder="내용을 입력해주세요."
               defaultValue={board ? board.content : ""}
+              onChange={handleContent}
             ></textarea>
+            <p className={styles.content_count}>{countContent}/1000</p>
           </section>
         </form>
       </section>

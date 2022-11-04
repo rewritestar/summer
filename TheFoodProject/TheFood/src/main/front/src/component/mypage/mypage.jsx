@@ -11,7 +11,7 @@ const Mypage = ({ auth, userProps, onChange, onwithDrawal }) => {
   const [user, setUser] = useState(userProps);
   useEffect(() => {
     const tokenForm = localStorage.getItem("token");
-    if (tokenForm.expiration < new Date()) {
+    if (new Date(tokenForm.expiration) < new Date()) {
       alert(
         "로그인 유효기한이 만료되어 로그아웃 되었습니다. 다시 한번 로그인해주세요."
       );

@@ -32,10 +32,9 @@ class Auth {
       .catch((e) => console.log(`error withDrawal axios ${e}`));
   }
   async findPw(findPwForm) {
-    const response = await this.auth
+    return this.auth
       .post("/api/findpw/", findPwForm)
       .catch(() => console.log("error findpw axios"));
-    return response.data;
   }
   async mypageChange(mypageForm) {
     const response = await this.auth

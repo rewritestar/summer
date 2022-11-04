@@ -10,6 +10,11 @@ const Page = ({ boards }) => {
   const handlePageNumber = (number) => {
     setPageNumber(number);
   };
+  boards.sort((a, b) => {
+    a = a.date ? new Date(a.date) : new Date(2001, 1, 1);
+    b = b.date ? new Date(b.date) : new Date(2001, 1, 1);
+    return a >= b ? -1 : 1;
+  });
   return (
     <div className={styles.container}>
       <BoardList boards={boards.slice(offset, offset + limit)} />
