@@ -8,6 +8,7 @@ const BoardWrite = ({ auth, boardApi }) => {
   const [imgsrc, setImgsrc] = useState("");
   const [board, setBoard] = useState();
   const [countContent, setCountContent] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const wroteBoard = location.state || "";
 
@@ -66,19 +67,23 @@ const BoardWrite = ({ auth, boardApi }) => {
     navigate("/");
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
+
     const id = board ? board.id : 0;
     const title = titleRef.current.value || "no title";
     const category = TYPE_CODE[categoryRef.current.value];
-    const filename = fileRef.current.files[0]
-      ? fileRef.current.files[0].name
-      : "noimage.png";
-    const filepath = `images/${filename}` || "/images/noimage.png";
     const content = contentRef.current.value || "no content";
     const userid = user.id;
     const username = user.username;
     const date = board ? board.date : new Date();
+    //
+    const uploadedImg = await boardApi.onImgUpload(fileRef);
+
+    console.log(uploadedImg);
+    const filename = uploadedImg ? uploadedImg.original_filename : "noimage";
+    const filepath = uploadedImg ? uploadedImg.url : "/images/noimage.png";
     const boardForm = {
       id,
       title,
@@ -90,11 +95,10 @@ const BoardWrite = ({ auth, boardApi }) => {
       username,
       date,
     };
-    // const formdata = new FormData();
-    // formdata.append("file", fileRef.current.files[0]);
     boardApi //
       .boardWrite(boardForm) //
       .then((newBoard) => {
+        setLoading(false);
         alert(`게시글 작성에 성공했습니다!`);
         navigate("/boarddetail", { state: newBoard });
       });
@@ -127,9 +131,12 @@ const BoardWrite = ({ auth, boardApi }) => {
           <img className={styles.img} src="/images/logo.png" alt="logo"></img>
           <h1 className={styles.title}>The Food</h1>
         </section>
-        <button type="submit" form="form" className={styles.button}>
-          작성하기
-        </button>
+        {!loading && (
+          <button type="submit" form="form" className={styles.button}>
+            작성하기
+          </button>
+        )}
+        {loading && <div className={styles.loading}></div>}
       </header>
       <section className={styles.content}>
         <form className={styles.form} id="form" onSubmit={onSubmit}>
@@ -195,7 +202,7 @@ const BoardWrite = ({ auth, boardApi }) => {
             />
           </section>
           <section className={styles.text}>
-            {imgsrc && <img src={imgsrc} />}
+            {imgsrc && <img className={styles.img_thumbnail} src={imgsrc} />}
             <textarea
               ref={contentRef}
               className={styles.textarea}

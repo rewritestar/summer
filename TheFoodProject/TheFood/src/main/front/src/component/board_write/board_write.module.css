@@ -4,7 +4,7 @@
   width: 100%;
   height: 100vh;
   background-color: colorFirst;
-  overflow-y: hidden;
+  overflow-y: auto;
 }
 .header {
   width: 100%;
@@ -48,7 +48,6 @@
 }
 
 .content {
-  overflow-y: auto;
   width: 65%;
   height: 100%;
   margin: auto;
@@ -99,6 +98,13 @@
   cursor: pointer;
 }
 
+.img_thumbnail {
+  max-width: 100px;
+  max-width: 100px;
+  padding: 0.5em;
+  border-radius: 10px;
+}
+
 .textarea {
   width: 100%;
   height: 25em;
@@ -114,4 +120,24 @@
 }
 .textarea:focus {
   outline: 0;
+}
+
+.loading {
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  border: 3.5px solid colorWhite;
+  border-top: 3.5px solid colorFourth;
+  animation: spin 2s linear infinite;
+  margin: auto;
+  margin-right: 2em;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

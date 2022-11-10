@@ -154,6 +154,27 @@ class BoardApiTest {
       .post(`/api/boarddelete`, boardid)
       .catch((e) => console.log("error boardDelete axios"));
   }
+  async onImgUpload(fileRef) {
+    if (!fileRef.current.files[0]) {
+      return;
+    }
+
+    const file = fileRef.current.files[0];
+    const formData = new FormData();
+    const cloudName = "dtikdam3i"; //보안 처리 필요함
+    formData.append("file", file);
+    formData.append("upload_preset", "the-food-board-img");
+
+    const res = await fetch(
+      `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+    const uploaded = await res.json();
+    return uploaded;
+  }
 
   //마이페이지 댓글, 게시글 조회 관련
   async getMyCommentBoards(user_id) {
