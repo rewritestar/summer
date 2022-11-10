@@ -108,3 +108,8 @@ task copyReactBuildFiles(type: Copy) {
 test.onlyIf {
 	!project.hasProperty('test')
 }
+
+
+bootJar {
+	destinationDirectory = file("./target")
+}
