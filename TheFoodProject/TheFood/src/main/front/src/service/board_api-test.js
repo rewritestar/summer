@@ -1,7 +1,7 @@
 import axios from "axios";
 
 class BoardApiTest {
-  constructor() {
+  constructor(key) {
     this.boardApi = axios.create({
       headers: {
         "Content-Type": "application/json",
@@ -134,6 +134,7 @@ class BoardApiTest {
         date: new Date(1978, 6, 2, 12, 2),
       },
     ];
+    this.key = key;
   }
   //게시물 관련
   async getRecipe(type) {
@@ -161,7 +162,7 @@ class BoardApiTest {
 
     const file = fileRef.current.files[0];
     const formData = new FormData();
-    const cloudName = "dtikdam3i"; //보안 처리 필요함
+    const cloudName = this.key; //보안 처리 필요함
     formData.append("file", file);
     formData.append("upload_preset", "the-food-board-img");
 

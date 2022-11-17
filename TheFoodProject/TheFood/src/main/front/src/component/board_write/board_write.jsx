@@ -73,7 +73,8 @@ const BoardWrite = ({ auth, boardApi }) => {
 
     const id = board ? board.id : 0;
     const title = titleRef.current.value || "no title";
-    const category = TYPE_CODE[categoryRef.current.value];
+    const category =
+      TYPE_CODE[categoryRef.current.value] || TYPE_CODE["레시피-한식"];
     const content = contentRef.current.value || "no content";
     const userid = user.id;
     const username = user.username;

@@ -10,10 +10,12 @@ import AuthTest from "./service/auth-test";
 import BoardApiTest from "./service/board_api-test";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-// const auth = new Auth();
-// const boardApi = new BoardApi();
-const auth = new AuthTest();
-const boardApi = new BoardApiTest();
+const key = process.env.REACT_APP_IMG_KEY;
+console.log(key);
+const auth = new Auth();
+const boardApi = new BoardApi(key);
+// const auth = new AuthTest();
+// const boardApi = new BoardApiTest(key);
 root.render(
   <React.StrictMode>
     <BrowserRouter>

@@ -46,7 +46,7 @@ const BoardDetail = ({ auth, boardApi }) => {
       date.getMinutes() > 9 ? date.getMinutes() : `0${date.getMinutes()}`;
     const result = `${date.getFullYear()}-${
       date.getMonth() + 1
-    }-${date.getDate()} ${HOURS}:${MINUTES}(${WEEK[date.getDate()]})`;
+    }-${date.getDate()} ${HOURS}:${MINUTES}(${WEEK[date.getDay()]})`;
     return result;
   };
   //게시물 수정버튼

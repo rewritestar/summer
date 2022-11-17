@@ -1,12 +1,13 @@
 import axios from "axios";
 
 class BoardApi {
-  constructor() {
+  constructor(key) {
     this.boardApi = axios.create({
       headers: {
         "Content-Type": "application/json",
       },
     });
+    this.key = key;
   }
   //게시물 관련
   async getRecipe(type) {
@@ -96,7 +97,7 @@ class BoardApi {
     }
     const file = fileRef.current.files[0];
     const formData = new FormData();
-    const cloudName = "dtikdam3i"; //보안 처리 필요함
+    const cloudName = this.key; //보안 처리 필요함
     formData.append("file", file);
     formData.append("upload_preset", "the-food-board-img");
 
