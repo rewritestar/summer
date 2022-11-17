@@ -10,8 +10,7 @@ import AuthTest from "./service/auth-test";
 import BoardApiTest from "./service/board_api-test";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-const key = process.env.REACT_APP_IMG_KEY;
-console.log(key);
+const key = "dtikdam3i";
 const auth = new Auth();
 const boardApi = new BoardApi(key);
 // const auth = new AuthTest();
