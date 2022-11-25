@@ -7,6 +7,6 @@
     "npm": "8.15.0"
   },
   "scripts": {
-    "start": "taget/TheFood-0.0.1-SNAPSHOT.jar"
+    "start": "java -jar target/TheFood-0.0.1-SNAPSHOT.jar"
   }
 }
