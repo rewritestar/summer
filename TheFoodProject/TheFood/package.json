@@ -7,6 +7,7 @@
     "npm": "8.15.0"
   },
   "scripts": {
-    "start": "java -jar target/TheFood-0.0.1-SNAPSHOT.jar"
+    "start": "node server",
+    "heroku-postbuild": "cross-env NODE_PATH=src npm run build"
   }
 }
