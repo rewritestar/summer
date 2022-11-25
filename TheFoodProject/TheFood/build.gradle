@@ -111,5 +111,5 @@ test.onlyIf {
 
 
 bootJar {
-	destinationDirectory = file("./target")
+	destinationDirectory = file("./build/libs/")
 }
