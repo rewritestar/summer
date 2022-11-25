@@ -7,6 +7,6 @@
     "npm": "8.15.0"
   },
   "scripts": {
-    "start": "build/libs/TheFood-0.0.1-SNAPSHOT.jar"
+    "start": "taget/TheFood-0.0.1-SNAPSHOT.jar"
   }
 }
