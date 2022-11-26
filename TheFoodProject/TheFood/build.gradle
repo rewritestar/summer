@@ -113,3 +113,5 @@ test.onlyIf {
 bootJar {
 	destinationDirectory = file("./target")
 }
+
+task stage(dependsOn: ['clean', 'installDist'])
