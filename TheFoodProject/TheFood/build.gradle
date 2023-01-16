@@ -4,8 +4,8 @@ plugins {
 	id 'java'
 }
 
-group = 'TheFoodProject'
-version = '0.0.1-SNAPSHOT'
+//group = 'TheFoodProject'
+//version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 configurations {
@@ -20,13 +20,16 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.testng:testng:7.1.0'
 	implementation 'junit:junit:4.13.1'
 	compileOnly 'org.projectlombok:lombok'
-//	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
-	runtimeOnly 'mysql:mysql-connector-java'
+	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+	//runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
 	compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -110,8 +113,7 @@ test.onlyIf {
 }
 
 
-bootJar {
-	destinationDirectory = file("./target")
-}
+//bootJar {
+//	destinationDirectory = file("./target")
+//}
 
-task stage(dependsOn: ['clean', 'installDist'])
