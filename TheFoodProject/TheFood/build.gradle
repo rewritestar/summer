@@ -4,9 +4,9 @@ plugins {
 	id 'java'
 }
 
-group = 'TheFoodProject'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+//group = 'TheFoodProject'
+//version = '0.0.1-SNAPSHOT'
+//sourceCompatibility = '11'
 
 configurations {
 	compileOnly {
@@ -25,8 +25,8 @@ dependencies {
 	implementation 'org.testng:testng:7.1.0'
 	implementation 'junit:junit:4.13.1'
 	compileOnly 'org.projectlombok:lombok'
-//	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
-	runtimeOnly 'mysql:mysql-connector-java'
+	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+//	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
 	compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -34,8 +34,8 @@ dependencies {
 	implementation 'org.springframework.security:spring-security-test'
 
 	//mysql 연걸
-//	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.19'
-	implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
+	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.19'
+//	implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
 
 
 	//토큰
@@ -110,8 +110,8 @@ test.onlyIf {
 }
 
 
-bootJar {
-	destinationDirectory = file("./target")
-}
+//bootJar {
+//	destinationDirectory = file("./target")
+//}
 
 task stage(dependsOn: ['clean', 'installDist'])
