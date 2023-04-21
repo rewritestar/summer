@@ -50,7 +50,7 @@
 ### 메인화면 <br>
 ![image](https://user-images.githubusercontent.com/60992593/233638827-119a7d11-4fc1-4de3-b11d-ac096159e7fc.png)
 - 반응형<br>
-![image](https://user-images.githubusercontent.com/60992593/233639039-a1737481-e798-4089-8cce-8131939b9730.png)
+![image](https://user-images.githubusercontent.com/60992593/233639039-a1737481-e798-4089-8cce-8131939b9730.png){: width="500" height="600"}
 ![image](https://user-images.githubusercontent.com/60992593/233639058-da49e686-720a-4467-9d6d-36c2f2301512.png)
 
 
