@@ -55,10 +55,11 @@
 
 
 ### 회원가입 <br>
-![image](https://user-images.githubusercontent.com/60992593/233639090-1d48c50c-aeb7-41f3-b2e9-990de03265d8.png)
+<img src= "https://user-images.githubusercontent.com/60992593/233639090-1d48c50c-aeb7-41f3-b2e9-990de03265d8.png" width="500" height="700"/>
 
 ### 로그인 <br>
-![image](https://user-images.githubusercontent.com/60992593/233639156-3c33a72a-f0a4-4cd3-8d02-fc9ca90ce865.png)
+<img src= "https://user-images.githubusercontent.com/60992593/233639156-3c33a72a-f0a4-4cd3-8d02-fc9ca90ce865.png" width="500" height="700"/>
+
 
 ### 비밀번호 찾기<br>
 
