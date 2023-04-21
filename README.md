@@ -26,6 +26,7 @@
 - html
 - postcss
 - yarn
+- cloudinary(이미지 서버)
 ### back-end(백앤드)
 - Spring boot
 - JPA
@@ -33,6 +34,7 @@
 - Maria database
 ### API
 - Axios
+-
 
 
 
