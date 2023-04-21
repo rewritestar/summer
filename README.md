@@ -70,13 +70,13 @@
 - 이메일 전송<br>
 ![image](https://user-images.githubusercontent.com/60992593/233639206-4cfa685b-522d-4eca-81df-bc3fb9439de3.png)
 
-### 카테고리<br>
-
-![image](https://user-images.githubusercontent.com/60992593/197318930-eb9bbf2b-a07e-4df0-82f6-5f18df8994e4.png)
 
 ### 마이페이지<br>
 ![image](https://user-images.githubusercontent.com/60992593/233639258-b1e9ea79-8e58-4fad-86f1-6413f8ae2373.png)
 
+
+### 게시글 작성<br>
+![image](https://user-images.githubusercontent.com/60992593/233640976-742a0500-b174-4969-ba01-e11829d548aa.png)
 
 ### 게시글 조회<br>
 
