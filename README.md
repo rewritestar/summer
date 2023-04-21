@@ -64,7 +64,7 @@
 ### 비밀번호 찾기<br>
 
 - 찾기<br>
-<img src= "https://user-images.githubusercontent.com/60992593/233639187-e794820e-6cf4-4f90-9963-f7e078df3b80.png" width="500" height="700"/>
+<img src= "https://user-images.githubusercontent.com/60992593/233639187-e794820e-6cf4-4f90-9963-f7e078df3b80.png" width="500" height="600"/>
 
 
 - 이메일 전송<br>
