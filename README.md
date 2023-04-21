@@ -48,26 +48,39 @@
 ## 실제 웹사이트 화면
 
 ### 메인화면 <br>
-![image](https://user-images.githubusercontent.com/60992593/197318705-ebb15410-2bda-44d8-91e0-e0f5c346005f.png)
+![image](https://user-images.githubusercontent.com/60992593/233638827-119a7d11-4fc1-4de3-b11d-ac096159e7fc.png)
+- 반응형<br>
+![image](https://user-images.githubusercontent.com/60992593/233639039-a1737481-e798-4089-8cce-8131939b9730.png)
+![image](https://user-images.githubusercontent.com/60992593/233639058-da49e686-720a-4467-9d6d-36c2f2301512.png)
+
 
 ### 회원가입 <br>
-![image](https://user-images.githubusercontent.com/60992593/197318741-3d790948-dd84-474b-8d6f-92ad33be22d8.png)
+![image](https://user-images.githubusercontent.com/60992593/233639090-1d48c50c-aeb7-41f3-b2e9-990de03265d8.png)
+
+### 로그인 <br>
+![image](https://user-images.githubusercontent.com/60992593/233639156-3c33a72a-f0a4-4cd3-8d02-fc9ca90ce865.png)
 
 ### 비밀번호 찾기<br>
 
 - 찾기<br>
-![image](https://user-images.githubusercontent.com/60992593/197318836-30d788b3-5851-4a58-a6fb-2a164935dbd7.png)
+![image](https://user-images.githubusercontent.com/60992593/233639187-e794820e-6cf4-4f90-9963-f7e078df3b80.png)
 
 - 이메일 전송<br>
-![image](https://user-images.githubusercontent.com/60992593/197318797-fc3da6f9-2da4-46d5-82cd-31a8862e3897.png)
+![image](https://user-images.githubusercontent.com/60992593/233639206-4cfa685b-522d-4eca-81df-bc3fb9439de3.png)
 
 ### 카테고리<br>
 
 ![image](https://user-images.githubusercontent.com/60992593/197318930-eb9bbf2b-a07e-4df0-82f6-5f18df8994e4.png)
 
+### 마이페이지<br>
+![image](https://user-images.githubusercontent.com/60992593/233639258-b1e9ea79-8e58-4fad-86f1-6413f8ae2373.png)
+
+
 ### 게시글 조회<br>
 
-![image](https://user-images.githubusercontent.com/60992593/197318954-0d1bf75f-4ab2-43cf-89e3-18eeae3762fa.png)
+![image](https://user-images.githubusercontent.com/60992593/233639300-769261ff-986e-4bff-8b57-2cfc49311b26.png)
+![image](https://user-images.githubusercontent.com/60992593/233639340-888e39e4-4783-41cd-851b-66b2927b5c12.png)
+
 
 ### 댓글<br>
 
