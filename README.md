@@ -55,7 +55,7 @@
 
 
 ### 회원가입 <br>
-<img src= "https://user-images.githubusercontent.com/60992593/233639090-1d48c50c-aeb7-41f3-b2e9-990de03265d8.png" width="500" height="700"/>
+![image](https://user-images.githubusercontent.com/60992593/233639090-1d48c50c-aeb7-41f3-b2e9-990de03265d8.png)
 
 ### 로그인 <br>
 <img src= "https://user-images.githubusercontent.com/60992593/233639156-3c33a72a-f0a4-4cd3-8d02-fc9ca90ce865.png" width="500" height="700"/>
@@ -64,7 +64,8 @@
 ### 비밀번호 찾기<br>
 
 - 찾기<br>
-![image](https://user-images.githubusercontent.com/60992593/233639187-e794820e-6cf4-4f90-9963-f7e078df3b80.png)
+<img src= "https://user-images.githubusercontent.com/60992593/233639187-e794820e-6cf4-4f90-9963-f7e078df3b80.png" width="500" height="700"/>
+
 
 - 이메일 전송<br>
 ![image](https://user-images.githubusercontent.com/60992593/233639206-4cfa685b-522d-4eca-81df-bc3fb9439de3.png)
